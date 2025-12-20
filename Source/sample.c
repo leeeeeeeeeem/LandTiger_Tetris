@@ -1,4 +1,4 @@
-/****************************************Copyright (c)****************************************************
+/***************************************Copyright (c)****************************************************
 **                                      
 **                                 http://www.powermcu.com
 **
@@ -38,7 +38,7 @@ int main(void)
 	joystick_init();
   LCD_Initialization();
 	LCD_Clear(Black);
-	GUI_Text(0, 0, (uint8_t *) "swaglife", Blue, White);
+	LCD_setBlock(8, 8, 0xCF54);
 	//LCD_DrawLine(0, 0, 200, 200, White);
 	//init_timer(0, 0x1312D0 ); 						/* 50ms * 25MHz = 1.25*10^6 = 0x1312D0 */
 	//init_timer(0, 0x6108 ); 						  /* 1ms * 25MHz = 25*10^3 = 0x6108 */
