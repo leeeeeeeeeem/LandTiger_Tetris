@@ -31,14 +31,15 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 #endif
 
 
-int main(void)
-{
-  SystemInit();  												/* System Initialization (i.e., PLL)  */
+int main(void){
+	SystemInit();  												/* System Initialization (i.e., PLL)  */
 	BUTTON_init();
 	joystick_init();
-  LCD_Initialization();
+  	LCD_Initialization();
 	LCD_Clear(Black);
-	LCD_setBlock(8, 8, 0xCF54);
+	field_init();
+	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
+	LCD_setBlock(11, 11, 0xCF54);
 	//LCD_DrawLine(0, 0, 200, 200, White);
 	//init_timer(0, 0x1312D0 ); 						/* 50ms * 25MHz = 1.25*10^6 = 0x1312D0 */
 	//init_timer(0, 0x6108 ); 						  /* 1ms * 25MHz = 25*10^3 = 0x6108 */
@@ -50,10 +51,9 @@ int main(void)
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);						
 	
-  while (1)	
-  {
+	while (1){
 		__ASM("wfi");
-  }
+	}
 }
 
 /*********************************************************************************************************

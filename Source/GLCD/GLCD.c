@@ -43,6 +43,11 @@ static uint8_t LCD_Code;
 #define  LGDP4535   13 /* 0x4535 */  
 #define  SSD2119    14 /* 3.5 LCD 0x9919 */
 
+#define FIELD_H 20
+#define FIELD_W 10
+
+#define BLOCK_SIZE 15
+
 static uint8_t tetromino[4][4] = {{0, 0, 0, 0},
 								  {0, 0, 0, 0},
 								  {0, 0, 0, 0},
@@ -236,6 +241,8 @@ static uint8_t tetrominoes[7][4][4][4] = {			// Static data structure containing
 											}
 										};
 
+
+uint16_t field[FIELD_W][FIELD_H];
 
 								  
 /*******************************************************************************
@@ -864,12 +871,27 @@ void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_
 
 void LCD_setBlock(uint16_t Xpos, uint16_t Ypos, uint16_t color){
 	int i, j;
-	for (i = Xpos; i < Xpos + 8; i++){
-		for (j = Ypos; j < Ypos + 8; j++){
+	for (i = Xpos; i < Xpos + 15; i++){
+		for (j = Ypos; j < Ypos + 15; j++){
 			LCD_SetPoint(i, j, color);
 		}
 	}
 }
+
+void field_init(){
+	int x, y;
+	LCD_DrawLine(10, 10, 10, 310, Grey);
+	LCD_DrawLine(10, 10, 160, 10, Grey);
+	LCD_DrawLine(160, 10, 160, 310, Grey);
+	LCD_DrawLine(10, 310, 160, 310, Grey);
+	for (x = 0; x < FIELD_W; x++){
+		for (y = 0; y < FIELD_H; y++){
+			field[x][y] = 0;
+		}
+	}
+
+}
+
 
 
 

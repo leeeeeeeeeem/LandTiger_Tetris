@@ -1810,14 +1810,15 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 
 
 
-int main(void)
-{
-  SystemInit();
+int main(void){
+ SystemInit();
  BUTTON_init();
  joystick_init();
-  LCD_Initialization();
+   LCD_Initialization();
  LCD_Clear(0x0000);
- GUI_Text(0, 0, (uint8_t *) "swaglife", 0x001F, 0xFFFF);
+ field_init();
+ GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
+ LCD_setBlock(11, 11, 0xCF54);
  //LCD_DrawLine(0, 0, 200, 200, 0xFFFF);
  //init_timer(0, 0x1312D0 );
  //init_timer(0, 0x6108 );
@@ -1829,8 +1830,7 @@ int main(void)
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);
 
-  while (1)
-  {
+ while (1){
   __asm("wfi");
-  }
+ }
 }
