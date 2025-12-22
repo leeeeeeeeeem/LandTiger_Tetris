@@ -1793,6 +1793,7 @@ void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point);
 void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t color );
 void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor );
 void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
+void set_block(uint16_t Xpos, uint16_t Ypos, uint8_t size, uint16_t color);
 # 24 "Source/GLCD/GLCD.c" 2
 # 1 "Source/GLCD\\AsciiLib.h" 1
 # 26 "Source/GLCD\\AsciiLib.h"
@@ -1938,203 +1939,7 @@ void GetASCIICode(unsigned char* pBuffer,unsigned char ASCII);
 
 
 static uint8_t LCD_Code;
-# 51 "Source/GLCD/GLCD.c"
-static uint8_t tetromino[4][4] = {{0, 0, 0, 0},
-          {0, 0, 0, 0},
-          {0, 0, 0, 0},
-          {0, 0, 0, 0}};
-
-
-static uint8_t tetrominoes[7][4][4][4] = { // Static data structure containing all 7 tetrominoes with
-             // all 4 rotations.
-
-           { // I-shaped
-            {
-             {1, 1, 1, 1},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 0, 0, 0},
-             {1, 0, 0, 0},
-             {1, 0, 0, 0},
-             {1, 0, 0, 0}
-            },
-            {
-             {1, 1, 1, 1},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 0, 0, 0},
-             {1, 0, 0, 0},
-             {1, 0, 0, 0},
-             {1, 0, 0, 0}
-            }
-           },
-           { // O-shaped
-            {
-             {1, 1, 0, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 1, 0, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 1, 0, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 1, 0, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            }
-           },
-           { // T-shaped
-            {
-             {1, 1, 1, 0},
-             {0, 1, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {0, 1, 0, 0},
-             {1, 1, 0, 0},
-             {0, 1, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {0, 1, 0, 0},
-             {1, 1, 1, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 0, 0, 0},
-             {1, 1, 0, 0},
-             {1, 0, 0, 0},
-             {0, 0, 0, 0}
-            }
-           },
-           { // J-shaped
-            {
-             {0, 1, 0, 0},
-             {0, 1, 0, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {0, 0, 1, 0},
-             {1, 1, 1, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 0, 0, 0},
-             {1, 0, 0, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 1, 1, 0},
-             {1, 0, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            }
-           },
-           { // L-shaped
-            {
-             {1, 0, 0, 0},
-             {1, 0, 0, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 1, 1, 0},
-             {1, 0, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 1, 0, 0},
-             {0, 1, 0, 0},
-             {0, 1, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {0, 0, 1, 0},
-             {1, 1, 1, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            }
-           },
-           { // S-shaped
-            {
-             {0, 1, 1, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 0, 0, 0},
-             {1, 1, 0, 0},
-             {0, 1, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {0, 1, 1, 0},
-             {1, 1, 0, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 0, 0, 0},
-             {1, 1, 0, 0},
-             {0, 1, 0, 0},
-             {0, 0, 0, 0}
-            }
-           },
-           { // Z-shaped
-            {
-             {1, 1, 0, 0},
-             {0, 1, 1, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {0, 1, 0, 0},
-             {1, 1, 0, 0},
-             {1, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {1, 1, 0, 0},
-             {0, 1, 1, 0},
-             {0, 0, 0, 0},
-             {0, 0, 0, 0}
-            },
-            {
-             {0, 1, 0, 0},
-             {1, 1, 0, 0},
-             {1, 0, 0, 0},
-             {0, 0, 0, 0}
-            }
-           }
-          };
-
-
-uint16_t field[10][20];
-# 256 "Source/GLCD/GLCD.c"
+# 54 "Source/GLCD/GLCD.c"
 static void LCD_Configuration(void)
 {
 
@@ -2144,7 +1949,7 @@ static void LCD_Configuration(void)
  ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIODIR |= 0x03f80000;
  ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = 0x03f80000;
 }
-# 274 "Source/GLCD/GLCD.c"
+# 72 "Source/GLCD/GLCD.c"
 static __attribute__((always_inline)) void LCD_Send (uint16_t byte)
 {
  ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIODIR |= 0xFF;
@@ -2155,12 +1960,12 @@ static __attribute__((always_inline)) void LCD_Send (uint16_t byte)
  ((0) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 20)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 20)));
  ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN = byte >> 8;
 }
-# 294 "Source/GLCD/GLCD.c"
+# 92 "Source/GLCD/GLCD.c"
 static void wait_delay(int count)
 {
  while(count--);
 }
-# 307 "Source/GLCD/GLCD.c"
+# 105 "Source/GLCD/GLCD.c"
 static __attribute__((always_inline)) uint16_t LCD_Read (void)
 {
  uint16_t value;
@@ -2176,7 +1981,7 @@ static __attribute__((always_inline)) uint16_t LCD_Read (void)
  ((1) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 21)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 21)));;
  return value;
 }
-# 331 "Source/GLCD/GLCD.c"
+# 129 "Source/GLCD/GLCD.c"
 static __attribute__((always_inline)) void LCD_WriteIndex(uint16_t index)
 {
  ((0) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 22)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 22)));;
@@ -2189,7 +1994,7 @@ static __attribute__((always_inline)) void LCD_WriteIndex(uint16_t index)
  ((1) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 24)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 24)));;
  ((1) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 22)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 22)));;
 }
-# 352 "Source/GLCD/GLCD.c"
+# 150 "Source/GLCD/GLCD.c"
 static __attribute__((always_inline)) void LCD_WriteData(uint16_t data)
 {
  ((0) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 22)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 22)));;
@@ -2200,7 +2005,7 @@ static __attribute__((always_inline)) void LCD_WriteData(uint16_t data)
  ((1) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 24)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 24)));;
  ((1) ? (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOSET = (1 << 22)) : (((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00000) )->FIOCLR = (1 << 22)));;
 }
-# 371 "Source/GLCD/GLCD.c"
+# 169 "Source/GLCD/GLCD.c"
 static __attribute__((always_inline)) uint16_t LCD_ReadData(void)
 {
  uint16_t value;
@@ -2216,7 +2021,7 @@ static __attribute__((always_inline)) uint16_t LCD_ReadData(void)
 
  return value;
 }
-# 396 "Source/GLCD/GLCD.c"
+# 194 "Source/GLCD/GLCD.c"
 static __attribute__((always_inline)) void LCD_WriteReg(uint16_t LCD_Reg,uint16_t LCD_RegValue)
 {
 
@@ -2224,7 +2029,7 @@ static __attribute__((always_inline)) void LCD_WriteReg(uint16_t LCD_Reg,uint16_
 
  LCD_WriteData(LCD_RegValue);
 }
-# 412 "Source/GLCD/GLCD.c"
+# 210 "Source/GLCD/GLCD.c"
 static __attribute__((always_inline)) uint16_t LCD_ReadReg(uint16_t LCD_Reg)
 {
  uint16_t LCD_RAM;
@@ -2235,10 +2040,10 @@ static __attribute__((always_inline)) uint16_t LCD_ReadReg(uint16_t LCD_Reg)
  LCD_RAM = LCD_ReadData();
  return LCD_RAM;
 }
-# 432 "Source/GLCD/GLCD.c"
+# 230 "Source/GLCD/GLCD.c"
 static void LCD_SetCursor(uint16_t Xpos,uint16_t Ypos)
 {
-# 445 "Source/GLCD/GLCD.c"
+# 243 "Source/GLCD/GLCD.c"
   switch( LCD_Code )
   {
      default:
@@ -2266,7 +2071,7 @@ static void LCD_SetCursor(uint16_t Xpos,uint16_t Ypos)
        break;
   }
 }
-# 482 "Source/GLCD/GLCD.c"
+# 280 "Source/GLCD/GLCD.c"
 static void delay_ms(uint16_t ms)
 {
  uint16_t i,j;
@@ -2275,7 +2080,7 @@ static void delay_ms(uint16_t ms)
   for( j = 0; j < 1141; j++ );
  }
 }
-# 500 "Source/GLCD/GLCD.c"
+# 298 "Source/GLCD/GLCD.c"
 void LCD_Initialization(void)
 {
  uint16_t DeviceCode;
@@ -2357,7 +2162,7 @@ void LCD_Initialization(void)
 
     delay_ms(50);
 }
-# 590 "Source/GLCD/GLCD.c"
+# 388 "Source/GLCD/GLCD.c"
 void LCD_Clear(uint16_t Color)
 {
  uint32_t index;
@@ -2387,7 +2192,7 @@ void LCD_Clear(uint16_t Color)
   LCD_WriteData(Color);
  }
 }
-# 628 "Source/GLCD/GLCD.c"
+# 426 "Source/GLCD/GLCD.c"
 static uint16_t LCD_BGR2RGB(uint16_t color)
 {
  uint16_t r, g, b, rgb;
@@ -2400,7 +2205,7 @@ static uint16_t LCD_BGR2RGB(uint16_t color)
 
  return( rgb );
 }
-# 650 "Source/GLCD/GLCD.c"
+# 448 "Source/GLCD/GLCD.c"
 uint16_t LCD_GetPoint(uint16_t Xpos,uint16_t Ypos)
 {
  uint16_t dummy;
@@ -2438,7 +2243,7 @@ uint16_t LCD_GetPoint(uint16_t Xpos,uint16_t Ypos)
         return LCD_BGR2RGB( dummy );
  }
 }
-# 697 "Source/GLCD/GLCD.c"
+# 495 "Source/GLCD/GLCD.c"
 void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point)
 {
  if( Xpos >= 240 || Ypos >= 320 )
@@ -2448,7 +2253,7 @@ void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point)
  LCD_SetCursor(Xpos,Ypos);
  LCD_WriteReg(0x0022,point);
 }
-# 719 "Source/GLCD/GLCD.c"
+# 517 "Source/GLCD/GLCD.c"
 void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t color )
 {
     short dx,dy;
@@ -2530,7 +2335,7 @@ void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t
         LCD_SetPoint(x0,y0,color);
  }
 }
-# 813 "Source/GLCD/GLCD.c"
+# 611 "Source/GLCD/GLCD.c"
 void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor )
 {
  uint16_t i, j;
@@ -2552,7 +2357,7 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
         }
     }
 }
-# 847 "Source/GLCD/GLCD.c"
+# 645 "Source/GLCD/GLCD.c"
 void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor)
 {
     uint8_t TempChar;
@@ -2578,25 +2383,11 @@ void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_
     while ( *str != 0 );
 }
 
-void LCD_setBlock(uint16_t Xpos, uint16_t Ypos, uint16_t color){
+void set_block(uint16_t Xpos, uint16_t Ypos, uint8_t size, uint16_t color){
  int i, j;
- for (i = Xpos; i < Xpos + 15; i++){
-  for (j = Ypos; j < Ypos + 15; j++){
-   LCD_SetPoint(i, j, color);
+ for (i = Xpos; i < Xpos + size; i++){
+   for (j = Ypos; j < Ypos + size; j++){
+    LCD_SetPoint(i, j, color);
   }
  }
-}
-
-void field_init(){
- int x, y;
- LCD_DrawLine(10, 10, 10, 310, 0xF7DE);
- LCD_DrawLine(10, 10, 160, 10, 0xF7DE);
- LCD_DrawLine(160, 10, 160, 310, 0xF7DE);
- LCD_DrawLine(10, 310, 160, 310, 0xF7DE);
- for (x = 0; x < 10; x++){
-  for (y = 0; y < 20; y++){
-   field[x][y] = 0;
-  }
- }
-
 }

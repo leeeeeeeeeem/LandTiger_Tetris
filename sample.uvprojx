@@ -629,6 +629,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>field</GroupName>
+          <Files>
+            <File>
+              <FileName>field.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\field\field.c</FilePath>
+            </File>
+            <File>
+              <FileName>field.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\field\field.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1200,6 +1215,21 @@
               <FileName>lib_led.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\led\lib_led.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>field</GroupName>
+          <Files>
+            <File>
+              <FileName>field.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\field\field.c</FilePath>
+            </File>
+            <File>
+              <FileName>field.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\field\field.h</FilePath>
             </File>
           </Files>
         </Group>

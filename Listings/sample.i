@@ -1792,6 +1792,7 @@ void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point);
 void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t color );
 void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor );
 void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
+void set_block(uint16_t Xpos, uint16_t Ypos, uint8_t size, uint16_t color);
 # 26 "Source/sample.c" 2
 # 1 "Source\\timer/timer.h" 1
 # 14 "Source\\timer/timer.h"
@@ -1818,7 +1819,9 @@ int main(void){
  LCD_Clear(0x0000);
  field_init();
  GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
- LCD_setBlock(11, 11, 0xCF54);
+ field_setBlock(0, 0, 0xCF54);
+ field_update();
+ //LCD_setBlock(11, 11, 0xCF54);
  //LCD_DrawLine(0, 0, 200, 200, 0xFFFF);
  //init_timer(0, 0x1312D0 );
  //init_timer(0, 0x6108 );
