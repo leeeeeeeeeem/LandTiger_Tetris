@@ -207,7 +207,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {			// Static data structur
 											}
 										};
 
-uint16_t field[FIELD_W][FIELD_H];
+uint16_t field[FIELD_H][FIELD_W];
 
 void field_setBlock(int x, int y, uint16_t color){
 	field[x][y] = color;
@@ -215,8 +215,8 @@ void field_setBlock(int x, int y, uint16_t color){
 
 void field_update(){
 	int i, j;
-	for (i = 0; i < FIELD_W; i++){
-		for (j = 0; j < FIELD_H; j++){
+	for (i = 0; i < FIELD_H; i++){
+		for (j = 0; j < FIELD_W; j++){
 			if (field[i][j])
 				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * i + 1,
 						FIELD_TOP_LEFT_Y + BLOCK_SIZE * j + 1,
@@ -232,11 +232,22 @@ void field_init(){
 	LCD_DrawLine(FIELD_TOP_LEFT_X, FIELD_TOP_LEFT_X, FIELD_BOTTOM_LEFT_X, FIELD_BOTTOM_LEFT_Y, Grey);
 	LCD_DrawLine(FIELD_BOTTOM_LEFT_X, FIELD_BOTTOM_LEFT_Y, FIELD_BOTTOM_RIGHT_X, FIELD_BOTTOM_RIGHT_Y, Grey);
 	LCD_DrawLine(FIELD_BOTTOM_RIGHT_X, FIELD_BOTTOM_RIGHT_Y, FIELD_TOP_RIGHT_X, FIELD_TOP_RIGHT_Y, Grey);
-	for (x = 0; x < FIELD_W; x++){
-		for (y = 0; y < FIELD_H; y++){
+	for (x = 0; x < FIELD_H; x++){
+		for (y = 0; y < FIELD_W; y++){
 			field[x][y] = 0;
 		}
 	}
+}
+
+void field_placeTetromino(int x, int y, int idx, uint16_t color){
+	int i, j;
+	for (i = 0; i < 4; i++){
+		for (j = 0; j < 4; j++){
+			if (tetrominoes[idx][0][i][j])
+				field_setBlock(x + j, y + i, color);
+		}
+	}
+	field_update();
 }
 
 
