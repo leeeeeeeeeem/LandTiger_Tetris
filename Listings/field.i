@@ -1790,7 +1790,9 @@ typedef struct
 void field_init(void);
 void field_setBlock(int x, int y, uint16_t color);
 void field_update(void);
-void field_placeTetromino(int x, int y, int idx, uint16_t color);
+void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color);
+void field_dropCurrentTetromino(void);
+void field_rotateCurrentTetromino(void);
 # 2 "Source/field/field.c" 2
 # 1 "./Source/GLCD\\GLCD.h" 1
 # 90 "./Source/GLCD\\GLCD.h"
@@ -1803,8 +1805,20 @@ void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, ui
 void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
 void set_block(uint16_t Xpos, uint16_t Ypos, uint8_t size, uint16_t color);
 # 3 "Source/field/field.c" 2
-# 23 "Source/field/field.c"
-static uint8_t tetrominoes[7][4][4][4] = { // Static data structure containing all 7 tetrominoes with
+# 22 "Source/field/field.c"
+typedef struct current_tetromino_s{
+  uint8_t index;
+  uint8_t rotation;
+  uint8_t position_x;
+  uint8_t position_y;
+  uint8_t placed;
+  uint16_t color;
+ } current_tetromino_t;
+
+current_tetromino_t current_tetromino;
+
+static uint8_t tetrominoes[7][4][4][4] = {
+             // Static data structure containing all 7 tetrominoes with
              // all 4 rotations.
 
            { // I-shaped
@@ -1994,7 +2008,7 @@ static uint8_t tetrominoes[7][4][4][4] = { // Static data structure containing a
 uint16_t field[20][10];
 
 void field_setBlock(int x, int y, uint16_t color){
- field[x][y] = color;
+ field[y][x] = color;
 }
 
 void field_update(){
@@ -2002,8 +2016,8 @@ void field_update(){
  for (i = 0; i < 20; i++){
   for (j = 0; j < 10; j++){
    if (field[i][j])
-    set_block(10 + 15 * i + 1,
-      10 + 15 * j + 1,
+    set_block(10 + 15 * j + 1,
+      10 + 15 * i + 1,
       15,
       field[i][j]);
   }
@@ -2016,20 +2030,66 @@ void field_init(){
  LCD_DrawLine(10, 10, 10, 10 + 15 * 20, 0xF7DE);
  LCD_DrawLine(10, 10 + 15 * 20, 10 + 15 * 10, 10 + 15 * 20, 0xF7DE);
  LCD_DrawLine(10 + 15 * 10, 10 + 15 * 20, 10 + 15 * 10, 10, 0xF7DE);
- for (x = 0; x < 20; x++){
-  for (y = 0; y < 10; y++){
-   field[x][y] = 0;
+ for (y = 0; y < 20; y++){
+  for (x = 0; x < 10; x++){
+   field[y][x] = 0;
   }
  }
 }
 
-void field_placeTetromino(int x, int y, int idx, uint16_t color){
+void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color){
  int i, j;
  for (i = 0; i < 4; i++){
   for (j = 0; j < 4; j++){
-   if (tetrominoes[idx][0][i][j])
+   if (tetrominoes[idx][rotation][i][j])
     field_setBlock(x + j, y + i, color);
   }
  }
+ current_tetromino.index = idx;
+ current_tetromino.position_x = x;
+ current_tetromino.position_y = y;
+ current_tetromino.rotation = rotation;
+ current_tetromino.placed = 0;
+ current_tetromino.color = color;
  field_update();
+}
+
+void field_dropCurrentTetromino(){
+ int i, j;
+ for (i = 0; i < 4; i++) {
+  for (j = 0; j < 4; j++) {
+   if (tetrominoes[current_tetromino.index][current_tetromino.rotation][i][j]) {
+    field_setBlock(current_tetromino.position_x + j,
+     current_tetromino.position_y + i,
+     0);
+   }
+  }
+ }
+ field_placeTetromino(
+   current_tetromino.position_x,
+   current_tetromino.position_y + 1,
+   current_tetromino.index,
+   current_tetromino.rotation,
+   current_tetromino.color);
+ current_tetromino.position_y++;
+}
+
+void field_rotateCurrentTetromino(){
+ int i, j;
+ for (i = 0; i < 4; i++) {
+  for (j = 0; j < 4; j++) {
+   if (tetrominoes[current_tetromino.index][current_tetromino.rotation][i][j]) {
+    field_setBlock(current_tetromino.position_x + j,
+     current_tetromino.position_y + i,
+     0);
+   }
+  }
+ }
+ current_tetromino.rotation = (current_tetromino.rotation + 1) % 4;
+ field_placeTetromino(
+   current_tetromino.position_x,
+   current_tetromino.position_y,
+   current_tetromino.index,
+   current_tetromino.rotation,
+   current_tetromino.color);
 }
