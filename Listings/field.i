@@ -1790,6 +1790,7 @@ typedef struct
 void field_init(void);
 void field_setBlock(int x, int y, uint16_t color);
 void field_update(void);
+void field_placeTetromino(int x, int y, int idx, uint16_t color);
 # 2 "Source/field/field.c" 2
 # 1 "./Source/GLCD\\GLCD.h" 1
 # 90 "./Source/GLCD\\GLCD.h"
@@ -1990,7 +1991,7 @@ static uint8_t tetrominoes[7][4][4][4] = { // Static data structure containing a
            }
           };
 
-uint16_t field[10][20];
+uint16_t field[20][10];
 
 void field_setBlock(int x, int y, uint16_t color){
  field[x][y] = color;
@@ -1998,8 +1999,8 @@ void field_setBlock(int x, int y, uint16_t color){
 
 void field_update(){
  int i, j;
- for (i = 0; i < 10; i++){
-  for (j = 0; j < 20; j++){
+ for (i = 0; i < 20; i++){
+  for (j = 0; j < 10; j++){
    if (field[i][j])
     set_block(10 + 15 * i + 1,
       10 + 15 * j + 1,
@@ -2015,9 +2016,20 @@ void field_init(){
  LCD_DrawLine(10, 10, 10, 10 + 15 * 20, 0xF7DE);
  LCD_DrawLine(10, 10 + 15 * 20, 10 + 15 * 10, 10 + 15 * 20, 0xF7DE);
  LCD_DrawLine(10 + 15 * 10, 10 + 15 * 20, 10 + 15 * 10, 10, 0xF7DE);
- for (x = 0; x < 10; x++){
-  for (y = 0; y < 20; y++){
+ for (x = 0; x < 20; x++){
+  for (y = 0; y < 10; y++){
    field[x][y] = 0;
   }
  }
+}
+
+void field_placeTetromino(int x, int y, int idx, uint16_t color){
+ int i, j;
+ for (i = 0; i < 4; i++){
+  for (j = 0; j < 4; j++){
+   if (tetrominoes[idx][0][i][j])
+    field_setBlock(x + j, y + i, color);
+  }
+ }
+ field_update();
 }
