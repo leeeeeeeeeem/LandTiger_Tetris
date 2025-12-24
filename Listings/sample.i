@@ -1822,7 +1822,12 @@ int main(void){
  field_placeTetromino(5, 0, 6, 0, 0xCF54);
  field_dropCurrentTetromino();
  field_rotateCurrentTetromino();
-
+ field_dropCurrentTetromino();
+ field_dropCurrentTetromino();
+ field_dropCurrentTetromino();
+ field_dropCurrentTetromino();
+ field_rotateCurrentTetromino();
+ field_rotateCurrentTetromino();
  //field_setBlock(0, 0, 0xCF54);
  //field_update();
  //LCD_setBlock(11, 11, 0xCF54);

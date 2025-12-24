@@ -228,7 +228,12 @@ void field_update(){
 	int i, j;
 	for (i = 0; i < FIELD_H; i++){
 		for (j = 0; j < FIELD_W; j++){
-			if (field[i][j])
+			if (field[i][j] == 0xFFFF)
+				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j + 1,
+						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i + 1,
+						BLOCK_SIZE,
+						0x0000);
+			else if (field[i][j])
 				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j + 1,
 						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i + 1,
 						BLOCK_SIZE,
@@ -267,37 +272,32 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 	field_update();
 }
 
-void field_dropCurrentTetromino(){
+void field_deleteCurrentTetromino(){
 	int i, j;
 	for (i = 0; i < 4; i++) {
 		for (j = 0; j < 4; j++) {
 			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][i][j]) {
 				field_setBlock(current_tetromino.position_x + j, 
 					current_tetromino.position_y + i, 
-					0);
+					0xFFFF);
 			}
 		}
 	}
-	field_placeTetromino(
-			current_tetromino.position_x, 
-			current_tetromino.position_y + 1,
-			current_tetromino.index,
-			current_tetromino.rotation,
-			current_tetromino.color);
+}
+
+void field_dropCurrentTetromino(){
+	field_deleteCurrentTetromino();
 	current_tetromino.position_y++;
+	field_placeTetromino(
+		current_tetromino.position_x, 
+		current_tetromino.position_y,
+		current_tetromino.index,
+		current_tetromino.rotation,
+		current_tetromino.color);
 }
 
 void field_rotateCurrentTetromino(){
-	int i, j;
-	for (i = 0; i < 4; i++) {
-		for (j = 0; j < 4; j++) {
-			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][i][j]) {
-				field_setBlock(current_tetromino.position_x + j, 
-					current_tetromino.position_y + i, 
-					0);
-			}
-		}
-	}
+	field_deleteCurrentTetromino();
 	current_tetromino.rotation = (current_tetromino.rotation + 1) % 4;
 	field_placeTetromino(
 			current_tetromino.position_x, 
