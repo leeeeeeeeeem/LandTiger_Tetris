@@ -10,5 +10,6 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 void field_dropCurrentTetromino(void);
 void field_dropCurrentTetromino(void);
 void field_rotateCurrentTetromino(void);
+void field_collissionDetection(void);
 
 #endif

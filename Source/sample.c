@@ -40,14 +40,10 @@ int main(void){
 	field_init();
 	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
 	field_placeTetromino(5, 0, 6, 0, 0xCF54);
-	field_dropCurrentTetromino();
 	field_rotateCurrentTetromino();
-	field_dropCurrentTetromino();
-	field_dropCurrentTetromino();
-	field_dropCurrentTetromino();
-	field_dropCurrentTetromino();
-	field_rotateCurrentTetromino();
-	field_rotateCurrentTetromino();
+	start_dropping();
+	field_placeTetromino(5, 0, 4, 0, 0xCF54);
+	start_dropping();
 	//field_setBlock(0, 0, 0xCF54);
 	//field_update();
 	//LCD_setBlock(11, 11, 0xCF54);

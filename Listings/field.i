@@ -1794,6 +1794,7 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 void field_dropCurrentTetromino(void);
 void field_dropCurrentTetromino(void);
 void field_rotateCurrentTetromino(void);
+void field_collissionDetection(void);
 # 2 "Source/field/field.c" 2
 # 1 "./Source/GLCD\\GLCD.h" 1
 # 90 "./Source/GLCD\\GLCD.h"
@@ -2028,6 +2029,7 @@ void field_update(){
       field[i][j]);
   }
  }
+ field_collissionDetection();
 }
 
 void field_init(){
@@ -2093,4 +2095,26 @@ void field_rotateCurrentTetromino(){
    current_tetromino.index,
    current_tetromino.rotation,
    current_tetromino.color);
+}
+
+void field_collissionDetection(){
+ int y, x;
+ for (y = 0; y < 4; y++) {
+  for (x = 0; x < 4; x++) {
+   if (y != 3 &&
+    tetrominoes[current_tetromino.index][current_tetromino.rotation][x][y] &&
+    !tetrominoes[current_tetromino.index][current_tetromino.rotation][x][y + 1] &&
+     (
+      current_tetromino.position_y == 20 - 1 ||
+      field[current_tetromino.position_x + x][current_tetromino.position_y + y + 1]
+     )
+    )
+      current_tetromino.placed = 1;
+  }
+ }
+}
+
+void start_dropping(){
+ while(!current_tetromino.placed)
+  field_dropCurrentTetromino();
 }
