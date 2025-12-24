@@ -2017,13 +2017,13 @@ void field_update(){
  for (i = 0; i < 20; i++){
   for (j = 0; j < 10; j++){
    if (field[i][j] == 0xFFFF)
-    set_block(10 + 15 * j + 1,
-      10 + 15 * i + 1,
+    set_block(10 + 15 * j,
+      10 + 15 * i,
       15,
       0x0000);
    else if (field[i][j])
-    set_block(10 + 15 * j + 1,
-      10 + 15 * i + 1,
+    set_block(10 + 15 * j,
+      10 + 15 * i,
       15,
       field[i][j]);
   }
@@ -2032,10 +2032,10 @@ void field_update(){
 
 void field_init(){
  int x, y;
- LCD_DrawLine(10, 10, 10 + 15 * 10, 10, 0xF7DE);
- LCD_DrawLine(10, 10, 10, 10 + 15 * 20, 0xF7DE);
- LCD_DrawLine(10, 10 + 15 * 20, 10 + 15 * 10, 10 + 15 * 20, 0xF7DE);
- LCD_DrawLine(10 + 15 * 10, 10 + 15 * 20, 10 + 15 * 10, 10, 0xF7DE);
+ LCD_DrawLine(10 - 1, 10 - 1, 10 + 15 * 10 + 1, 10 - 1, 0xF7DE);
+ LCD_DrawLine(10 - 1, 10 - 1, 10 - 1, 10 + 15 * 20 + 1, 0xF7DE);
+ LCD_DrawLine(10 - 1, 10 + 15 * 20 + 1, 10 + 15 * 10 + 1 , 10 + 15 * 20 + 1, 0xF7DE);
+ LCD_DrawLine(10 + 15 * 10 + 1, 10 + 15 * 20 + 1, 10 + 15 * 10 + 1, 10 - 1, 0xF7DE);
  for (y = 0; y < 20; y++){
   for (x = 0; x < 10; x++){
    field[y][x] = 0;

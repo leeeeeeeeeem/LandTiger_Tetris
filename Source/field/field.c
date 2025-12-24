@@ -229,13 +229,13 @@ void field_update(){
 	for (i = 0; i < FIELD_H; i++){
 		for (j = 0; j < FIELD_W; j++){
 			if (field[i][j] == 0xFFFF)
-				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j + 1,
-						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i + 1,
+				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j,
+						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i,
 						BLOCK_SIZE,
 						0x0000);
 			else if (field[i][j])
-				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j + 1,
-						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i + 1,
+				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j,
+						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i,
 						BLOCK_SIZE,
 						field[i][j]);
 		}
@@ -244,10 +244,10 @@ void field_update(){
 
 void field_init(){
 	int x, y;
-	LCD_DrawLine(FIELD_TOP_LEFT_X, FIELD_TOP_LEFT_Y, FIELD_TOP_RIGHT_X, FIELD_TOP_RIGHT_Y, Grey);
-	LCD_DrawLine(FIELD_TOP_LEFT_X, FIELD_TOP_LEFT_X, FIELD_BOTTOM_LEFT_X, FIELD_BOTTOM_LEFT_Y, Grey);
-	LCD_DrawLine(FIELD_BOTTOM_LEFT_X, FIELD_BOTTOM_LEFT_Y, FIELD_BOTTOM_RIGHT_X, FIELD_BOTTOM_RIGHT_Y, Grey);
-	LCD_DrawLine(FIELD_BOTTOM_RIGHT_X, FIELD_BOTTOM_RIGHT_Y, FIELD_TOP_RIGHT_X, FIELD_TOP_RIGHT_Y, Grey);
+	LCD_DrawLine(FIELD_TOP_LEFT_X - 1, FIELD_TOP_LEFT_Y - 1, FIELD_TOP_RIGHT_X + 1, FIELD_TOP_RIGHT_Y - 1, Grey);
+	LCD_DrawLine(FIELD_TOP_LEFT_X - 1, FIELD_TOP_LEFT_X - 1, FIELD_BOTTOM_LEFT_X - 1, FIELD_BOTTOM_LEFT_Y + 1, Grey);
+	LCD_DrawLine(FIELD_BOTTOM_LEFT_X - 1, FIELD_BOTTOM_LEFT_Y + 1, FIELD_BOTTOM_RIGHT_X + 1 , FIELD_BOTTOM_RIGHT_Y + 1, Grey);
+	LCD_DrawLine(FIELD_BOTTOM_RIGHT_X + 1, FIELD_BOTTOM_RIGHT_Y + 1, FIELD_TOP_RIGHT_X + 1, FIELD_TOP_RIGHT_Y - 1, Grey);
 	for (y = 0; y < FIELD_H; y++){
 		for (x = 0; x < FIELD_W; x++){
 			field[y][x] = 0;
