@@ -1,2 +1,1 @@
-*.html linguist-detectable=false
-*.SWIG linguist-detectable=false
+*.i linguist-detectable=false
