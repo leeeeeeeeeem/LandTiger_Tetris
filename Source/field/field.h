@@ -11,5 +11,7 @@ void field_dropCurrentTetromino(void);
 void field_dropCurrentTetromino(void);
 void field_rotateCurrentTetromino(void);
 void field_collissionDetection(void);
+void field_clearDetection(void);
+void field_clearRow(uint8_t y);
 
 #endif
