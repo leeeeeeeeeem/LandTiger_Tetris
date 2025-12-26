@@ -312,12 +312,12 @@ void field_collissionDetection(){
 	int y, x;
 	for (y = 0; y < 4; y++) {
 		for (x = 0; x < 4; x++) {
-			if (y != 3 &&
-				tetrominoes[current_tetromino.index][current_tetromino.rotation][x][y] &&
-				!tetrominoes[current_tetromino.index][current_tetromino.rotation][x][y + 1] &&
+			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
+				(y == 3 || !tetrominoes[current_tetromino.index][current_tetromino.rotation][y + 1][x]) &&
 					(
-					 current_tetromino.position_y == FIELD_H - 1 ||
-					 field[current_tetromino.position_x + x][current_tetromino.position_y + y + 1]
+					 current_tetromino.position_y + y >= FIELD_H - 1 ||
+					 (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0 &&
+					  field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0xFFFF)
 					)
 				) 
 						current_tetromino.placed = 1;
