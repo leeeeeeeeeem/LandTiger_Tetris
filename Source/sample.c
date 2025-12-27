@@ -39,15 +39,17 @@ int main(void){
 	LCD_Clear(Black);
 	field_init();
 	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
-	field_placeTetromino(0, 0, 4, 0, 0xCF54);
-	start_dropping();
 	field_placeTetromino(2, 0, 4, 0, 0xCF54);
+	field_moveCurrentTetrominoLeft();
+	field_moveCurrentTetrominoLeft();
+	field_moveCurrentTetrominoLeft();
 	start_dropping();
-	field_placeTetromino(4, 0, 4, 0, 0xCF54);
-	start_dropping();
-	field_placeTetromino(6, 0, 4, 0, 0xCF54);
-	start_dropping();
-	field_placeTetromino(8, 0, 4, 0, 0xCF54);
+	field_placeTetromino(7, 0, 4, 0, 0xCF54);
+	field_moveCurrentTetrominoRight();
+	field_moveCurrentTetrominoRight();
+	field_moveCurrentTetrominoRight();
+	field_moveCurrentTetrominoRight();
+	field_moveCurrentTetrominoRight();
 	start_dropping();
 	field_clearDetection();
 

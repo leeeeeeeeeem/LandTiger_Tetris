@@ -310,6 +310,64 @@ void field_rotateCurrentTetromino(){
 			current_tetromino.color);
 }
 
+void field_moveCurrentTetrominoRight(){
+	uint8_t y, x, can_place = 1;
+	for (y = 0; y < 4; y++) {
+		for (x = 0; x < 4; x++) {
+			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
+					(current_tetromino.position_x + x + 1 >= FIELD_W	|| 
+						(((x != 3 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x + 1]) 
+						 || (x == 3) ) &&
+						 field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0 &&
+						 field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0xFFFF)
+					)
+				){
+					can_place = 0;
+					break;
+				 }
+		}
+	}
+	if (can_place){
+		field_deleteCurrentTetromino();
+		field_placeTetromino(
+			current_tetromino.position_x + 1, 
+			current_tetromino.position_y,
+			current_tetromino.index,
+			current_tetromino.rotation,
+			current_tetromino.color);
+
+	}
+}
+		
+void field_moveCurrentTetrominoLeft(){
+	uint8_t y, x, can_place = 1;
+	for (y = 0; y < 4; y++) {
+		for (x = 0; x < 4; x++) {
+			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
+					(current_tetromino.position_x + x - 1 < 0	|| 
+						(((x != 0 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x -	1]) 
+						 || (x == 0) ) &&
+						 field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0 &&
+						 field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0xFFFF)
+					)
+				){
+					can_place = 0;
+					break;
+				 }
+		}
+	}
+	if (can_place){
+		field_deleteCurrentTetromino();
+		field_placeTetromino(
+			current_tetromino.position_x - 1, 
+			current_tetromino.position_y,
+			current_tetromino.index,
+			current_tetromino.rotation,
+			current_tetromino.color);
+
+	}
+}
+
 void field_collisionDetection(){
 	uint8_t y, x;
 	for (y = 0; y < 4; y++) {
