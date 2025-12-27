@@ -43,7 +43,7 @@ int main(void){
 	field_moveCurrentTetrominoLeft();
 	field_moveCurrentTetrominoLeft();
 	field_moveCurrentTetrominoLeft();
-	start_dropping();
+	field_hardDropCurrentTetromino();
 	field_placeTetromino(7, 0, 4, 0, 0xCF54);
 	field_moveCurrentTetrominoRight();
 	field_moveCurrentTetrominoRight();

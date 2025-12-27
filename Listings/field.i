@@ -1790,9 +1790,9 @@ typedef struct
 void field_init(void);
 void field_setBlock(int x, int y, uint16_t color);
 void field_update(void);
-void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color);
+void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color, uint8_t update);
 void field_dropCurrentTetromino(void);
-void field_dropCurrentTetromino(void);
+void field_hardDropCurrentTetromino(void);
 void field_moveCurrentTetrominoLeft(void);
 void field_moveCurrentTetrominoRight(void);
 void field_rotateCurrentTetromino(void);
@@ -2051,7 +2051,7 @@ void field_init(){
  }
 }
 
-void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color){
+void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color, uint8_t update){
  uint8_t i, j;
  for (i = 0; i < 4; i++){
   for (j = 0; j < 4; j++){
@@ -2065,7 +2065,8 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
  current_tetromino.rotation = rotation;
  current_tetromino.placed = 0;
  current_tetromino.color = color;
- field_update();
+ if (update)
+  field_update();
 }
 
 void field_deleteCurrentTetromino(){
@@ -2089,8 +2090,27 @@ void field_dropCurrentTetromino(){
   current_tetromino.position_y,
   current_tetromino.index,
   current_tetromino.rotation,
-  current_tetromino.color);
+  current_tetromino.color,
+  1);
 }
+
+void field_hardDropCurrentTetromino(){
+ while (!current_tetromino.placed){
+  field_deleteCurrentTetromino();
+  current_tetromino.position_y++;
+  field_placeTetromino(
+   current_tetromino.position_x,
+   current_tetromino.position_y,
+   current_tetromino.index,
+   current_tetromino.rotation,
+   current_tetromino.color,
+   0);
+  field_collisionDetection();
+ }
+ field_update();
+ field_clearDetection();
+}
+
 
 void field_rotateCurrentTetromino(){
  field_deleteCurrentTetromino();
@@ -2100,7 +2120,8 @@ void field_rotateCurrentTetromino(){
    current_tetromino.position_y,
    current_tetromino.index,
    current_tetromino.rotation,
-   current_tetromino.color);
+   current_tetromino.color,
+   1);
 }
 
 void field_moveCurrentTetrominoRight(){
@@ -2127,7 +2148,8 @@ void field_moveCurrentTetrominoRight(){
    current_tetromino.position_y,
    current_tetromino.index,
    current_tetromino.rotation,
-   current_tetromino.color);
+   current_tetromino.color,
+   1);
 
  }
 }
@@ -2156,7 +2178,8 @@ void field_moveCurrentTetrominoLeft(){
    current_tetromino.position_y,
    current_tetromino.index,
    current_tetromino.rotation,
-   current_tetromino.color);
+   current_tetromino.color,
+   1);
 
  }
 }

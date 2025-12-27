@@ -194,9 +194,9 @@ Removing Unused input sections from the image.
     Removing funct_led.o(.ARM.exidx), (24 bytes).
     Removing lib_led.o(.text), (70 bytes).
     Removing lib_led.o(.ARM.exidx), (16 bytes).
-    Removing field.o(.ARM.exidx), (104 bytes).
+    Removing field.o(.ARM.exidx), (112 bytes).
 
-22 unused section(s) (total 217192 bytes) removed from the image.
+22 unused section(s) (total 217200 bytes) removed from the image.
 
 ==============================================================================
 
@@ -343,16 +343,16 @@ Image Symbol Table
     [Anonymous Symbol]                       0x00001dcc   Section        0  lib_button.o(.text)
     [Anonymous Symbol]                       0x00001e48   Section        0  funct_led.o(.text)
     [Anonymous Symbol]                       0x00001ee0   Section        0  field.o(.text)
-    .text                                    0x0000273a   Section       78  rt_memclr_w.o(.text)
-    .text                                    0x00002788   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x000027d2   Section        0  exit.o(.text)
-    .text                                    0x000027e4   Section        0  sys_exit.o(.text)
-    .text                                    0x000027f0   Section        2  use_no_semi.o(.text)
-    AsciiLib                                 0x000027f2   Data        1520  asciilib.o(.rodata.AsciiLib)
-    [Anonymous Symbol]                       0x000027f2   Section        0  asciilib.o(.rodata.AsciiLib)
-    .text                                    0x000027f2   Section        0  indicate_semi.o(.text)
-    tetrominoes                              0x00002e04   Data         448  field.o(.rodata.tetrominoes)
-    [Anonymous Symbol]                       0x00002e04   Section        0  field.o(.rodata.tetrominoes)
+    .text                                    0x0000290a   Section       78  rt_memclr_w.o(.text)
+    .text                                    0x00002958   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x000029a2   Section        0  exit.o(.text)
+    .text                                    0x000029b4   Section        0  sys_exit.o(.text)
+    .text                                    0x000029c0   Section        2  use_no_semi.o(.text)
+    AsciiLib                                 0x000029c2   Data        1520  asciilib.o(.rodata.AsciiLib)
+    [Anonymous Symbol]                       0x000029c2   Section        0  asciilib.o(.rodata.AsciiLib)
+    .text                                    0x000029c2   Section        0  indicate_semi.o(.text)
+    tetrominoes                              0x00002fd4   Data         448  field.o(.rodata.tetrominoes)
+    [Anonymous Symbol]                       0x00002fd4   Section        0  field.o(.rodata.tetrominoes)
     Stack_Mem                                0x10000000   Data        1024  startup_lpc17xx.o(STACK)
     STACK                                    0x10000000   Section     1024  startup_lpc17xx.o(STACK)
     __initial_sp                             0x10000400   Data           0  startup_lpc17xx.o(STACK)
@@ -530,28 +530,29 @@ Image Symbol Table
     field_update                             0x00001ef9   Thumb Code   238  field.o(.text)
     field_collisionDetection                 0x00001fe9   Thumb Code   150  field.o(.text)
     field_init                               0x00002081   Thumb Code    92  field.o(.text)
-    field_placeTetromino                     0x000020dd   Thumb Code   116  field.o(.text)
-    field_deleteCurrentTetromino             0x00002151   Thumb Code   106  field.o(.text)
-    field_dropCurrentTetromino               0x000021bd   Thumb Code   182  field.o(.text)
-    field_rotateCurrentTetromino             0x00002275   Thumb Code   178  field.o(.text)
-    field_moveCurrentTetrominoRight          0x00002329   Thumb Code   298  field.o(.text)
-    field_moveCurrentTetrominoLeft           0x00002455   Thumb Code   298  field.o(.text)
-    field_clearDetection                     0x00002581   Thumb Code   144  field.o(.text)
-    field_clearRow                           0x00002611   Thumb Code    82  field.o(.text)
-    start_dropping                           0x00002665   Thumb Code   214  field.o(.text)
-    __aeabi_memclr4                          0x0000273b   Thumb Code     0  rt_memclr_w.o(.text)
-    __aeabi_memclr8                          0x0000273b   Thumb Code     0  rt_memclr_w.o(.text)
-    __rt_memclr_w                            0x0000273b   Thumb Code     0  rt_memclr_w.o(.text)
-    _memset_w                                0x0000273f   Thumb Code    74  rt_memclr_w.o(.text)
-    __user_setup_stackheap                   0x00002789   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x000027d3   Thumb Code    18  exit.o(.text)
-    _sys_exit                                0x000027e5   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x000027f1   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x000027f1   Thumb Code     2  use_no_semi.o(.text)
-    __semihosting_library_function           0x000027f3   Thumb Code     0  indicate_semi.o(.text)
-    led_mask                                 0x00002de4   Data          32  funct_led.o(.rodata.led_mask)
-    Region$$Table$$Base                      0x00002fc4   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00002ff4   Number         0  anon$$obj.o(Region$$Table)
+    field_placeTetromino                     0x000020dd   Thumb Code   126  field.o(.text)
+    field_deleteCurrentTetromino             0x0000215d   Thumb Code   106  field.o(.text)
+    field_dropCurrentTetromino               0x000021c9   Thumb Code   182  field.o(.text)
+    field_hardDropCurrentTetromino           0x00002281   Thumb Code   450  field.o(.text)
+    field_clearDetection                     0x00002445   Thumb Code   144  field.o(.text)
+    field_rotateCurrentTetromino             0x000024d5   Thumb Code   178  field.o(.text)
+    field_moveCurrentTetrominoRight          0x00002589   Thumb Code   298  field.o(.text)
+    field_moveCurrentTetrominoLeft           0x000026b5   Thumb Code   298  field.o(.text)
+    field_clearRow                           0x000027e1   Thumb Code    82  field.o(.text)
+    start_dropping                           0x00002835   Thumb Code   214  field.o(.text)
+    __aeabi_memclr4                          0x0000290b   Thumb Code     0  rt_memclr_w.o(.text)
+    __aeabi_memclr8                          0x0000290b   Thumb Code     0  rt_memclr_w.o(.text)
+    __rt_memclr_w                            0x0000290b   Thumb Code     0  rt_memclr_w.o(.text)
+    _memset_w                                0x0000290f   Thumb Code    74  rt_memclr_w.o(.text)
+    __user_setup_stackheap                   0x00002959   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x000029a3   Thumb Code    18  exit.o(.text)
+    _sys_exit                                0x000029b5   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x000029c1   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x000029c1   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x000029c3   Thumb Code     0  indicate_semi.o(.text)
+    led_mask                                 0x00002fb4   Data          32  funct_led.o(.rodata.led_mask)
+    Region$$Table$$Base                      0x00003194   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000031c4   Number         0  anon$$obj.o(Region$$Table)
     SystemFrequency                          0x2007c000   Data           4  system_lpc17xx.o(.data.SystemFrequency)
     __libspace_start                         0x2007c008   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x2007c068   Data           0  libspace.o(.bss)
@@ -569,9 +570,9 @@ Memory Map of the image
 
   Image Entry point : 0x000000cd
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00003000, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000031d0, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00002ff4, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000031c4, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -645,46 +646,46 @@ Memory Map of the image
     0x00001dca   0x00001dca   0x00000002   PAD
     0x00001dcc   0x00001dcc   0x0000007c   Code   RO          114    .text               lib_button.o
     0x00001e48   0x00001e48   0x00000098   Code   RO          121    .text               funct_led.o
-    0x00001ee0   0x00001ee0   0x0000085a   Code   RO          138    .text               field.o
-    0x0000273a   0x0000273a   0x0000004e   Code   RO          154    .text               c_w.l(rt_memclr_w.o)
-    0x00002788   0x00002788   0x0000004a   Code   RO          178    .text               c_w.l(sys_stackheap_outer.o)
-    0x000027d2   0x000027d2   0x00000012   Code   RO          180    .text               c_w.l(exit.o)
-    0x000027e4   0x000027e4   0x0000000c   Code   RO          251    .text               c_w.l(sys_exit.o)
-    0x000027f0   0x000027f0   0x00000002   Code   RO          266    .text               c_w.l(use_no_semi.o)
-    0x000027f2   0x000027f2   0x00000000   Code   RO          268    .text               c_w.l(indicate_semi.o)
-    0x000027f2   0x000027f2   0x000005f0   Data   RO           48    .rodata.AsciiLib    asciilib.o
-    0x00002de2   0x00002de2   0x00000002   PAD
-    0x00002de4   0x00002de4   0x00000020   Data   RO          123    .rodata.led_mask    funct_led.o
-    0x00002e04   0x00002e04   0x000001c0   Data   RO          141    .rodata.tetrominoes  field.o
-    0x00002fc4   0x00002fc4   0x00000030   Data   RO          324    Region$$Table       anon$$obj.o
+    0x00001ee0   0x00001ee0   0x00000a2a   Code   RO          138    .text               field.o
+    0x0000290a   0x0000290a   0x0000004e   Code   RO          154    .text               c_w.l(rt_memclr_w.o)
+    0x00002958   0x00002958   0x0000004a   Code   RO          178    .text               c_w.l(sys_stackheap_outer.o)
+    0x000029a2   0x000029a2   0x00000012   Code   RO          180    .text               c_w.l(exit.o)
+    0x000029b4   0x000029b4   0x0000000c   Code   RO          251    .text               c_w.l(sys_exit.o)
+    0x000029c0   0x000029c0   0x00000002   Code   RO          266    .text               c_w.l(use_no_semi.o)
+    0x000029c2   0x000029c2   0x00000000   Code   RO          268    .text               c_w.l(indicate_semi.o)
+    0x000029c2   0x000029c2   0x000005f0   Data   RO           48    .rodata.AsciiLib    asciilib.o
+    0x00002fb2   0x00002fb2   0x00000002   PAD
+    0x00002fb4   0x00002fb4   0x00000020   Data   RO          123    .rodata.led_mask    funct_led.o
+    0x00002fd4   0x00002fd4   0x000001c0   Data   RO          141    .rodata.tetrominoes  field.o
+    0x00003194   0x00003194   0x00000030   Data   RO          324    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x00002ff4, Size: 0x00000400, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x000031c4, Size: 0x00000400, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x10000000        -       0x00000400   Zero   RW            1    STACK               startup_lpc17xx.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x2007c000, Load base: 0x00002ff8, Size: 0x00000220, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x2007c000, Load base: 0x000031c8, Size: 0x00000220, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2007c000   0x00002ff8   0x00000004   Data   RW           23    .data.SystemFrequency  system_lpc17xx.o
-    0x2007c004   0x00002ffc   0x00000004   PAD
+    0x2007c000   0x000031c8   0x00000004   Data   RW           23    .data.SystemFrequency  system_lpc17xx.o
+    0x2007c004   0x000031cc   0x00000004   PAD
     0x2007c008        -       0x00000060   Zero   RW          189    .bss                c_w.l(libspace.o)
     0x2007c068        -       0x00000004   Zero   RW           77    .bss.RIT_IRQHandler.J_down  irq_rit.o
     0x2007c06c        -       0x00000004   Zero   RW           76    .bss.RIT_IRQHandler.J_up  irq_rit.o
     0x2007c070        -       0x00000004   Zero   RW           78    .bss.RIT_IRQHandler.position  irq_rit.o
     0x2007c074        -       0x00000004   Zero   RW           79    .bss.RIT_IRQHandler.value  irq_rit.o
     0x2007c078        -       0x00000001   Zero   RW           24    .bss.ScaleFlag      system_lpc17xx.o
-    0x2007c079   0x00002ffc   0x00000001   PAD
+    0x2007c079   0x000031cc   0x00000001   PAD
     0x2007c07a        -       0x00000008   Zero   RW          142    .bss.current_tetromino  field.o
-    0x2007c082   0x00002ffc   0x00000002   PAD
+    0x2007c082   0x000031cc   0x00000002   PAD
     0x2007c084        -       0x00000004   Zero   RW           75    .bss.down           irq_rit.o
     0x2007c088        -       0x00000190   Zero   RW          140    .bss.field          field.o
     0x2007c218        -       0x00000001   Zero   RW          132    .bss.led_value      lib_led.o
-    0x2007c219   0x00002ffc   0x00000007   PAD
+    0x2007c219   0x000031cc   0x00000007   PAD
     0x2007c220        -       0x00000000   Zero   RW            2    HEAP                startup_lpc17xx.o
 
 
@@ -696,7 +697,7 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
         42          0       1520          0          0        646   asciilib.o
-      2138          0        448          0        408       6845   field.o
+      2602          0        448          0        408       8044   field.o
        152          0         32          0          0       2477   funct_led.o
       5986          0          0          0          0      18516   glcd.o
        106          0          0          0          0       3895   irq_button.o
@@ -711,7 +712,7 @@ Image component sizes
        336         20          0          4          1       2134   system_lpc17xx.o
 
     ----------------------------------------------------------------------
-      9624         50       2254          4       1468      56527   Object Totals
+     10088         50       2254          4       1468      57726   Object Totals
          0          0         48          0          0          0   (incl. Generated)
          8          0          2          0         14          0   (incl. Padding)
 
@@ -761,15 +762,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     10022         66       2254          4       1564      56879   Grand Totals
-     10022         66       2254          4       1564      56879   ELF Image Totals
-     10022         66       2254          4          0          0   ROM Totals
+     10486         66       2254          4       1564      58078   Grand Totals
+     10486         66       2254          4       1564      58078   ELF Image Totals
+     10486         66       2254          4          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                12276 (  11.99kB)
+    Total RO  Size (Code + RO Data)                12740 (  12.44kB)
     Total RW  Size (RW Data + ZI Data)              1568 (   1.53kB)
-    Total ROM Size (Code + RO Data + RW Data)      12280 (  11.99kB)
+    Total ROM Size (Code + RO Data + RW Data)      12744 (  12.45kB)
 
 ==============================================================================
 
