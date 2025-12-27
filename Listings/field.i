@@ -1794,7 +1794,9 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 void field_dropCurrentTetromino(void);
 void field_dropCurrentTetromino(void);
 void field_rotateCurrentTetromino(void);
-void field_collissionDetection(void);
+void field_collisionDetection(void);
+void field_clearDetection(void);
+void field_clearRow(uint8_t y_toClear);
 # 2 "Source/field/field.c" 2
 # 1 "./Source/GLCD\\GLCD.h" 1
 # 90 "./Source/GLCD\\GLCD.h"
@@ -2014,14 +2016,16 @@ void field_setBlock(int x, int y, uint16_t color){
 }
 
 void field_update(){
- int i, j;
+ uint8_t i, j;
  for (i = 0; i < 20; i++){
   for (j = 0; j < 10; j++){
-   if (field[i][j] == 0xFFFF)
+   if (field[i][j] == 0xFFFF){
     set_block(10 + 15 * j,
       10 + 15 * i,
       15,
       0x0000);
+    field_setBlock(j, i, 0x0000);
+   }
    else if (field[i][j])
     set_block(10 + 15 * j,
       10 + 15 * i,
@@ -2029,11 +2033,11 @@ void field_update(){
       field[i][j]);
   }
  }
- field_collissionDetection();
+ field_collisionDetection();
 }
 
 void field_init(){
- int x, y;
+ uint8_t x, y;
  LCD_DrawLine(10 - 1, 10 - 1, 10 + 15 * 10 + 1, 10 - 1, 0xF7DE);
  LCD_DrawLine(10 - 1, 10 - 1, 10 - 1, 10 + 15 * 20 + 1, 0xF7DE);
  LCD_DrawLine(10 - 1, 10 + 15 * 20 + 1, 10 + 15 * 10 + 1 , 10 + 15 * 20 + 1, 0xF7DE);
@@ -2046,7 +2050,7 @@ void field_init(){
 }
 
 void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color){
- int i, j;
+ uint8_t i, j;
  for (i = 0; i < 4; i++){
   for (j = 0; j < 4; j++){
    if (tetrominoes[idx][rotation][i][j])
@@ -2063,7 +2067,7 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 }
 
 void field_deleteCurrentTetromino(){
- int i, j;
+ uint8_t i, j;
  for (i = 0; i < 4; i++) {
   for (j = 0; j < 4; j++) {
    if (tetrominoes[current_tetromino.index][current_tetromino.rotation][i][j]) {
@@ -2096,8 +2100,9 @@ void field_rotateCurrentTetromino(){
    current_tetromino.rotation,
    current_tetromino.color);
 }
-void field_collissionDetection(){
- int y, x;
+
+void field_collisionDetection(){
+ uint8_t y, x;
  for (y = 0; y < 4; y++) {
   for (x = 0; x < 4; x++) {
    if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
@@ -2111,6 +2116,32 @@ void field_collissionDetection(){
       current_tetromino.placed = 1;
   }
  }
+}
+
+void field_clearDetection(){
+    uint8_t y, x, cleared;
+    for (y = 0; y < 20; y++){
+        cleared = 1;
+        for (x = 0; x < 10; x++){
+            if (field[y][x] == 0 || field[y][x] == 0xFFFF)
+                cleared = 0;
+        }
+        if (cleared)
+            field_clearRow(y);
+    }
+}
+
+void field_clearRow(uint8_t y_toClear){
+    uint8_t y, x;
+ for (y = y_toClear; y > 0; y--){
+        for (x = 0 ; x < 10; x++){
+     if (field[y - 1][x] == 0x0000)
+      field[y][x] = 0xFFFF;
+     else
+      field[y][x] = field[y - 1][x];
+     }
+    }
+ field_update();
 }
 
 void start_dropping(){

@@ -225,14 +225,16 @@ void field_setBlock(int x, int y, uint16_t color){
 }
 
 void field_update(){
-	int i, j;
+	uint8_t i, j;
 	for (i = 0; i < FIELD_H; i++){
 		for (j = 0; j < FIELD_W; j++){
-			if (field[i][j] == 0xFFFF)
+			if (field[i][j] == 0xFFFF){
 				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j,
 						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i,
 						BLOCK_SIZE,
 						0x0000);
+				field_setBlock(j, i, 0x0000);
+			}
 			else if (field[i][j])
 				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j,
 						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i,
@@ -240,11 +242,11 @@ void field_update(){
 						field[i][j]);
 		}
 	} 
-	field_collissionDetection();
+	field_collisionDetection();
 }
 
 void field_init(){
-	int x, y;
+	uint8_t x, y;
 	LCD_DrawLine(FIELD_TOP_LEFT_X - 1, FIELD_TOP_LEFT_Y - 1, FIELD_TOP_RIGHT_X + 1, FIELD_TOP_RIGHT_Y - 1, Grey);
 	LCD_DrawLine(FIELD_TOP_LEFT_X - 1, FIELD_TOP_LEFT_X - 1, FIELD_BOTTOM_LEFT_X - 1, FIELD_BOTTOM_LEFT_Y + 1, Grey);
 	LCD_DrawLine(FIELD_BOTTOM_LEFT_X - 1, FIELD_BOTTOM_LEFT_Y + 1, FIELD_BOTTOM_RIGHT_X + 1 , FIELD_BOTTOM_RIGHT_Y + 1, Grey);
@@ -257,7 +259,7 @@ void field_init(){
 }
 
 void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color){
-	int i, j;
+	uint8_t i, j;
 	for (i = 0; i < 4; i++){
 		for (j = 0; j < 4; j++){
 			if (tetrominoes[idx][rotation][i][j])
@@ -274,7 +276,7 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 }
 
 void field_deleteCurrentTetromino(){
-	int i, j;
+	uint8_t i, j;
 	for (i = 0; i < 4; i++) {
 		for (j = 0; j < 4; j++) {
 			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][i][j]) {
@@ -308,7 +310,7 @@ void field_rotateCurrentTetromino(){
 			current_tetromino.color);
 }
 
-void field_collissionDetection(){
+void field_collisionDetection(){
 	uint8_t y, x;
 	for (y = 0; y < 4; y++) {
 		for (x = 0; x < 4; x++) {
@@ -338,11 +340,21 @@ void field_clearDetection(){
     }
 }
 
-void field_clearRow(int y){
-    // clear row y
+void field_clearRow(uint8_t y_toClear){
+    uint8_t y, x;
+	for (y = y_toClear; y > 0; y--){
+        for (x = 0 ; x < FIELD_W; x++){
+					if (field[y - 1][x] == 0x0000)
+						field[y][x] = 0xFFFF;
+					else
+						field[y][x] = field[y - 1][x];
+    	}
+    }
+	field_update();
 }
 
 void start_dropping(){
 	while(!current_tetromino.placed)
 		field_dropCurrentTetromino();
 }
+
