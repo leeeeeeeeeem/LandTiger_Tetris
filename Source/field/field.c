@@ -1,5 +1,6 @@
 #include "field.h"
 #include "GLCD.h"
+#include <stdlib.h>
 
 #define FIELD_H 20
 #define FIELD_W 10
@@ -18,6 +19,7 @@
 #define FIELD_BOTTOM_RIGHT_Y FIELD_PADDING + BLOCK_SIZE * FIELD_H
 
 #define N_TETROMINOES 7
+#define N_COLORS 7
 
 typedef struct current_tetromino_s{
 		uint8_t index;
@@ -217,6 +219,15 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 												}
 											}
 										};
+uint16_t colors[N_COLORS] = {
+    0x94EA,
+    0xFB15,
+    0xCB5F,
+    0x8DBF,
+    0xFD47,
+    0xA761,
+    0xFB94,
+};
 
 uint16_t field[FIELD_H][FIELD_W];
 uint8_t updated[FIELD_H][FIELD_W];
@@ -279,6 +290,10 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 	current_tetromino.color = color;
 	if (update)
 		field_update();
+}
+
+void field_placeRandomTetromino(){
+	field_placeTetromino(4, 0, rand() / (RAND_MAX / N_TETROMINOES + 1), 0, colors[rand() / (RAND_MAX / N_COLORS + 1)], 1);
 }
 
 void field_deleteCurrentTetromino(){

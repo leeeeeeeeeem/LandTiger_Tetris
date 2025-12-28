@@ -1804,6 +1804,87 @@ extern void reset_timer( uint8_t timer_num );
 extern void TIMER0_IRQHandler (void);
 extern void TIMER1_IRQHandler (void);
 # 27 "Source/sample.c" 2
+# 1 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 1 3
+# 58 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+    typedef unsigned int size_t;
+# 82 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+typedef unsigned int clock_t;
+typedef unsigned int time_t;
+
+
+
+
+
+
+struct tm {
+    int tm_sec;
+
+    int tm_min;
+    int tm_hour;
+    int tm_mday;
+    int tm_mon;
+    int tm_year;
+    int tm_wday;
+    int tm_yday;
+    int tm_isdst;
+    union {
+        struct {
+            int __extra_1, __extra_2;
+        };
+        struct {
+            long __extra_1_long, __extra_2_long;
+        };
+        struct {
+            char *__extra_1_cptr, *__extra_2_cptr;
+        };
+        struct {
+            void *__extra_1_vptr, *__extra_2_vptr;
+        };
+    };
+};
+# 127 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+extern __attribute__((__nothrow__)) clock_t clock(void);
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) double difftime(time_t , time_t );
+
+
+
+
+extern __attribute__((__nothrow__)) time_t mktime(struct tm * ) __attribute__((__nonnull__(1)));
+# 156 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+extern __attribute__((__nothrow__)) time_t time(time_t * );
+# 166 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+extern __attribute__((__nothrow__)) char *asctime(const struct tm * ) __attribute__((__nonnull__(1)));
+extern __attribute__((__nothrow__)) char *_asctime_r(const struct tm * ,
+                                char * __restrict ) __attribute__((__nonnull__(1,2)));
+# 178 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+extern __attribute__((__nothrow__)) char *ctime(const time_t * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) struct tm *gmtime(const time_t * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) struct tm *localtime(const time_t * ) __attribute__((__nonnull__(1)));
+extern __attribute__((__nothrow__)) struct tm *_localtime_r(const time_t * __restrict ,
+                                       struct tm * __restrict ) __attribute__((__nonnull__(1,2)));
+# 203 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\time.h" 3
+extern __attribute__((__nothrow__)) size_t strftime(char * __restrict , size_t ,
+                       const char * __restrict ,
+                       const struct tm * __restrict ) __attribute__((__nonnull__(1,3,4)));
+# 28 "Source/sample.c" 2
 
 
 
@@ -1818,13 +1899,14 @@ int main(void){
    LCD_Initialization();
  LCD_Clear(0x0000);
  field_init();
+ srand(time(0));
  GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
- field_placeTetromino(2, 0, 4, 0, 0xCF54);
+ field_placeRandomTetromino();
  field_moveCurrentTetrominoLeft();
  field_moveCurrentTetrominoLeft();
  field_moveCurrentTetrominoLeft();
  field_hardDropCurrentTetromino();
- field_placeTetromino(7, 0, 4, 0, 0xCF54);
+ field_placeRandomTetromino();
  field_moveCurrentTetrominoRight();
  field_moveCurrentTetrominoRight();
  field_moveCurrentTetrominoRight();
@@ -1832,6 +1914,13 @@ int main(void){
  field_moveCurrentTetrominoRight();
  start_dropping();
  field_clearDetection();
+ field_placeRandomTetromino();
+ start_dropping();
+ field_clearDetection();
+ field_placeRandomTetromino();
+ start_dropping();
+ field_clearDetection();
+
 
  //field_setBlock(0, 0, 0xCF54);
  //field_update();

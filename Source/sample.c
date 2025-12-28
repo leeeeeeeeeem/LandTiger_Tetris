@@ -24,6 +24,7 @@
 #include "LPC17xx.h"
 #include "GLCD/GLCD.h" 
 #include "timer/timer.h"
+#include <time.h>
 
 
 #ifdef SIMULATOR
@@ -38,13 +39,14 @@ int main(void){
   	LCD_Initialization();
 	LCD_Clear(Black);
 	field_init();
+	srand(time(NULL));
 	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
-	field_placeTetromino(2, 0, 4, 0, 0xCF54);
+	field_placeRandomTetromino();
 	field_moveCurrentTetrominoLeft();
 	field_moveCurrentTetrominoLeft();
 	field_moveCurrentTetrominoLeft();
 	field_hardDropCurrentTetromino();
-	field_placeTetromino(7, 0, 4, 0, 0xCF54);
+	field_placeRandomTetromino();
 	field_moveCurrentTetrominoRight();
 	field_moveCurrentTetrominoRight();
 	field_moveCurrentTetrominoRight();
@@ -52,6 +54,13 @@ int main(void){
 	field_moveCurrentTetrominoRight();
 	start_dropping();
 	field_clearDetection();
+	field_placeRandomTetromino();
+	start_dropping();
+	field_clearDetection();
+	field_placeRandomTetromino();
+	start_dropping();
+	field_clearDetection();
+
 
 	//field_setBlock(0, 0, 0xCF54);
 	//field_update();
