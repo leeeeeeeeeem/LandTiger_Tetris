@@ -2044,10 +2044,10 @@ void field_update(){
 
 void field_init(){
  uint8_t x, y;
- LCD_DrawLine(10 - 1, 10 - 1, 10 + 15 * 10 + 1, 10 - 1, 0xF7DE);
- LCD_DrawLine(10 - 1, 10 - 1, 10 - 1, 10 + 15 * 20 + 1, 0xF7DE);
- LCD_DrawLine(10 - 1, 10 + 15 * 20 + 1, 10 + 15 * 10 + 1 , 10 + 15 * 20 + 1, 0xF7DE);
- LCD_DrawLine(10 + 15 * 10 + 1, 10 + 15 * 20 + 1, 10 + 15 * 10 + 1, 10 - 1, 0xF7DE);
+ LCD_DrawLine(10 - 1, 10 - 1, 10 + 15 * 10, 10 - 1, 0xF7DE);
+ LCD_DrawLine(10 - 1, 10 - 1, 10 - 1, 10 + 15 * 20, 0xF7DE);
+ LCD_DrawLine(10 - 1, 10 + 15 * 20, 10 + 15 * 10, 10 + 15 * 20, 0xF7DE);
+ LCD_DrawLine(10 + 15 * 10, 10 + 15 * 20, 10 + 15 * 10, 10 - 1, 0xF7DE);
  for (y = 0; y < 20; y++){
   for (x = 0; x < 10; x++){
    field[y][x] = 0;
