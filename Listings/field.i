@@ -2012,6 +2012,7 @@ static uint8_t tetrominoes[7][4][4][4] = {
           };
 
 uint16_t field[20][10];
+uint8_t updated[20][10];
 
 void field_setBlock(int x, int y, uint16_t color){
  field[y][x] = color;
@@ -2027,12 +2028,15 @@ void field_update(){
       15,
       0x0000);
     field_setBlock(j, i, 0x0000);
+    updated[i][j] = 0;
    }
-   else if (field[i][j])
+   else if (field[i][j] && !updated[i][j]){
     set_block(10 + 15 * j,
       10 + 15 * i,
       15,
       field[i][j]);
+    updated[i][j] = 1;
+   }
   }
  }
  field_collisionDetection();
@@ -2047,6 +2051,7 @@ void field_init(){
  for (y = 0; y < 20; y++){
   for (x = 0; x < 10; x++){
    field[y][x] = 0;
+   updated[y][x] = 0;
   }
  }
 }

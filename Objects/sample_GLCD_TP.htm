@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\sample_GLCD_TP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\sample_GLCD_TP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Sat Dec 27 08:42:57 2025
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Sun Dec 28 03:33:56 2025
 <BR><P>
-<H3>Maximum Stack Usage =        160 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        168 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 <P>
@@ -199,7 +199,7 @@ Global Symbols
 <P><STRONG><a name="[7e]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[36]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
@@ -384,7 +384,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[37]"></a>main</STRONG> (Thumb, 164 bytes, Stack size 8 bytes, sample.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
 <LI>Call Chain = main &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;enable_timer
@@ -542,8 +542,8 @@ Global Symbols
 
 <P><STRONG><a name="[89]"></a>field_setBlock</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
 
-<P><STRONG><a name="[54]"></a>field_update</STRONG> (Thumb, 238 bytes, Stack size 32 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[54]"></a>field_update</STRONG> (Thumb, 292 bytes, Stack size 40 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_block
 </UL>
@@ -560,7 +560,7 @@ Global Symbols
 
 <P><STRONG><a name="[8a]"></a>field_collisionDetection</STRONG> (Thumb, 150 bytes, Stack size 20 bytes, field.o(.text), UNUSED)
 
-<P><STRONG><a name="[42]"></a>field_init</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, field.o(.text))
+<P><STRONG><a name="[42]"></a>field_init</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = field_init &rArr; LCD_DrawLine &rArr; LCD_SetPoint
 </UL>
@@ -571,7 +571,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[44]"></a>field_placeTetromino</STRONG> (Thumb, 126 bytes, Stack size 24 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = field_placeTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = field_placeTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
@@ -585,7 +585,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[46]"></a>field_hardDropCurrentTetromino</STRONG> (Thumb, 450 bytes, Stack size 56 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
@@ -593,7 +593,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[49]"></a>field_clearDetection</STRONG> (Thumb, 144 bytes, Stack size 32 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = field_clearDetection &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = field_clearDetection &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
@@ -605,7 +605,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[47]"></a>field_moveCurrentTetrominoRight</STRONG> (Thumb, 298 bytes, Stack size 28 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = field_moveCurrentTetrominoRight &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = field_moveCurrentTetrominoRight &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
@@ -613,7 +613,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[45]"></a>field_moveCurrentTetrominoLeft</STRONG> (Thumb, 298 bytes, Stack size 28 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = field_moveCurrentTetrominoLeft &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = field_moveCurrentTetrominoLeft &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
@@ -625,7 +625,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[48]"></a>start_dropping</STRONG> (Thumb, 214 bytes, Stack size 40 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = start_dropping &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 144<LI>Call Chain = start_dropping &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>

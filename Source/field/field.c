@@ -219,6 +219,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 										};
 
 uint16_t field[FIELD_H][FIELD_W];
+uint8_t updated[FIELD_H][FIELD_W];
 
 void field_setBlock(int x, int y, uint16_t color){
 	field[y][x] = color;
@@ -234,12 +235,15 @@ void field_update(){
 						BLOCK_SIZE,
 						0x0000);
 				field_setBlock(j, i, 0x0000);
+				updated[i][j] = 0;
 			}
-			else if (field[i][j])
+			else if (field[i][j] && !updated[i][j]){
 				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j,
 						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i,
 						BLOCK_SIZE,
 						field[i][j]);
+				updated[i][j] = 1;
+			}
 		}
 	} 
 	field_collisionDetection();
@@ -254,6 +258,7 @@ void field_init(){
 	for (y = 0; y < FIELD_H; y++){
 		for (x = 0; x < FIELD_W; x++){
 			field[y][x] = 0;
+			updated[y][x] = 0;
 		}
 	}
 }
