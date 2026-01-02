@@ -23,8 +23,7 @@
 **
 ******************************************************************************/
 
-void TIMER0_IRQHandler (void)
-{
+void TIMER0_IRQHandler (void){
   LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }
@@ -39,10 +38,10 @@ void TIMER0_IRQHandler (void)
 ** Returned value:		None
 **
 ******************************************************************************/
-void TIMER1_IRQHandler (void)
-{
-  LPC_TIM1->IR = 1;			/* clear interrupt flag */
-  return;
+void TIMER1_IRQHandler (void){
+	advance_game();	
+  	LPC_TIM1->IR = 1;
+  	return;
 }
 
 /******************************************************************************

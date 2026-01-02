@@ -38,43 +38,17 @@ int main(void){
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
 	BUTTON_init();
 	joystick_init();
-	init_timer(0, 0xFFFFFFFF);
+	init_RIT(0x004C4B40); ///* RIT Initialization 50 msec       */
+	enable_RIT();	
+	init_timer(0, 0xFFFFFFFF); // for seeding PRNG
+	init_timer(1, 0x1312D0);  // 50ms for game advancement 
 	enable_timer(0);
+	enable_timer(1);
   	LCD_Initialization();
 	LCD_Clear(Black);
 	field_init();
 	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
 	seed = LPC_TIM0->TC;
-	field_placeRandomTetromino();
-	field_moveCurrentTetrominoLeft();
-	field_moveCurrentTetrominoLeft();
-	field_moveCurrentTetrominoLeft();
-	field_hardDropCurrentTetromino();
-	field_placeRandomTetromino();
-	field_moveCurrentTetrominoRight();
-	field_moveCurrentTetrominoRight();
-	field_moveCurrentTetrominoRight();
-	field_moveCurrentTetrominoRight();
-	field_moveCurrentTetrominoRight();
-	start_dropping();
-	field_clearDetection();
-	field_placeRandomTetromino();
-	start_dropping();
-	field_clearDetection();
-	field_placeRandomTetromino();
-	start_dropping();
-	field_clearDetection();
-
-
-	//field_setBlock(0, 0, 0xCF54);
-	//field_update();
-	//LCD_setBlock(11, 11, 0xCF54);
-	//LCD_DrawLine(0, 0, 200, 200, White);
-	//init_timer(0, 0x1312D0 ); 						/* 50ms * 25MHz = 1.25*10^6 = 0x1312D0 */
-	//init_timer(0, 0x6108 ); 						  /* 1ms * 25MHz = 25*10^3 = 0x6108 */
-	//init_timer(0, 0x4E2 ); 						    /* 500us * 25MHz = 1.25*10^3 = 0x4E2 */
-	//init_timer(0, 0xC8); 						    /* 8us * 25MHz = 200 ~= 0xC8 */
-	
 	
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);						
