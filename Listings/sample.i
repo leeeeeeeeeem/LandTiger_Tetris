@@ -1898,43 +1898,17 @@ int main(void){
  SystemInit();
  BUTTON_init();
  joystick_init();
- init_timer(0, 0xFFFFFFFF);
+ init_RIT(0x004C4B40); //
+ enable_RIT();
+ init_timer(0, 0xFFFFFFFF); // for seeding PRNG
+ init_timer(1, 0x1312D0); // for game advancement
  enable_timer(0);
+ enable_timer(1);
    LCD_Initialization();
  LCD_Clear(0x0000);
  field_init();
  GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
  seed = ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x04000) )->TC;
- field_placeRandomTetromino();
- field_moveCurrentTetrominoLeft();
- field_moveCurrentTetrominoLeft();
- field_moveCurrentTetrominoLeft();
- field_hardDropCurrentTetromino();
- field_placeRandomTetromino();
- field_moveCurrentTetrominoRight();
- field_moveCurrentTetrominoRight();
- field_moveCurrentTetrominoRight();
- field_moveCurrentTetrominoRight();
- field_moveCurrentTetrominoRight();
- start_dropping();
- field_clearDetection();
- field_placeRandomTetromino();
- start_dropping();
- field_clearDetection();
- field_placeRandomTetromino();
- start_dropping();
- field_clearDetection();
-
-
- //field_setBlock(0, 0, 0xCF54);
- //field_update();
- //LCD_setBlock(11, 11, 0xCF54);
- //LCD_DrawLine(0, 0, 200, 200, 0xFFFF);
- //init_timer(0, 0x1312D0 );
- //init_timer(0, 0x6108 );
- //init_timer(0, 0x4E2 );
- //init_timer(0, 0xC8);
-
 
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);

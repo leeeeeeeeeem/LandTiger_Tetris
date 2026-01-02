@@ -1791,13 +1791,25 @@ void joystick_init(void);
 
 
 
-
 void joystick_init(void) {
 
-  ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL3 &= ~(3<<26); //PIN mode GPIO (00b value per P1.29)
+
+ ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL3 &= ~(3<<26); //PIN mode GPIO (00b value per P1.29)
  ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIODIR &= ~(1<<29); //P1.29 Input (joysticks on PORT1 defined as Input)
 
 
-  ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL3 &= ~(3<<20); //PIN mode GPIO (00b value per P1.26)
+ ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL3 &= ~(3<<24); //PIN mode GPIO (00b value per P1.28)
+   ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIODIR &= ~(1<<28); //P1.28 Input (joysticks on PORT1 defined as Input)
+
+
+ ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL3 &= ~(3<<22); //PIN mode GPIO (00b value per P1.27)
+    ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIODIR &= ~(1<<27); //P1.27 Input (joysticks on PORT1 defined as Input)
+
+
+ ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL3 &= ~(3<<20); //PIN mode GPIO (00b value per P1.26)
  ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIODIR &= ~(1<<26); //P1.26 Input (joysticks on PORT1 defined as Input)
+
+
+ ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL3 &= ~(3<<18); //PIN mode GPIO (00b value per P1.25)
+   ((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIODIR &= ~(1<<25); //P1.25 Input (joysticks on PORT1 defined as Input)
 }

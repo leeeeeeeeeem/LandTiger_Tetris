@@ -1790,25 +1790,60 @@ typedef struct
 } LPC_EMAC_TypeDef;
 # 3 "Source/button_EXINT/IRQ_button.c" 2
 
-extern int down;
 
-void EINT0_IRQHandler (void)
+# 1 "Source/button_EXINT\\../led/led.h" 1
+# 12 "Source/button_EXINT\\../led/led.h"
+void LED_init(void);
+void LED_deinit(void);
+
+
+void LED_On (unsigned int num);
+void LED_Off (unsigned int num);
+void LED_Out(unsigned int value);
+# 6 "Source/button_EXINT/IRQ_button.c" 2
+# 1 "Source/button_EXINT\\../timer/timer.h" 1
+# 14 "Source/button_EXINT\\../timer/timer.h"
+extern uint32_t init_timer( uint8_t timer_num, uint32_t timerInterval );
+extern void enable_timer( uint8_t timer_num );
+extern void disable_timer( uint8_t timer_num );
+extern void reset_timer( uint8_t timer_num );
+
+extern void TIMER0_IRQHandler (void);
+extern void TIMER1_IRQHandler (void);
+# 7 "Source/button_EXINT/IRQ_button.c" 2
+
+
+
+
+extern int down_0;
+extern int down_1;
+extern int down_2;
+
+
+void EINT0_IRQHandler (void) // INT0
 {
+ down_0 = 1;
+ __NVIC_DisableIRQ(EINT0_IRQn);
+ ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 &= ~(1 << 20);
 
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->EXTINT &= (1 << 0);
 }
 
 
-void EINT1_IRQHandler (void)
+void EINT1_IRQHandler (void) // KEY1
 {
+ down_1 = 1;
  __NVIC_DisableIRQ(EINT1_IRQn);
  ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 &= ~(1 << 22);
- down=1;
+
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->EXTINT &= (1 << 1);
 }
 
-void EINT2_IRQHandler (void)
+void EINT2_IRQHandler (void) // KEY2
 {
+ down_2 = 1;
+ __NVIC_DisableIRQ(EINT2_IRQn);
+ ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 &= ~(1 << 24);
 
-  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->EXTINT &= (1 << 2);
+ ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->EXTINT &= (1 << 2);
 }

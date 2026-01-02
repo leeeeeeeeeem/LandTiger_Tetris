@@ -1794,6 +1794,7 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 uint8_t generate_idx(void);
 void field_placeRandomTetromino(void);
 void field_dropCurrentTetromino(void);
+void field_softDropCurrentTetromino(void);
 void field_hardDropCurrentTetromino(void);
 void field_moveCurrentTetrominoLeft(void);
 void field_moveCurrentTetrominoRight(void);
@@ -1801,6 +1802,10 @@ void field_rotateCurrentTetromino(void);
 void field_collisionDetection(void);
 void field_clearDetection(void);
 void field_clearRow(uint8_t y_toClear);
+void start_game(void);
+void advance_game(void);
+void toggle_soft_drop(void);
+void toggle_running(void);
 # 2 "Source/field/field.c" 2
 # 1 "./Source/GLCD\\GLCD.h" 1
 # 90 "./Source/GLCD\\GLCD.h"
@@ -2210,6 +2215,10 @@ uint16_t colors[7] = {
 uint16_t field[20][10];
 uint8_t updated[20][10];
 
+uint8_t game_started = 0;
+uint8_t game_running = 0;
+uint8_t soft_drop = 0;
+
 extern uint32_t seed;
 
 void field_setBlock(int x, int y, uint16_t color){
@@ -2307,6 +2316,24 @@ void field_dropCurrentTetromino(){
   1);
 }
 
+void field_softDropCurrentTetromino(){
+ uint8_t i = 0;
+ while (i < 2 && !current_tetromino.placed){
+  field_deleteCurrentTetromino();
+  current_tetromino.position_y++;
+  field_placeTetromino(
+   current_tetromino.position_x,
+   current_tetromino.position_y,
+   current_tetromino.index,
+   current_tetromino.rotation,
+   current_tetromino.color,
+   0);
+  field_collisionDetection();
+  i++;
+ }
+ field_update();
+}
+
 void field_hardDropCurrentTetromino(){
  while (!current_tetromino.placed){
   field_deleteCurrentTetromino();
@@ -2322,6 +2349,7 @@ void field_hardDropCurrentTetromino(){
  }
  field_update();
  field_clearDetection();
+ field_placeRandomTetromino();
 }
 
 
@@ -2443,4 +2471,32 @@ void field_clearRow(uint8_t y_toClear){
 void start_dropping(){
  while(!current_tetromino.placed)
   field_dropCurrentTetromino();
+}
+
+void start_game(){
+ game_started = 1;
+ field_placeRandomTetromino();
+}
+
+void advance_game(){
+ if (!game_running)
+  return;
+ if (soft_drop)
+  field_softDropCurrentTetromino();
+ else
+  field_dropCurrentTetromino();
+ if (current_tetromino.placed){
+  field_clearDetection();
+  field_placeRandomTetromino();
+ }
+}
+
+void toggle_soft_drop(void){
+ soft_drop = !soft_drop;
+}
+
+void toggle_running(void){
+ game_running = !game_running;
+ if (game_running && !game_started)
+  start_game();
 }

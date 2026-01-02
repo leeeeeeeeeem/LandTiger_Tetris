@@ -41,7 +41,7 @@ int main(void){
 	init_RIT(0x004C4B40); ///* RIT Initialization 50 msec       */
 	enable_RIT();	
 	init_timer(0, 0xFFFFFFFF); // for seeding PRNG
-	init_timer(1, 0x1312D0);  // 50ms for game advancement 
+	init_timer(1, 0x1312D0);  // for game advancement 
 	enable_timer(0);
 	enable_timer(1);
   	LCD_Initialization();

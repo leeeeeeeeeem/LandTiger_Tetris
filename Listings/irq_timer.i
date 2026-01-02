@@ -2238,14 +2238,13 @@ extern __attribute__((__nothrow__)) void __use_no_semihosting_swi(void);
 extern __attribute__((__nothrow__)) void __use_no_semihosting(void);
 # 15 "Source/timer/IRQ_timer.c" 2
 # 26 "Source/timer/IRQ_timer.c"
-void TIMER0_IRQHandler (void)
-{
+void TIMER0_IRQHandler (void){
   ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x04000) )->IR = 1;
   return;
 }
-# 42 "Source/timer/IRQ_timer.c"
-void TIMER1_IRQHandler (void)
-{
-  ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x08000) )->IR = 1;
-  return;
+# 41 "Source/timer/IRQ_timer.c"
+void TIMER1_IRQHandler (void){
+ advance_game();
+   ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x08000) )->IR = 1;
+   return;
 }

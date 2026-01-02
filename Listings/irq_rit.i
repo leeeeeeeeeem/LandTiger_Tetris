@@ -1802,95 +1802,743 @@ void LED_On (unsigned int num);
 void LED_Off (unsigned int num);
 void LED_Out(unsigned int value);
 # 13 "Source/RIT/IRQ_RIT.c" 2
-# 24 "Source/RIT/IRQ_RIT.c"
-volatile int down=0;
+# 1 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
+# 53 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+    typedef unsigned int size_t;
+# 68 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+    typedef __builtin_va_list __va_list;
+# 87 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+typedef struct __fpos_t_struct {
+    unsigned long long int __pos;
 
-void RIT_IRQHandler (void)
+
+
+
+
+    struct {
+        unsigned int __state1, __state2;
+    } __mbstate;
+} fpos_t;
+# 108 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+typedef struct __FILE FILE;
+# 119 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+struct __FILE {
+    union {
+        long __FILE_alignment;
+
+
+
+        char __FILE_size[84];
+
+    } __FILE_opaque;
+};
+# 138 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern FILE __stdin, __stdout, __stderr;
+extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
+# 224 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int rename(const char * , const char * ) __attribute__((__nonnull__(1,2)));
+# 243 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) FILE *tmpfile(void);
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) char *tmpnam(char * );
+# 265 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fclose(FILE * ) __attribute__((__nonnull__(1)));
+# 275 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fflush(FILE * );
+# 285 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) FILE *fopen(const char * __restrict ,
+                           const char * __restrict ) __attribute__((__nonnull__(1,2)));
+# 329 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) FILE *freopen(const char * __restrict ,
+                    const char * __restrict ,
+                    FILE * __restrict ) __attribute__((__nonnull__(2,3)));
+# 342 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
+                    char * __restrict ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int setvbuf(FILE * __restrict ,
+                   char * __restrict ,
+                   int , size_t ) __attribute__((__nonnull__(1)));
+# 370 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int fprintf(FILE * __restrict ,
+                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 393 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _fprintf(FILE * __restrict ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int printf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _printf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int sprintf(char * __restrict , const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _sprintf(char * __restrict , const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int __ARM_snprintf(char * __restrict , size_t ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(3)));
+# 460 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
+                      const char * __restrict , ...) __attribute__((__nonnull__(3)));
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int fscanf(FILE * __restrict ,
+                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 503 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int _fscanf(FILE * __restrict ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int scanf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int _scanf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int sscanf(const char * __restrict ,
+                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 541 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int _sscanf(const char * __restrict ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 555 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int _vfscanf(FILE * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
+extern __attribute__((__nothrow__)) int _vscanf(const char * __restrict , __va_list) __attribute__((__nonnull__(1)));
+extern __attribute__((__nothrow__)) int _vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
+extern __attribute__((__nothrow__)) int __ARM_vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
+
+extern __attribute__((__nothrow__)) int vprintf(const char * __restrict , __va_list ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int _vprintf(const char * __restrict , __va_list ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) int vfprintf(FILE * __restrict ,
+                    const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+# 584 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int vsprintf(char * __restrict ,
+                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+# 594 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int __ARM_vsnprintf(char * __restrict , size_t ,
+                     const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
+# 609 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int _vsprintf(char * __restrict ,
+                      const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) int _vfprintf(FILE * __restrict ,
+                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) int _vsnprintf(char * __restrict , size_t ,
+                      const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
+# 635 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int __ARM_asprintf(char ** , const char * __restrict , ...) __attribute__((__nonnull__(2)));
+extern __attribute__((__nothrow__)) int __ARM_vasprintf(char ** , const char * __restrict , __va_list ) __attribute__((__nonnull__(2)));
+# 649 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fgetc(FILE * ) __attribute__((__nonnull__(1)));
+# 659 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) char *fgets(char * __restrict , int ,
+                    FILE * __restrict ) __attribute__((__nonnull__(1,3)));
+# 673 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fputc(int , FILE * ) __attribute__((__nonnull__(2)));
+# 683 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * __restrict ) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int getc(FILE * ) __attribute__((__nonnull__(1)));
+# 704 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+    extern __attribute__((__nothrow__)) int (getchar)(void);
+# 713 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) char *gets(char * ) __attribute__((__nonnull__(1)));
+# 725 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int putc(int , FILE * ) __attribute__((__nonnull__(2)));
+# 737 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+    extern __attribute__((__nothrow__)) int (putchar)(int );
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int puts(const char * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int ungetc(int , FILE * ) __attribute__((__nonnull__(2)));
+# 778 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) size_t fread(void * __restrict ,
+                    size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
+# 794 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) size_t __fread_bytes_avail(void * __restrict ,
+                    size_t , FILE * __restrict ) __attribute__((__nonnull__(1,3)));
+# 810 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) size_t fwrite(const void * __restrict ,
+                    size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
+# 822 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fgetpos(FILE * __restrict , fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
+# 833 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fseek(FILE * , long int , int ) __attribute__((__nonnull__(1)));
+# 850 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fsetpos(FILE * __restrict , const fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
+# 863 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) long int ftell(FILE * ) __attribute__((__nonnull__(1)));
+# 877 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) void rewind(FILE * ) __attribute__((__nonnull__(1)));
+# 886 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) void clearerr(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int feof(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+
+extern __attribute__((__nothrow__)) int ferror(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+
+extern __attribute__((__nothrow__)) void perror(const char * );
+# 917 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+extern __attribute__((__nothrow__)) void __use_no_semihosting_swi(void);
+extern __attribute__((__nothrow__)) void __use_no_semihosting(void);
+# 14 "Source/RIT/IRQ_RIT.c" 2
+# 1 "./Source\\timer/timer.h" 1
+# 14 "./Source\\timer/timer.h"
+extern uint32_t init_timer( uint8_t timer_num, uint32_t timerInterval );
+extern void enable_timer( uint8_t timer_num );
+extern void disable_timer( uint8_t timer_num );
+extern void reset_timer( uint8_t timer_num );
+
+extern void TIMER0_IRQHandler (void);
+extern void TIMER1_IRQHandler (void);
+# 15 "Source/RIT/IRQ_RIT.c" 2
+
+
+
+# 1 "Source/RIT\\../field/field.h" 1
+
+
+
+
+
+void field_init(void);
+void field_setBlock(int x, int y, uint16_t color);
+void field_update(void);
+void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color, uint8_t update);
+uint8_t generate_idx(void);
+void field_placeRandomTetromino(void);
+void field_dropCurrentTetromino(void);
+void field_softDropCurrentTetromino(void);
+void field_hardDropCurrentTetromino(void);
+void field_moveCurrentTetrominoLeft(void);
+void field_moveCurrentTetrominoRight(void);
+void field_rotateCurrentTetromino(void);
+void field_collisionDetection(void);
+void field_clearDetection(void);
+void field_clearRow(uint8_t y_toClear);
+void start_game(void);
+void advance_game(void);
+void toggle_soft_drop(void);
+void toggle_running(void);
+# 19 "Source/RIT/IRQ_RIT.c" 2
+
+
+
+volatile int down_0 = 0;
+volatile int down_1 = 0;
+volatile int down_2 = 0;
+volatile int toRelease_down_0 = 0;
+volatile int toRelease_down_1 = 0;
+volatile int toRelease_down_2 = 0;
+
+volatile int J_up = 0;
+volatile int J_down = 0;
+volatile int J_right = 0;
+volatile int J_left = 0;
+volatile int J_click = 0;
+volatile int J_up_left = 0;
+volatile int J_up_right = 0;
+volatile int J_down_left = 0;
+volatile int J_down_right = 0;
+
+
+
+int const long_press_count_1 = 0; // => count = x / 50ms ; where x = time long press
+//int const long_press_count_2 = 0;
+# 54 "Source/RIT/IRQ_RIT.c"
+void RIT_IRQHandler(void)
 {
- static int J_up=0;
- static int J_down=0;
- static int position=0;
- static int value =0;
 
- if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<29)) == 0){
-
-  J_up++;
-  switch(J_up){
-   case 1:
-     value++;
-    LED_Out(value);
-    break;
-
-   default:
-    if(J_up %8 == 0){
-     value++;
-      LED_Out(value);
-    }
-
-
-    break;
-  }
- }
- else{
-   J_up=0;
- }
-
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<26)) == 0){
-
-  J_down++;
-  switch(J_down){
-   case 1:
-     value--;
-    LED_Out(value);
-    break;
-
-   default:
-    if(J_down %8 == 0){
-     value--;
-      LED_Out(value);
-    }
+ unsigned char UP_LEFT_activated = 0;
+ unsigned char UP_RIGHT_activated = 0;
+ unsigned char DOWN_LEFT_activated = 0;
+ unsigned char DOWN_RIGHT_activated = 0;
 
 
 
-    break;
-  }
- }
- else{
-   J_down=0;
- }
-
-
- if(down>=1){
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<11)) == 0){
-   switch(down){
+ if(down_0 !=0) {
+  down_0++;
+  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<10)) == 0){
+   switch(down_0) {
     case 2:
-    if( position == 7){
-     LED_On(0);
-     LED_Off(7);
-     position = 0;
-    }
-    else{
-     LED_Off(position);
-     LED_On(++position);
-    }
+     // short press
+       // your_code
+     toRelease_down_0 = 1;
+     break;
+    case long_press_count_1:
+     // your code here (for long press)
      break;
     default:
      break;
    }
-   down++;
   }
   else {
-   down=0;
+   if(toRelease_down_0){
+    //add code to manage release.
+    toRelease_down_0=0;
+   }
+   down_0=0;
+   __NVIC_EnableIRQ(EINT0_IRQn);
+   ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 |= (1 << 20);
+  }
+ } // end INT0
+
+ ///////////////////////////////////////////////////////////////////
+
+
+
+ if(down_1 !=0) {
+  down_1++;
+  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<11)) == 0){
+   switch(down_1){
+    case 2:
+     toggle_running();
+     toRelease_down_1=1;
+     break;
+    case long_press_count_1:
+     // your code here (for long press)
+     break;
+    default:
+     break;
+   }
+  }
+  else {
+   if(toRelease_down_1){
+    //add code to manage release.
+    toRelease_down_1=0;
+   }
+   down_1=0;
    __NVIC_EnableIRQ(EINT1_IRQn);
    ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 |= (1 << 22);
   }
+ } // end KEY1
+
+ ///////////////////////////////////////////////////////////////////
+
+
+
+ if(down_2 !=0) {
+  down_2++;
+  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<12)) == 0){
+   switch(down_2){
+    case 2:
+     field_hardDropCurrentTetromino();
+     toRelease_down_2=1;
+     break;
+    case long_press_count_1:
+     // your code here (for long press)
+     break;
+    default:
+     break;
+   }
+  }
+  else {
+   if(toRelease_down_2){
+    //add code to manage release.
+    toRelease_down_2=0;
+   }
+   down_2=0;
+   __NVIC_EnableIRQ(EINT2_IRQn);
+   ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 |= (1 << 24);
+  }
+ } // end KEY2
+
+ ///////////////////////////////////////////////////////////////////
+
+
+ if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<27)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<29)) == 0)) {
+
+  J_up_left++;
+  UP_LEFT_activated = 1;
+  switch(J_up_left){
+   case 1:
+    //short press
+    //your code
+
+    //for just enabling up-left and not up-left + left + up without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   case long_press_count_1:
+    // your code here (for long press)
+
+    //for just enabling up-left and not up-left + left + up without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   default:
+    // potential other code here
+
+    //for just enabling up-left and not up-left + left + up without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+  }
+ }
+ else {
+  J_up_left=0;
+ } // end Joystick UP-LEFT
+
+ ///////////////////////////////////////////////////////////////////
+
+
+ if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<28)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<29)) == 0)) {
+
+  J_up_right++;
+  UP_RIGHT_activated = 1;
+  switch(J_up_right){
+   case 1:
+    //short press
+    //your code
+
+    //for just enabling up-right and not up-right + right + up without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   case long_press_count_1:
+    // your code here (for long press)
+
+    //for just enabling up-right and not up-right + right + up without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   default:
+    // J_uppotential other code here
+
+    //for just enabling up-right and not up-right + right + up without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+  }
+ }
+ else {
+  J_up_right=0;
+ } // end Joystick UP-RIGHT
+
+ ///////////////////////////////////////////////////////////////////
+
+
+ if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<27)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<26)) == 0)) {
+
+  J_down_left++;
+  DOWN_LEFT_activated = 0;
+  switch(J_down_left){
+   case 1:
+    //short press
+
+    //your code
+
+    //for just enabling down-left and not down-left + down + left without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   case long_press_count_1:
+    // your code here (for long press)
+
+    //for just enabling down-left and not down-left + down + left without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   default:
+    // potential other code here
+
+    //for just enabling down-left and not down-left + down + left without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+  }
+ }
+ else {
+  J_down_left=0;
+ } // end Joystick DOWN-LEFT
+
+ ///////////////////////////////////////////////////////////////////
+
+
+ if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<26)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<28)) == 0)) {
+
+  J_down_right++;
+  DOWN_RIGHT_activated = 0;
+  switch(J_down_right){
+   case 1:
+    //short press
+    //your code
+
+    //for just enabling down-right and not down-left + down + right without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   case long_press_count_1:
+    // your code here (for long press)
+
+    //for just enabling down-right and not down-left + down + right without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+   default:
+    // potential other code here
+
+
+    //for just enabling down-right and not down-left + down + right without flags
+    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+    //return;
+    break;
+  }
+ }
+ else {
+  J_down_right=0;
+ } // end Joystick DOWN-RIGHT
+
+ ///////////////////////////////////////////////////////////////////
+
+
+
+ if(UP_LEFT_activated==0 && UP_RIGHT_activated==0){
+  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<29)) == 0 ) {
+
+   J_up++;
+   switch(J_up){
+    case 1:
+     field_rotateCurrentTetromino();
+     break;
+    case long_press_count_1:
+     break;
+    default:
+     // potential other code here
+     break;
+   }
+  }
+  else {
+   J_up=0;
+  } // end Joystick UP
  }
 
+ ///////////////////////////////////////////////////////////////////
 
 
 
+ if(DOWN_LEFT_activated==0 && DOWN_RIGHT_activated==0){
+  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<26)) == 0) {
 
-  ((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+   J_down++;
+   switch(J_down){
+    case 1:
+     toggle_soft_drop();
+     break;
+    case long_press_count_1:
+     // your code here (for long press)
+     break;
+    default:
+     // potential other code here
+     break;
+   }
+  }
+  else{
+   J_down=0;
+   toggle_soft_drop();
+  } // end Joystick DOWN
+ }
 
-  return;
+ ///////////////////////////////////////////////////////////////////
+
+
+
+ if(DOWN_RIGHT_activated==0 && UP_RIGHT_activated==0){
+  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<28)) == 0) {
+
+   J_right++;
+   switch(J_right){
+    case 1:
+     field_moveCurrentTetrominoRight();
+     break;
+    case long_press_count_1:
+     // your code here (for long press)
+     break;
+    default:
+     // potential other code here
+     break;
+   }
+  }
+  else {
+   J_right=0;
+  } // end Joystick RIGHT
+ }
+
+ ///////////////////////////////////////////////////////////////////
+
+
+
+ if(UP_LEFT_activated==0 && DOWN_LEFT_activated==0){
+  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<27)) == 0) {
+
+   J_left++;
+   switch(J_left){
+    case 1:
+     field_moveCurrentTetrominoLeft();
+     break;
+    case long_press_count_1:
+     // your code here (for long press)
+     break;
+    default:
+     // potential other code here
+     break;
+   }
+  }
+  else {
+   J_left=0;
+  } // end Joystick LEFT
+ }
+
+ ///////////////////////////////////////////////////////////////////
+
+
+
+ if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<25)) == 0) {
+
+  J_click++;
+  switch(J_click){
+   case 1:
+    //short press
+    // your code here
+    break;
+   case long_press_count_1:
+    // your code here (for long press)
+    break;
+   default:
+    // potential other code here
+    break;
+  }
+ }
+ else {
+  J_click=0;
+ } // end Joystick CLICK
+
+ //reset_RIT(); se ci sono cose strane come il rit che si ferma
+ ((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+
+ return;
 }
