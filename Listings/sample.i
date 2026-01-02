@@ -1891,16 +1891,20 @@ extern __attribute__((__nothrow__)) size_t strftime(char * __restrict , size_t ,
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
 
 
+uint32_t seed;
+
 
 int main(void){
  SystemInit();
  BUTTON_init();
  joystick_init();
+ init_timer(0, 0xFFFFFFFF);
+ enable_timer(0);
    LCD_Initialization();
  LCD_Clear(0x0000);
  field_init();
- srand(time(0));
  GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
+ seed = ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x04000) )->TC;
  field_placeRandomTetromino();
  field_moveCurrentTetrominoLeft();
  field_moveCurrentTetrominoLeft();
@@ -1929,9 +1933,8 @@ int main(void){
  //init_timer(0, 0x1312D0 );
  //init_timer(0, 0x6108 );
  //init_timer(0, 0x4E2 );
- init_timer(0, 0xC8 );
+ //init_timer(0, 0xC8);
 
- enable_timer(0);
 
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);

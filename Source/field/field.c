@@ -219,6 +219,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 												}
 											}
 										};
+
 uint16_t colors[N_COLORS] = {
     0x94EA,
     0xFB15,
@@ -231,6 +232,8 @@ uint16_t colors[N_COLORS] = {
 
 uint16_t field[FIELD_H][FIELD_W];
 uint8_t updated[FIELD_H][FIELD_W];
+
+extern uint32_t seed;
 
 void field_setBlock(int x, int y, uint16_t color){
 	field[y][x] = color;
@@ -292,8 +295,14 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 		field_update();
 }
 
+uint8_t generate_idx(){
+	seed = seed * 1103515245u + 12345u;
+	return (uint8_t)(((seed >> 16) * 7u) >> 16);
+}
+
 void field_placeRandomTetromino(){
-	field_placeTetromino(4, 0, rand() / (RAND_MAX / N_TETROMINOES + 1), 0, colors[rand() / (RAND_MAX / N_COLORS + 1)], 1);
+	int idx = generate_idx();
+	field_placeTetromino(4, 0, idx, 0, colors[idx], 1);
 }
 
 void field_deleteCurrentTetromino(){
