@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\sample_GLCD_TP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\sample_GLCD_TP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Fri Jan  2 04:05:22 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Fri Jan  2 07:07:58 2026
 <BR><P>
 <H3>Maximum Stack Usage =        204 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -496,7 +496,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[27]"></a>RIT_IRQHandler</STRONG> (Thumb, 714 bytes, Stack size 16 bytes, irq_rit.o(.text))
+<P><STRONG><a name="[27]"></a>RIT_IRQHandler</STRONG> (Thumb, 722 bytes, Stack size 16 bytes, irq_rit.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = RIT_IRQHandler &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_moveCurrentTetrominoLeft
@@ -596,7 +596,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
-<P><STRONG><a name="[4f]"></a>field_hardDropCurrentTetromino</STRONG> (Thumb, 602 bytes, Stack size 48 bytes, field.o(.text))
+<P><STRONG><a name="[4f]"></a>field_hardDropCurrentTetromino</STRONG> (Thumb, 686 bytes, Stack size 48 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
@@ -608,24 +608,24 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[50]"></a>field_rotateCurrentTetromino</STRONG> (Thumb, 178 bytes, Stack size 24 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = field_rotateCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[50]"></a>field_rotateCurrentTetromino</STRONG> (Thumb, 234 bytes, Stack size 32 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = field_rotateCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[52]"></a>field_moveCurrentTetrominoRight</STRONG> (Thumb, 298 bytes, Stack size 28 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = field_moveCurrentTetrominoRight &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[52]"></a>field_moveCurrentTetrominoRight</STRONG> (Thumb, 344 bytes, Stack size 32 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = field_moveCurrentTetrominoRight &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[53]"></a>field_moveCurrentTetrominoLeft</STRONG> (Thumb, 298 bytes, Stack size 28 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = field_moveCurrentTetrominoLeft &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[53]"></a>field_moveCurrentTetrominoLeft</STRONG> (Thumb, 344 bytes, Stack size 32 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = field_moveCurrentTetrominoLeft &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
@@ -644,7 +644,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[48]"></a>advance_game</STRONG> (Thumb, 490 bytes, Stack size 40 bytes, field.o(.text))
+<P><STRONG><a name="[48]"></a>advance_game</STRONG> (Thumb, 544 bytes, Stack size 40 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 196<LI>Call Chain = advance_game &rArr; field_softDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_softDropCurrentTetromino

@@ -1885,6 +1885,15 @@ extern __attribute__((__nothrow__)) size_t strftime(char * __restrict , size_t ,
                        const char * __restrict ,
                        const struct tm * __restrict ) __attribute__((__nonnull__(1,3,4)));
 # 28 "Source/sample.c" 2
+# 1 "Source\\RIT/RIT.h" 1
+# 14 "Source\\RIT/RIT.h"
+extern uint32_t init_RIT( uint32_t RITInterval );
+extern void enable_RIT( void );
+extern void disable_RIT( void );
+extern void reset_RIT( void );
+
+extern void RIT_IRQHandler (void);
+# 29 "Source/sample.c" 2
 
 
 
@@ -1898,7 +1907,7 @@ int main(void){
  SystemInit();
  BUTTON_init();
  joystick_init();
- init_RIT(0x004C4B40); //
+ init_RIT(0x000C4B40); //
  enable_RIT();
  init_timer(0, 0xFFFFFFFF); // for seeding PRNG
  init_timer(1, 0x1312D0); // for game advancement

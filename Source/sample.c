@@ -25,6 +25,7 @@
 #include "GLCD/GLCD.h" 
 #include "timer/timer.h"
 #include <time.h>
+#include "RIT/RIT.h"
 
 
 #ifdef SIMULATOR
@@ -38,7 +39,7 @@ int main(void){
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
 	BUTTON_init();
 	joystick_init();
-	init_RIT(0x004C4B40); ///* RIT Initialization 50 msec       */
+	init_RIT(0x000C4B40); ///* RIT Initialization 50 msec       */
 	enable_RIT();	
 	init_timer(0, 0xFFFFFFFF); // for seeding PRNG
 	init_timer(1, 0x1312D0);  // for game advancement 

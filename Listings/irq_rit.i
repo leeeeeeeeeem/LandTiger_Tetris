@@ -2476,7 +2476,7 @@ void RIT_IRQHandler(void)
      field_moveCurrentTetrominoRight();
      break;
     case long_press_count_1:
-     // your code here (for long press)
+     field_moveCurrentTetrominoRight();
      break;
     default:
      // potential other code here
@@ -2501,7 +2501,7 @@ void RIT_IRQHandler(void)
      field_moveCurrentTetrominoLeft();
      break;
     case long_press_count_1:
-     // your code here (for long press)
+     field_moveCurrentTetrominoLeft();
      break;
     default:
      // potential other code here
@@ -2537,7 +2537,7 @@ void RIT_IRQHandler(void)
   J_click=0;
  } // end Joystick CLICK
 
- //reset_RIT(); se ci sono cose strane come il rit che si ferma
+ //reset_RIT(); // se ci sono cose strane come il rit che si ferma
  ((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
 
  return;

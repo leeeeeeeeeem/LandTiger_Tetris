@@ -353,6 +353,10 @@ void field_softDropCurrentTetromino(){
 }
 
 void field_hardDropCurrentTetromino(){
+	if (!game_running)
+		return;
+	NVIC_DisableIRQ(TIMER1_IRQn);
+	NVIC_DisableIRQ(RIT_IRQn);
 	while (!current_tetromino.placed){
 		field_deleteCurrentTetromino();
 		current_tetromino.position_y++;
@@ -368,10 +372,15 @@ void field_hardDropCurrentTetromino(){
 	field_update();
 	field_clearDetection();
 	field_placeRandomTetromino();
+	NVIC_DisableIRQ(RIT_IRQn);
+	NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 
 void field_rotateCurrentTetromino(){
+	if (!game_running)
+		return;
+	NVIC_DisableIRQ(TIMER1_IRQn);
 	field_deleteCurrentTetromino();
 	current_tetromino.rotation = (current_tetromino.rotation + 1) % 4;
 	field_placeTetromino(
@@ -381,9 +390,13 @@ void field_rotateCurrentTetromino(){
 			current_tetromino.rotation,
 			current_tetromino.color,
 			1);
+	NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 void field_moveCurrentTetrominoRight(){
+	if (!game_running)
+		return;
+	NVIC_DisableIRQ(TIMER1_IRQn);
 	uint8_t y, x, can_place = 1;
 	for (y = 0; y < 4; y++) {
 		for (x = 0; x < 4; x++) {
@@ -409,11 +422,14 @@ void field_moveCurrentTetrominoRight(){
 			current_tetromino.rotation,
 			current_tetromino.color,
 			1);
-
 	}
+	NVIC_EnableIRQ(TIMER1_IRQn);
 }
 		
-void field_moveCurrentTetrominoLeft(){
+void field_moveCurrentTetrominoLeft(){	
+	if (!game_running)
+		return;
+	NVIC_DisableIRQ(TIMER1_IRQn);
 	uint8_t y, x, can_place = 1;
 	for (y = 0; y < 4; y++) {
 		for (x = 0; x < 4; x++) {
@@ -439,8 +455,8 @@ void field_moveCurrentTetrominoLeft(){
 			current_tetromino.rotation,
 			current_tetromino.color,
 			1);
-
 	}
+	NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 void field_collisionDetection(){
@@ -499,6 +515,8 @@ void start_game(){
 void advance_game(){
 	if (!game_running)
 		return;
+	NVIC_DisableIRQ(RIT_IRQn);
+	NVIC_DisableIRQ(TIMER1_IRQn);
 	if (soft_drop)
 		field_softDropCurrentTetromino();
 	else
@@ -507,6 +525,8 @@ void advance_game(){
 		field_clearDetection();
 		field_placeRandomTetromino();
 	}
+	NVIC_EnableIRQ(TIMER1_IRQn);
+	NVIC_EnableIRQ(RIT_IRQn);
 }
 
 void toggle_soft_drop(void){
