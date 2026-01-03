@@ -2454,16 +2454,20 @@ void field_clearDetection(){
 
 void field_clearRow(uint8_t y_toClear){
     uint8_t y, x;
- for (y = y_toClear; y > 0; y--){
-        for (x = 0 ; x < 10; x++){
-     if (field[y - 1][x] == 0x0000)
-      field[y][x] = 0xFFFF;
-     else
-      field[y][x] = field[y - 1][x];
-     }
+    for (y = y_toClear; y > 0; y--) {
+        for (x = 0; x < 10; x++) {
+            if (field[y - 1][x] == 0x0000)
+                field_setBlock(x, y, 0xFFFF);
+      else
+                field_setBlock(x, y, field[y - 1][x]);
+        }
     }
- field_update();
+    for (x = 0; x < 10; x++) {
+        field_setBlock(x, 0, 0xFFFF);
+    }
+    field_update();
 }
+
 
 void request_hardDrop(){
  hard_drop = 1;
