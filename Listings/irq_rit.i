@@ -2143,7 +2143,8 @@ void request_hardDrop(void);
 void request_moveRight(void);
 void request_moveLeft(void);
 void request_rotate(void);
-void toggle_soft_drop(void);
+void set_softDrop(void);
+void unset_softDrop(void);
 void toggle_running(void);
 void start_game(void);
 void advance_game(void);
@@ -2450,7 +2451,7 @@ void RIT_IRQHandler(void)
    J_down++;
    switch(J_down){
     case 1:
-     toggle_soft_drop();
+     set_softDrop();
      break;
     case long_press_count_1:
      // your code here (for long press)
@@ -2461,8 +2462,8 @@ void RIT_IRQHandler(void)
    }
   }
   else{
+   unset_softDrop();
    J_down=0;
-   toggle_soft_drop();
   } // end Joystick DOWN
  }
 

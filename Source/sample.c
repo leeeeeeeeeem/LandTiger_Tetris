@@ -35,7 +35,7 @@ extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emul
 #define SECOND 0x17D7840
 #define FIFTYMS 0x1312D0
 
-#define EMULATOR_SECOND 5
+#define EMULATOR_SECOND 6
 #define GAME_SECOND SECOND / EMULATOR_SECOND  
 #define TPS 6 // game ticks per second
 
@@ -43,7 +43,7 @@ int main(void){
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
 	BUTTON_init();
 	joystick_init();
-	init_RIT(FIFTYMS / EMULATOR_SECOND); ///* RIT Initialization 50 msec       */
+	init_RIT(FIFTYMS / TPS); ///* RIT Initialization 50 msec       */
 	enable_RIT();	
 	init_timer(0, 0xFFFFFFFF); // for seeding PRNG
 	init_timer(1, GAME_SECOND / TPS);  // for game advancement 

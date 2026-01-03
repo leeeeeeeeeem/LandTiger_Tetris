@@ -1805,7 +1805,8 @@ void request_hardDrop(void);
 void request_moveRight(void);
 void request_moveLeft(void);
 void request_rotate(void);
-void toggle_soft_drop(void);
+void set_softDrop(void);
+void unset_softDrop(void);
 void toggle_running(void);
 void start_game(void);
 void advance_game(void);
@@ -2481,8 +2482,12 @@ void request_rotate(){
  rotate = 1;
 }
 
-void toggle_soft_drop(void){
- soft_drop = !soft_drop;
+void set_softDrop(void){
+ soft_drop = 1;
+}
+
+void unset_softDrop(void){
+ soft_drop = 0;
 }
 
 void toggle_running(void){

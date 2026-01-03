@@ -328,7 +328,7 @@ void RIT_IRQHandler(void)
 			J_down++;
 			switch(J_down){
 				case 1:				
-					toggle_soft_drop();
+					set_softDrop();
 					break;
 				case long_press_count_1:
 					// your code here (for long press)
@@ -339,8 +339,8 @@ void RIT_IRQHandler(void)
 			}
 		}
 		else{
+			unset_softDrop();
 			J_down=0;
-			toggle_soft_drop();
 		}	// end Joystick DOWN
 	}
 

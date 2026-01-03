@@ -496,8 +496,12 @@ void request_rotate(){
 	rotate = 1;
 }
 
-void toggle_soft_drop(void){
-	soft_drop = !soft_drop;
+void set_softDrop(void){
+	soft_drop = 1;
+}
+
+void unset_softDrop(void){
+	soft_drop = 0;
 }
 
 void toggle_running(void){
