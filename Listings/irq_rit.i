@@ -2132,7 +2132,6 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 uint8_t generate_idx(void);
 void field_placeRandomTetromino(void);
 void field_dropCurrentTetromino(void);
-void field_softDropCurrentTetromino(void);
 void field_hardDropCurrentTetromino(void);
 void field_moveCurrentTetrominoLeft(void);
 void field_moveCurrentTetrominoRight(void);
@@ -2140,10 +2139,14 @@ void field_rotateCurrentTetromino(void);
 void field_collisionDetection(void);
 void field_clearDetection(void);
 void field_clearRow(uint8_t y_toClear);
-void start_game(void);
-void advance_game(void);
+void request_hardDrop(void);
+void request_moveRight(void);
+void request_moveLeft(void);
+void request_rotate(void);
 void toggle_soft_drop(void);
 void toggle_running(void);
+void start_game(void);
+void advance_game(void);
 # 19 "Source/RIT/IRQ_RIT.c" 2
 
 
@@ -2220,7 +2223,6 @@ void RIT_IRQHandler(void)
      toRelease_down_1=1;
      break;
     case long_press_count_1:
-     // your code here (for long press)
      break;
     default:
      break;
@@ -2246,11 +2248,11 @@ void RIT_IRQHandler(void)
   if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<12)) == 0){
    switch(down_2){
     case 2:
-     field_hardDropCurrentTetromino();
+     request_hardDrop();
      toRelease_down_2=1;
      break;
     case long_press_count_1:
-     // your code here (for long press)
+     request_hardDrop();
      break;
     default:
      break;
@@ -2423,9 +2425,10 @@ void RIT_IRQHandler(void)
    J_up++;
    switch(J_up){
     case 1:
-     field_rotateCurrentTetromino();
+     request_rotate();
      break;
     case long_press_count_1:
+     request_rotate();
      break;
     default:
      // potential other code here
@@ -2473,10 +2476,10 @@ void RIT_IRQHandler(void)
    J_right++;
    switch(J_right){
     case 1:
-     field_moveCurrentTetrominoRight();
+     request_moveRight();
      break;
     case long_press_count_1:
-     field_moveCurrentTetrominoRight();
+     request_moveRight();
      break;
     default:
      // potential other code here
@@ -2498,10 +2501,10 @@ void RIT_IRQHandler(void)
    J_left++;
    switch(J_left){
     case 1:
-     field_moveCurrentTetrominoLeft();
+     request_moveLeft();
      break;
     case long_press_count_1:
-     field_moveCurrentTetrominoLeft();
+     request_moveLeft();
      break;
     default:
      // potential other code here

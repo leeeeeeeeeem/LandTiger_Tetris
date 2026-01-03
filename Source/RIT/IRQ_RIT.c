@@ -101,7 +101,6 @@ void RIT_IRQHandler(void)
 					toRelease_down_1=1;
 					break;
 				case long_press_count_1:
-					// your code here (for long press)
 					break;
 				default:
 					break;
@@ -127,11 +126,11 @@ void RIT_IRQHandler(void)
 		if((LPC_GPIO2->FIOPIN & (1<<12)) == 0){ /* button premuto */
 			switch(down_2){
 				case 2:
-					field_hardDropCurrentTetromino();
+					request_hardDrop();
 					toRelease_down_2=1;
 					break;
 				case long_press_count_1:
-					// your code here (for long press)
+					request_hardDrop();
 					break;
 				default:
 					break;
@@ -304,9 +303,10 @@ void RIT_IRQHandler(void)
 			J_up++;
 			switch(J_up){
 				case 1:				
-					field_rotateCurrentTetromino();
+					request_rotate();
 					break;
 				case long_press_count_1:
+					request_rotate();
 					break;
 				default:
 					// potential other code here
@@ -354,10 +354,10 @@ void RIT_IRQHandler(void)
 			J_right++;
 			switch(J_right){
 				case 1:				
-					field_moveCurrentTetrominoRight();
+					request_moveRight();
 					break;
 				case long_press_count_1:
-					field_moveCurrentTetrominoRight();
+					request_moveRight();
 					break;
 				default:
 					// potential other code here
@@ -379,10 +379,10 @@ void RIT_IRQHandler(void)
 			J_left++;
 			switch(J_left){
 				case 1:				
-					field_moveCurrentTetrominoLeft();
+					request_moveLeft();
 					break;
 				case long_press_count_1:
-					field_moveCurrentTetrominoLeft();
+					request_moveLeft();
 					break;
 				default:
 					// potential other code here

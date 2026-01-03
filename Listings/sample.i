@@ -1898,17 +1898,16 @@ extern void RIT_IRQHandler (void);
 
 
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
-
-
-
+# 42 "Source/sample.c"
 int main(void){
  SystemInit();
  BUTTON_init();
  joystick_init();
- init_RIT(0x000C4B40); //
+ init_RIT(0x1312D0 / 5); //
  enable_RIT();
  init_timer(0, 0xFFFFFFFF); // for seeding PRNG
- init_timer(1, 0x1312D0); // for game advancement
+ init_timer(1, 0x17D7840 / 5 / 6 // game ticks per second); // for game advancement
+ __NVIC_SetPriority(TIMER1_IRQn, 1);
  enable_timer(0);
  enable_timer(1);
    LCD_Initialization();
@@ -1916,10 +1915,10 @@ int main(void){
  field_init();
  GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
 
- ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
- ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);
+ //((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
+ //((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);
 
  while (1){
-  __asm("wfi");
+ // __asm("wfi");
  }
 }

@@ -1794,7 +1794,6 @@ void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, u
 uint8_t generate_idx(void);
 void field_placeRandomTetromino(void);
 void field_dropCurrentTetromino(void);
-void field_softDropCurrentTetromino(void);
 void field_hardDropCurrentTetromino(void);
 void field_moveCurrentTetrominoLeft(void);
 void field_moveCurrentTetrominoRight(void);
@@ -1802,10 +1801,14 @@ void field_rotateCurrentTetromino(void);
 void field_collisionDetection(void);
 void field_clearDetection(void);
 void field_clearRow(uint8_t y_toClear);
-void start_game(void);
-void advance_game(void);
+void request_hardDrop(void);
+void request_moveRight(void);
+void request_moveLeft(void);
+void request_rotate(void);
 void toggle_soft_drop(void);
 void toggle_running(void);
+void start_game(void);
+void advance_game(void);
 # 2 "Source/field/field.c" 2
 # 1 "./Source/GLCD\\GLCD.h" 1
 # 90 "./Source/GLCD\\GLCD.h"
@@ -2218,6 +2221,12 @@ uint8_t updated[20][10];
 uint8_t game_started = 0;
 uint8_t game_running = 0;
 uint8_t soft_drop = 0;
+uint8_t hard_drop = 0;
+uint8_t move_left = 0;
+uint8_t move_right = 0;
+uint8_t rotate = 0;
+
+uint8_t tickN = 0;
 
 uint32_t seed;
 
@@ -2316,29 +2325,9 @@ void field_dropCurrentTetromino(){
   1);
 }
 
-void field_softDropCurrentTetromino(){
- uint8_t i = 0;
- while (i < 2 && !current_tetromino.placed){
-  field_deleteCurrentTetromino();
-  current_tetromino.position_y++;
-  field_placeTetromino(
-   current_tetromino.position_x,
-   current_tetromino.position_y,
-   current_tetromino.index,
-   current_tetromino.rotation,
-   current_tetromino.color,
-   0);
-  field_collisionDetection();
-  i++;
- }
- field_update();
-}
-
 void field_hardDropCurrentTetromino(){
  if (!game_running)
   return;
- __NVIC_DisableIRQ(TIMER1_IRQn);
- __NVIC_DisableIRQ(RIT_IRQn);
  while (!current_tetromino.placed){
   field_deleteCurrentTetromino();
   current_tetromino.position_y++;
@@ -2354,15 +2343,12 @@ void field_hardDropCurrentTetromino(){
  field_update();
  field_clearDetection();
  field_placeRandomTetromino();
- __NVIC_DisableIRQ(RIT_IRQn);
- __NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 
 void field_rotateCurrentTetromino(){
  if (!game_running)
   return;
- __NVIC_DisableIRQ(TIMER1_IRQn);
  field_deleteCurrentTetromino();
  current_tetromino.rotation = (current_tetromino.rotation + 1) % 4;
  field_placeTetromino(
@@ -2372,13 +2358,11 @@ void field_rotateCurrentTetromino(){
    current_tetromino.rotation,
    current_tetromino.color,
    1);
- __NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 void field_moveCurrentTetrominoRight(){
  if (!game_running)
   return;
- __NVIC_DisableIRQ(TIMER1_IRQn);
  uint8_t y, x, can_place = 1;
  for (y = 0; y < 4; y++) {
   for (x = 0; x < 4; x++) {
@@ -2405,13 +2389,11 @@ void field_moveCurrentTetrominoRight(){
    current_tetromino.color,
    1);
  }
- __NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 void field_moveCurrentTetrominoLeft(){
  if (!game_running)
   return;
- __NVIC_DisableIRQ(TIMER1_IRQn);
  uint8_t y, x, can_place = 1;
  for (y = 0; y < 4; y++) {
   for (x = 0; x < 4; x++) {
@@ -2438,7 +2420,6 @@ void field_moveCurrentTetrominoLeft(){
    current_tetromino.color,
    1);
  }
- __NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 void field_collisionDetection(){
@@ -2484,32 +2465,20 @@ void field_clearRow(uint8_t y_toClear){
  field_update();
 }
 
-void start_dropping(){
- while(!current_tetromino.placed)
-  field_dropCurrentTetromino();
+void request_hardDrop(){
+ hard_drop = 1;
 }
 
-void start_game(){
- seed = ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x04000) )->TC;
- game_started = 1;
- field_placeRandomTetromino();
+void request_moveRight(){
+ move_right = 1;
 }
 
-void advance_game(){
- if (!game_running)
-  return;
- __NVIC_DisableIRQ(RIT_IRQn);
- __NVIC_DisableIRQ(TIMER1_IRQn);
- if (soft_drop)
-  field_softDropCurrentTetromino();
- else
-  field_dropCurrentTetromino();
- if (current_tetromino.placed){
-  field_clearDetection();
-  field_placeRandomTetromino();
- }
- __NVIC_EnableIRQ(TIMER1_IRQn);
- __NVIC_EnableIRQ(RIT_IRQn);
+void request_moveLeft(){
+ move_left = 1;
+}
+
+void request_rotate(){
+ rotate = 1;
 }
 
 void toggle_soft_drop(void){
@@ -2520,4 +2489,43 @@ void toggle_running(void){
  game_running = !game_running;
  if (game_running && !game_started)
   start_game();
+}
+
+void start_game(){
+ seed = ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x04000) )->TC;
+ game_started = 1;
+ tickN = 0;
+ field_placeRandomTetromino();
+}
+
+void advance_game(){
+ if (!game_running)
+  return;
+ tickN++;
+ if (rotate)
+  field_rotateCurrentTetromino();
+ if (move_left)
+  field_moveCurrentTetrominoLeft();
+ if (move_right)
+  field_moveCurrentTetrominoRight();
+ if (hard_drop){
+  hard_drop = 0;
+  field_hardDropCurrentTetromino();
+  return;
+ }
+ if (soft_drop && tickN == 3){
+  field_dropCurrentTetromino();
+  tickN = 0;
+ }
+ else if (tickN == 6){
+  field_dropCurrentTetromino();
+  tickN = 0;
+ }
+ if (current_tetromino.placed){
+  field_clearDetection();
+  field_placeRandomTetromino();
+ }
+ rotate = 0;
+ move_left = 0;
+ move_right = 0;
 }
