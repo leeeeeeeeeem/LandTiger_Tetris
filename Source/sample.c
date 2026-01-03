@@ -43,7 +43,7 @@ int main(void){
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
 	BUTTON_init();
 	joystick_init();
-	init_RIT(FIFTYMS / TPS); ///* RIT Initialization 50 msec       */
+	init_RIT(FIFTYMS / EMULATOR_SECOND); ///* RIT Initialization 50 msec       */
 	enable_RIT();	
 	init_timer(0, 0xFFFFFFFF); // for seeding PRNG
 	init_timer(1, GAME_SECOND / TPS);  // for game advancement 
@@ -55,11 +55,11 @@ int main(void){
 	field_init();
 	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
 	
-	//LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
-	//LPC_SC->PCON &= ~(0x2);						
+	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
+	LPC_SC->PCON &= ~(0x2);						
 	
 	while (1){
-	//	__ASM("wfi");
+		__ASM("wfi");
 	}
 }
 

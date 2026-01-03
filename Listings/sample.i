@@ -1903,7 +1903,7 @@ int main(void){
  SystemInit();
  BUTTON_init();
  joystick_init();
- init_RIT(0x1312D0 / 6 // game ticks per second); //
+ init_RIT(0x1312D0 / 6); //
  enable_RIT();
  init_timer(0, 0xFFFFFFFF); // for seeding PRNG
  init_timer(1, 0x17D7840 / 6 / 6 // game ticks per second); // for game advancement
@@ -1915,10 +1915,10 @@ int main(void){
  field_init();
  GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
 
- //((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
- //((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);
+ ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
+ ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);
 
  while (1){
- // __asm("wfi");
+  __asm("wfi");
  }
 }
