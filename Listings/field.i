@@ -2217,7 +2217,14 @@ uint16_t colors[7] = {
 };
 
 uint16_t field[20][10];
-uint8_t updated[20][10];
+
+typedef struct {
+    uint8_t x;
+    uint8_t y;
+} cell_t;
+
+cell_t dirty_cells[20 * 10];
+uint8_t dirty_count = 0;
 
 uint8_t game_started = 0;
 uint8_t game_running = 0;
@@ -2231,31 +2238,35 @@ uint8_t tickN = 0;
 
 uint32_t seed;
 
+void mark_dirty(uint8_t x, uint8_t y) {
+    if (dirty_count < 80) {
+        dirty_cells[dirty_count].x = x;
+        dirty_cells[dirty_count].y = y;
+        dirty_count++;
+    }
+}
+
 void field_setBlock(int x, int y, uint16_t color){
- field[y][x] = color;
+ if (field[y][x] != color) { // Only if actually changing
+     field[y][x] = color;
+     mark_dirty(x, y);
+    }
 }
 
 void field_update(){
- uint8_t i, j;
- for (i = 0; i < 20; i++){
-  for (j = 0; j < 10; j++){
-   if (field[i][j] == 0xFFFF){
-    set_block(10 + 15 * j,
-      10 + 15 * i,
-      15,
-      0x0000);
-    field_setBlock(j, i, 0x0000);
-    updated[i][j] = 0;
-   }
-   else if (field[i][j] && !updated[i][j]){
-    set_block(10 + 15 * j,
-      10 + 15 * i,
-      15,
-      field[i][j]);
-    updated[i][j] = 1;
-   }
+ uint8_t i, x, y;
+ for (i = 0; i < dirty_count; i++) {
+  x = dirty_cells[i].x;
+  y = dirty_cells[i].y;
+  if (field[y][x] == 0xFFFF) {
+   set_block(10 + 15 * x, 10 + 15 * y, 15, 0x0000);
+   field[y][x] = 0x0000;
+  }
+  else if (field[y][x]) {
+   set_block(10 + 15 * x, 10 + 15 * y, 15, field[y][x]);
   }
  }
+ dirty_count = 0;
  field_collisionDetection();
 }
 
@@ -2268,7 +2279,6 @@ void field_init(){
  for (y = 0; y < 20; y++){
   for (x = 0; x < 10; x++){
    field[y][x] = 0;
-   updated[y][x] = 0;
   }
  }
 }
@@ -2323,7 +2333,7 @@ void field_dropCurrentTetromino(){
   current_tetromino.index,
   current_tetromino.rotation,
   current_tetromino.color,
-  1);
+  0);
 }
 
 void field_hardDropCurrentTetromino(){
@@ -2358,7 +2368,7 @@ void field_rotateCurrentTetromino(){
    current_tetromino.index,
    current_tetromino.rotation,
    current_tetromino.color,
-   1);
+   0);
 }
 
 void field_moveCurrentTetrominoRight(){
@@ -2388,7 +2398,7 @@ void field_moveCurrentTetrominoRight(){
    current_tetromino.index,
    current_tetromino.rotation,
    current_tetromino.color,
-   1);
+   0);
  }
 }
 
@@ -2419,7 +2429,7 @@ void field_moveCurrentTetrominoLeft(){
    current_tetromino.index,
    current_tetromino.rotation,
    current_tetromino.color,
-   1);
+   0);
  }
 }
 
@@ -2526,6 +2536,7 @@ void advance_game(){
   field_dropCurrentTetromino();
   tickN = 0;
  }
+ field_update();
  if (current_tetromino.placed){
   field_clearDetection();
   field_placeRandomTetromino();

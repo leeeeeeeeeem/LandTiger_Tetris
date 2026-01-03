@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\sample_GLCD_TP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\sample_GLCD_TP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Sat Jan  3 04:02:35 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Sat Jan  3 04:21:59 2026
 <BR><P>
-<H3>Maximum Stack Usage =        200 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        208 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 TIMER1_IRQHandler &rArr; advance_game &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 <P>
@@ -406,7 +406,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_lpc17xx.o(RESET)
 </UL>
 <P><STRONG><a name="[c]"></a>TIMER1_IRQHandler</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, irq_timer.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = TIMER1_IRQHandler &rArr; advance_game &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = TIMER1_IRQHandler &rArr; advance_game &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
@@ -503,7 +503,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[27]"></a>RIT_IRQHandler</STRONG> (Thumb, 734 bytes, Stack size 16 bytes, irq_rit.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = RIT_IRQHandler &rArr; toggle_running &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = RIT_IRQHandler &rArr; toggle_running &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;request_moveLeft
 <LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;request_moveRight
@@ -540,30 +540,28 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[94]"></a>field_setBlock</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[94]"></a>mark_dirty</STRONG> (Thumb, 46 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
 
-<P><STRONG><a name="[55]"></a>field_update</STRONG> (Thumb, 292 bytes, Stack size 40 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[95]"></a>field_setBlock</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
+
+<P><STRONG><a name="[55]"></a>field_update</STRONG> (Thumb, 270 bytes, Stack size 32 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_block
 </UL>
-<BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_game
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_clearRow
-<LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_moveCurrentTetrominoLeft
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_moveCurrentTetrominoRight
-<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_rotateCurrentTetromino
-<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_clearDetection
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_hardDropCurrentTetromino
-<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_dropCurrentTetromino
+<BR>[Called By]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_game
+<LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_clearRow
+<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_clearDetection
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_hardDropCurrentTetromino
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_placeRandomTetromino
 <LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_placeTetromino
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;toggle_running
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
-<P><STRONG><a name="[95]"></a>field_collisionDetection</STRONG> (Thumb, 150 bytes, Stack size 20 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[96]"></a>field_collisionDetection</STRONG> (Thumb, 150 bytes, Stack size 20 bytes, field.o(.text), UNUSED)
 
-<P><STRONG><a name="[46]"></a>field_init</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, field.o(.text))
+<P><STRONG><a name="[46]"></a>field_init</STRONG> (Thumb, 92 bytes, Stack size 16 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
 <LI>Call Chain = field_init &rArr; LCD_DrawLine &rArr; LCD_SetPoint
 </UL>
@@ -573,55 +571,55 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[57]"></a>field_placeTetromino</STRONG> (Thumb, 126 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[57]"></a>field_placeTetromino</STRONG> (Thumb, 214 bytes, Stack size 48 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[96]"></a>generate_idx</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[97]"></a>generate_idx</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
 
-<P><STRONG><a name="[58]"></a>field_placeRandomTetromino</STRONG> (Thumb, 150 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[58]"></a>field_placeRandomTetromino</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[97]"></a>field_deleteCurrentTetromino</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[98]"></a>field_deleteCurrentTetromino</STRONG> (Thumb, 174 bytes, Stack size 32 bytes, field.o(.text), UNUSED)
 
-<P><STRONG><a name="[59]"></a>field_dropCurrentTetromino</STRONG> (Thumb, 182 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
+<P><STRONG><a name="[60]"></a>field_dropCurrentTetromino</STRONG> (Thumb, 326 bytes, Stack size 40 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = field_dropCurrentTetromino
+</UL>
+<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
-<P><STRONG><a name="[5a]"></a>field_hardDropCurrentTetromino</STRONG> (Thumb, 618 bytes, Stack size 48 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[59]"></a>field_hardDropCurrentTetromino</STRONG> (Thumb, 808 bytes, Stack size 64 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
-<P><STRONG><a name="[5b]"></a>field_clearDetection</STRONG> (Thumb, 144 bytes, Stack size 32 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[5a]"></a>field_clearDetection</STRONG> (Thumb, 144 bytes, Stack size 32 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[5c]"></a>field_rotateCurrentTetromino</STRONG> (Thumb, 194 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
-</UL>
-
-<P><STRONG><a name="[5d]"></a>field_moveCurrentTetrominoRight</STRONG> (Thumb, 318 bytes, Stack size 28 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = field_moveCurrentTetrominoRight &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
-</UL>
-<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
+<P><STRONG><a name="[5d]"></a>field_rotateCurrentTetromino</STRONG> (Thumb, 338 bytes, Stack size 48 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = field_rotateCurrentTetromino
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
-<P><STRONG><a name="[5e]"></a>field_moveCurrentTetrominoLeft</STRONG> (Thumb, 318 bytes, Stack size 28 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = field_moveCurrentTetrominoLeft &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
-</UL>
-<BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
+<P><STRONG><a name="[5f]"></a>field_moveCurrentTetrominoRight</STRONG> (Thumb, 470 bytes, Stack size 44 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = field_moveCurrentTetrominoRight
 </UL>
 <BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
-<P><STRONG><a name="[5f]"></a>field_clearRow</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[5e]"></a>field_moveCurrentTetrominoLeft</STRONG> (Thumb, 470 bytes, Stack size 44 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = field_moveCurrentTetrominoLeft
+</UL>
+<BR>[Called By]<UL><LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
+</UL>
+
+<P><STRONG><a name="[5b]"></a>field_clearRow</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
@@ -649,24 +647,26 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[4e]"></a>toggle_running</STRONG> (Thumb, 210 bytes, Stack size 8 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = toggle_running &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[4e]"></a>toggle_running</STRONG> (Thumb, 254 bytes, Stack size 24 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 120<LI>Call Chain = toggle_running &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[60]"></a>start_game</STRONG> (Thumb, 182 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[5c]"></a>start_game</STRONG> (Thumb, 226 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[48]"></a>advance_game</STRONG> (Thumb, 954 bytes, Stack size 40 bytes, field.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = advance_game &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+<P><STRONG><a name="[48]"></a>advance_game</STRONG> (Thumb, 528 bytes, Stack size 40 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 200<LI>Call Chain = advance_game &rArr; field_hardDropCurrentTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_moveCurrentTetrominoLeft
-<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_moveCurrentTetrominoRight
-<LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_hardDropCurrentTetromino
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_moveCurrentTetrominoRight
+<LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_rotateCurrentTetromino
+<LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_hardDropCurrentTetromino
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_dropCurrentTetromino
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER1_IRQHandler
@@ -676,11 +676,11 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_init
 </UL>
 
-<P><STRONG><a name="[98]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
+<P><STRONG><a name="[99]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
 
-<P><STRONG><a name="[99]"></a>__rt_memclr_w</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
+<P><STRONG><a name="[9a]"></a>__rt_memclr_w</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, rt_memclr_w.o(.text), UNUSED)
 
-<P><STRONG><a name="[9a]"></a>_memset_w</STRONG> (Thumb, 74 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
+<P><STRONG><a name="[9b]"></a>_memset_w</STRONG> (Thumb, 74 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
 
 <P><STRONG><a name="[33]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -701,13 +701,13 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[9b]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[9c]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
 <P><STRONG><a name="[61]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[9c]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+<P><STRONG><a name="[9d]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
 
 <P><STRONG><a name="[3c]"></a>_sys_exit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sys_exit.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit

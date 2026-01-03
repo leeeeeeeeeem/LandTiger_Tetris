@@ -231,7 +231,14 @@ uint16_t colors[N_COLORS] = {
 };
 
 uint16_t field[FIELD_H][FIELD_W];
-uint8_t updated[FIELD_H][FIELD_W];
+
+typedef struct {
+    uint8_t x;
+    uint8_t y;
+} cell_t;
+
+cell_t dirty_cells[FIELD_H * FIELD_W];
+uint8_t dirty_count = 0;
 
 uint8_t game_started = 0;
 uint8_t game_running = 0;
@@ -245,31 +252,35 @@ uint8_t tickN = 0;
 
 uint32_t seed;
 
+void mark_dirty(uint8_t x, uint8_t y) {
+    if (dirty_count < 80) {
+        dirty_cells[dirty_count].x = x;
+        dirty_cells[dirty_count].y = y;
+        dirty_count++;
+    }
+}
+
 void field_setBlock(int x, int y, uint16_t color){
-	field[y][x] = color;
+	if (field[y][x] != color) {  // Only if actually changing
+    	field[y][x] = color;
+    	mark_dirty(x, y);
+    }
 }
 
 void field_update(){
-	uint8_t i, j;
-	for (i = 0; i < FIELD_H; i++){
-		for (j = 0; j < FIELD_W; j++){
-			if (field[i][j] == 0xFFFF){
-				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j,
-						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i,
-						BLOCK_SIZE,
-						0x0000);
-				field_setBlock(j, i, 0x0000);
-				updated[i][j] = 0;
-			}
-			else if (field[i][j] && !updated[i][j]){
-				set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * j,
-						FIELD_TOP_LEFT_Y + BLOCK_SIZE * i,
-						BLOCK_SIZE,
-						field[i][j]);
-				updated[i][j] = 1;
-			}
+	uint8_t i, x, y;
+	for (i = 0; i < dirty_count; i++) {
+		x = dirty_cells[i].x;
+		y = dirty_cells[i].y;
+		if (field[y][x] == 0xFFFF) {
+			set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * x, FIELD_TOP_LEFT_Y + BLOCK_SIZE * y, BLOCK_SIZE, 0x0000);
+			field[y][x] = 0x0000;
+		} 
+		else if (field[y][x]) {
+			set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * x, FIELD_TOP_LEFT_Y + BLOCK_SIZE * y, BLOCK_SIZE, field[y][x]);
 		}
-	} 
+	}
+	dirty_count = 0;
 	field_collisionDetection();
 }
 
@@ -282,7 +293,6 @@ void field_init(){
 	for (y = 0; y < FIELD_H; y++){
 		for (x = 0; x < FIELD_W; x++){
 			field[y][x] = 0;
-			updated[y][x] = 0;
 		}
 	}
 }
@@ -337,7 +347,7 @@ void field_dropCurrentTetromino(){
 		current_tetromino.index,
 		current_tetromino.rotation,
 		current_tetromino.color,
-		1);
+		0);
 }
 
 void field_hardDropCurrentTetromino(){
@@ -372,7 +382,7 @@ void field_rotateCurrentTetromino(){
 			current_tetromino.index,
 			current_tetromino.rotation,
 			current_tetromino.color,
-			1);
+			0);
 }
 
 void field_moveCurrentTetrominoRight(){
@@ -402,7 +412,7 @@ void field_moveCurrentTetrominoRight(){
 			current_tetromino.index,
 			current_tetromino.rotation,
 			current_tetromino.color,
-			1);
+			0);
 	}
 }
 		
@@ -433,7 +443,7 @@ void field_moveCurrentTetrominoLeft(){
 			current_tetromino.index,
 			current_tetromino.rotation,
 			current_tetromino.color,
-			1);
+			0);
 	}
 }
 
@@ -540,6 +550,7 @@ void advance_game(){
 		field_dropCurrentTetromino();
 		tickN = 0;
 	}
+	field_update();
 	if (current_tetromino.placed){
 		field_clearDetection();
 		field_placeRandomTetromino();
