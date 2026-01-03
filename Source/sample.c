@@ -32,8 +32,6 @@
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
 #endif
 
-uint32_t seed;
-
 
 int main(void){
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
@@ -49,7 +47,6 @@ int main(void){
 	LCD_Clear(Black);
 	field_init();
 	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
-	seed = LPC_TIM0->TC;
 	
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);						

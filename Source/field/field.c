@@ -237,7 +237,7 @@ uint8_t game_started = 0;
 uint8_t game_running = 0;
 uint8_t soft_drop = 0;
 
-extern uint32_t seed;
+uint32_t seed;
 
 void field_setBlock(int x, int y, uint16_t color){
 	field[y][x] = color;
@@ -508,6 +508,7 @@ void start_dropping(){
 }
 
 void start_game(){
+	seed = LPC_TIM0->TC;
 	game_started = 1;
 	field_placeRandomTetromino();
 }

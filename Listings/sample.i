@@ -1900,8 +1900,6 @@ extern void RIT_IRQHandler (void);
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
 
 
-uint32_t seed;
-
 
 int main(void){
  SystemInit();
@@ -1917,7 +1915,6 @@ int main(void){
  LCD_Clear(0x0000);
  field_init();
  GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
- seed = ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x04000) )->TC;
 
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);

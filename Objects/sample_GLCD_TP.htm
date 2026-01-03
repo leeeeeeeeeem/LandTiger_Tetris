@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\sample_GLCD_TP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\sample_GLCD_TP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Fri Jan  2 07:07:58 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Sat Jan  3 01:23:48 2026
 <BR><P>
 <H3>Maximum Stack Usage =        204 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -383,7 +383,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
 </UL>
 
-<P><STRONG><a name="[37]"></a>main</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, sample.o(.text))
+<P><STRONG><a name="[37]"></a>main</STRONG> (Thumb, 128 bytes, Stack size 8 bytes, sample.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104 + Unknown Stack Size
 <LI>Call Chain = main &rArr; GUI_Text &rArr; LCD_SetPoint
 </UL>
@@ -427,6 +427,26 @@ Global Symbols
 
 <P><STRONG><a name="[88]"></a>_memset_w</STRONG> (Thumb, 74 bytes, Stack size 4 bytes, rt_memclr_w.o(.text), UNUSED)
 
+<P><STRONG><a name="[89]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[8a]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[8b]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
+
+<P><STRONG><a name="[8c]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+
+<P><STRONG><a name="[5e]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
+</UL>
+
+<P><STRONG><a name="[8d]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
+
+<P><STRONG><a name="[8e]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[8f]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
+
+<P><STRONG><a name="[90]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
+
 <P><STRONG><a name="[3d]"></a>SystemInit</STRONG> (Thumb, 320 bytes, Stack size 0 bytes, system_lpc17xx.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -435,9 +455,9 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[89]"></a>disable_timer</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, lib_timer.o(.text), UNUSED)
+<P><STRONG><a name="[91]"></a>disable_timer</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, lib_timer.o(.text), UNUSED)
 
-<P><STRONG><a name="[8a]"></a>reset_timer</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, lib_timer.o(.text), UNUSED)
+<P><STRONG><a name="[92]"></a>reset_timer</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, lib_timer.o(.text), UNUSED)
 
 <P><STRONG><a name="[42]"></a>init_timer</STRONG> (Thumb, 72 bytes, Stack size 0 bytes, lib_timer.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -455,7 +475,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8b]"></a>LCD_GetPoint</STRONG> (Thumb, 356 bytes, Stack size 28 bytes, glcd.o(.text), UNUSED)
+<P><STRONG><a name="[93]"></a>LCD_GetPoint</STRONG> (Thumb, 356 bytes, Stack size 28 bytes, glcd.o(.text), UNUSED)
 
 <P><STRONG><a name="[4a]"></a>LCD_SetPoint</STRONG> (Thumb, 322 bytes, Stack size 32 bytes, glcd.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = LCD_SetPoint
@@ -512,9 +532,9 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8c]"></a>disable_RIT</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, lib_rit.o(.text), UNUSED)
+<P><STRONG><a name="[94]"></a>disable_RIT</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, lib_rit.o(.text), UNUSED)
 
-<P><STRONG><a name="[8d]"></a>reset_RIT</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, lib_rit.o(.text), UNUSED)
+<P><STRONG><a name="[95]"></a>reset_RIT</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, lib_rit.o(.text), UNUSED)
 
 <P><STRONG><a name="[40]"></a>init_RIT</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, lib_rit.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -537,7 +557,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8e]"></a>field_setBlock</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[96]"></a>field_setBlock</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
 
 <P><STRONG><a name="[54]"></a>field_update</STRONG> (Thumb, 292 bytes, Stack size 40 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = field_update &rArr; set_block &rArr; LCD_SetPoint
@@ -560,7 +580,7 @@ Global Symbols
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
-<P><STRONG><a name="[8f]"></a>field_collisionDetection</STRONG> (Thumb, 150 bytes, Stack size 20 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[97]"></a>field_collisionDetection</STRONG> (Thumb, 150 bytes, Stack size 20 bytes, field.o(.text), UNUSED)
 
 <P><STRONG><a name="[46]"></a>field_init</STRONG> (Thumb, 106 bytes, Stack size 16 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88 + Unknown Stack Size
@@ -576,13 +596,13 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[90]"></a>generate_idx</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[98]"></a>generate_idx</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
 
 <P><STRONG><a name="[57]"></a>field_placeRandomTetromino</STRONG> (Thumb, 150 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[91]"></a>field_deleteCurrentTetromino</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[99]"></a>field_deleteCurrentTetromino</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
 
 <P><STRONG><a name="[58]"></a>field_dropCurrentTetromino</STRONG> (Thumb, 182 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
@@ -640,7 +660,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
-<P><STRONG><a name="[5d]"></a>start_game</STRONG> (Thumb, 162 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
+<P><STRONG><a name="[5d]"></a>start_game</STRONG> (Thumb, 170 bytes, Stack size 8 bytes, field.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 
@@ -657,19 +677,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[4e]"></a>toggle_running</STRONG> (Thumb, 190 bytes, Stack size 8 bytes, field.o(.text))
+<P><STRONG><a name="[4e]"></a>toggle_running</STRONG> (Thumb, 198 bytes, Stack size 8 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = toggle_running &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
-
-<P><STRONG><a name="[92]"></a>__use_two_region_memory</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
-
-<P><STRONG><a name="[93]"></a>__rt_heap_escrow$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
-
-<P><STRONG><a name="[94]"></a>__rt_heap_expand$2region</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, heapauxi.o(.text), UNUSED)
 
 <P><STRONG><a name="[33]"></a>__user_setup_stackheap</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, sys_stackheap_outer.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
@@ -690,23 +704,9 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[95]"></a>__user_libspace</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
-
-<P><STRONG><a name="[5e]"></a>__user_perproc_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__user_setup_stackheap
-</UL>
-
-<P><STRONG><a name="[96]"></a>__user_perthread_libspace</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, libspace.o(.text), UNUSED)
-
 <P><STRONG><a name="[3c]"></a>_sys_exit</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sys_exit.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
-
-<P><STRONG><a name="[97]"></a>__I$use$semihosting</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
-
-<P><STRONG><a name="[98]"></a>__use_no_semihosting_swi</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, use_no_semi.o(.text), UNUSED)
-
-<P><STRONG><a name="[99]"></a>__semihosting_library_function</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, indicate_semi.o(.text), UNUSED)
 <P>
 <H3>
 Local Symbols
