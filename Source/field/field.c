@@ -483,7 +483,7 @@ void field_clearDetection(){
     for (y = 0; y < FIELD_H; y++){
         cleared = 1;
         for (x = 0; x < FIELD_W; x++){
-            if (field[y][x] == 0 || field[y][x] == 0xFFFF)
+            if (field[y][x] == 0x0000 || field[y][x] == 0xFFFF)
                 cleared = 0;
         }
         if (cleared)
@@ -495,9 +495,9 @@ void field_clearRow(uint8_t y_toClear){
     uint8_t y, x;
     for (y = y_toClear; y > 0; y--) {
         for (x = 0; x < FIELD_W; x++) {
-            if (field[y - 1][x] == 0x0000)
+            if (field[y - 1][x] == 0x0000 && field[y][x] != 0x0000)
                 field_setBlock(x, y, 0xFFFF); 
-						else
+			else if (field[y - 1][x] != 0x0000)
                 field_setBlock(x, y, field[y - 1][x]);
         }
     }
