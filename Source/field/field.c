@@ -122,20 +122,20 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 													{0, 0, 0, 0}
 												}, 
 												{
-													{0, 0, 1, 0},
+													{1, 0, 0, 0},
 													{1, 1, 1, 0},
 													{0, 0, 0, 0},
 													{0, 0, 0, 0}
 												},
 												{
-													{1, 0, 0, 0},
-													{1, 0, 0, 0},
 													{1, 1, 0, 0},
+													{1, 0, 0, 0},
+													{1, 0, 0, 0},
 													{0, 0, 0, 0}
 												},
 												{
 													{1, 1, 1, 0},
-													{1, 0, 0, 0},
+													{0, 0, 1, 0},
 													{0, 0, 0, 0},
 													{0, 0, 0, 0}
 												}
@@ -367,16 +367,41 @@ void field_hardDropCurrentTetromino(){
 }
 
 void field_rotateCurrentTetromino(){
-	field_deleteCurrentTetromino();
-	current_tetromino.rotation = (current_tetromino.rotation + 1) % 4;
-	field_placeTetromino(
+	uint8_t y, x, current_x, current_y, can_place = 1;
+	uint8_t new_rotation = (current_tetromino.rotation + 1) % 4;
+	for (y = 0; y < 4; y++) {
+		for (x = 0; x < 4; x++) {
+			if (tetrominoes[current_tetromino.index][new_rotation][y][x] &&
+					!tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x]) {
+				current_x = current_tetromino.position_x + x;
+				current_y = current_tetromino.position_y + y;
+				if (current_x >= FIELD_W || current_y >= FIELD_H) {
+					can_place = 0;
+					break;
+				}
+				if (field[current_y][current_x] != 0 && 
+				    field[current_y][current_x] != 0xFFFF) {
+					can_place = 0;
+					break;
+				}
+			}
+		}
+		if (!can_place)
+			break;
+	}
+	if (can_place) {
+		field_deleteCurrentTetromino();
+		current_tetromino.rotation = new_rotation;
+		field_placeTetromino(
 			current_tetromino.position_x, 
 			current_tetromino.position_y,
 			current_tetromino.index,
 			current_tetromino.rotation,
 			current_tetromino.color,
 			0);
+	}
 }
+
 
 void field_moveCurrentTetrominoRight(){
 	uint8_t y, x, can_place = 1;
