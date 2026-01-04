@@ -56,11 +56,11 @@ int main(void){
 	init_timer(1, GAME_SECOND / TPS);  // for game advancement 
 	NVIC_SetPriority(TIMER1_IRQn, 1);
 	enable_timer(0);
-	enable_timer(1);
   	LCD_Initialization();
 	LCD_Clear(Black);
 	field_init();
-	GUI_Text(180, 100, (uint8_t*) "swag", Grey, Black); 
+	scoreboard_init();
+	enable_timer(1);
 	
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);						

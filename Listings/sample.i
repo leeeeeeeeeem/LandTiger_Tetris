@@ -1924,11 +1924,11 @@ int main(void){
  init_timer(1, 0x17D7840 //one second with a 25MHz clock / 22 / 6 // game ticks per second); // for game advancement
  __NVIC_SetPriority(TIMER1_IRQn, 1);
  enable_timer(0);
- enable_timer(1);
    LCD_Initialization();
  LCD_Clear(0x0000);
  field_init();
- GUI_Text(180, 100, (uint8_t*) "swag", 0xF7DE, 0x0000);
+ scoreboard_init();
+ enable_timer(1);
 
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON |= 0x1;
  ((LPC_SC_TypeDef *) ((0x40080000UL) + 0x7C000) )->PCON &= ~(0x2);

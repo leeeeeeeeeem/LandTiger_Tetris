@@ -252,8 +252,11 @@ uint8_t tickN = 0;
 
 uint32_t current_score;
 uint32_t high_score = 0;
+uint8_t total_cleared_rows = 0;
 
 uint32_t seed;
+
+uint8_t paused_placed = 0;
 
 void mark_toPlace(uint8_t x, uint8_t y) {
     if (toPlace_count < FIELD_H * FIELD_W) {
@@ -561,6 +564,7 @@ void toggle_running(void){
 void start_game(){
 	seed = LPC_TIM0->TC;
 	current_score = 0;
+	total_cleared_rows = 0;
 	game_started = 1;
 	tickN = 0;
 	field_placeRandomTetromino();
@@ -577,8 +581,15 @@ void reset_game(){
 
 void advance_game(){
 	uint8_t cleared_rows;
-	if (!game_running)
+	if (!game_running){
+		GUI_Text(170, 10, (uint8_t*) "paused", Grey, Black); 
+		paused_placed = 1;
 		return;
+	}
+	if (paused_placed){
+		GUI_Text(170, 10, (uint8_t*) "paused", Black, Black); 
+		paused_placed = 0;
+	}
 	tickN++;	
 	if (rotate)
 		field_rotateCurrentTetromino();
@@ -602,6 +613,7 @@ void advance_game(){
 	if (current_tetromino.placed){
 		current_score += 10;
 		cleared_rows = field_clearDetection();
+		total_cleared_rows += cleared_rows;
 		while (cleared_rows >= 4){
 			current_score += 600;
 			cleared_rows -= 4;
@@ -617,3 +629,12 @@ void advance_game(){
 	move_right = 0;
 }
 
+void scoreboard_init(){
+	GUI_Text(170, 70, (uint8_t*) "high", Grey, Black); 
+	GUI_Text(170, 90, (uint8_t*) "score", Grey, Black); 
+	GUI_Text(170, 110, (uint8_t*) "10000", Grey, Black); 
+	GUI_Text(170, 150, (uint8_t*) "score", Grey, Black); 
+	GUI_Text(170, 170, (uint8_t*) "100000", Grey, Black); 
+	GUI_Text(170, 210, (uint8_t*) "cleared", Grey, Black); 
+	GUI_Text(170, 230, (uint8_t*) "1000", Grey, Black); 
+}
