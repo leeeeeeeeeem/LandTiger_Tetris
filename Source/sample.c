@@ -32,10 +32,10 @@
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
 #endif
 
-#define SECOND 0x17D7840
-#define FIFTYMS 0x1312D0
+#define SECOND 0x17D7840 //one second with a 25MHz clock
+#define FIFTYMS 0x4C4B40 //50ms with a 100MHz clock
 
-#define EMULATOR_SECOND 6
+#define EMULATOR_SECOND 22
 #define GAME_SECOND SECOND / EMULATOR_SECOND  
 #define TPS 6 // game ticks per second
 
@@ -43,7 +43,7 @@ int main(void){
 	SystemInit();  												/* System Initialization (i.e., PLL)  */
 	BUTTON_init();
 	joystick_init();
-	init_RIT(FIFTYMS / EMULATOR_SECOND); ///* RIT Initialization 50 msec       */
+	init_RIT(FIFTYMS / 22); ///* RIT Initialization 50 msec       */
 	enable_RIT();	
 	init_timer(0, 0xFFFFFFFF); // for seeding PRNG
 	init_timer(1, GAME_SECOND / TPS);  // for game advancement 

@@ -1903,10 +1903,10 @@ int main(void){
  SystemInit();
  BUTTON_init();
  joystick_init();
- init_RIT(0x1312D0 / 6); //
+ init_RIT(0x4C4B40 //50ms with a 100MHz clock / 22); //
  enable_RIT();
  init_timer(0, 0xFFFFFFFF); // for seeding PRNG
- init_timer(1, 0x17D7840 / 6 / 6 // game ticks per second); // for game advancement
+ init_timer(1, 0x17D7840 //one second with a 25MHz clock / 22 / 6 // game ticks per second); // for game advancement
  __NVIC_SetPriority(TIMER1_IRQn, 1);
  enable_timer(0);
  enable_timer(1);
