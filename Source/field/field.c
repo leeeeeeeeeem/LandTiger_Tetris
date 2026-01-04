@@ -250,6 +250,9 @@ uint8_t rotate = 0;
 
 uint8_t tickN = 0;
 
+uint32_t current_score;
+uint32_t high_score = 0;
+
 uint32_t seed;
 
 void mark_toPlace(uint8_t x, uint8_t y) {
@@ -264,6 +267,16 @@ void field_setBlock(int x, int y, uint16_t color){
 	if (field[y][x] != color) {
     	field[y][x] = color;
     	mark_toPlace(x, y);
+    }
+}
+
+void field_reset(){
+	uint8_t y, x;
+    for (y = 0; y < FIELD_H; y++) {
+        for (x = 0; x < FIELD_W; x++) {
+			if (field[y][x])
+				field_setBlock(x, y, 0xFFFF);
+        }
     }
 }
 
@@ -478,17 +491,20 @@ void field_collisionDetection(){
 	}
 }
 
-void field_clearDetection(){
-    uint8_t y, x, cleared;
+uint8_t field_clearDetection(){
+    uint8_t y, x, cleared, cleared_rows = 0;
     for (y = 0; y < FIELD_H; y++){
         cleared = 1;
         for (x = 0; x < FIELD_W; x++){
             if (field[y][x] == 0x0000 || field[y][x] == 0xFFFF)
                 cleared = 0;
         }
-        if (cleared)
+        if (cleared){
             field_clearRow(y);
+			cleared_rows++;
+		}
     }
+	return cleared_rows;
 }
 
 void field_clearRow(uint8_t y_toClear){
@@ -507,6 +523,10 @@ void field_clearRow(uint8_t y_toClear){
     field_update();
 }
 
+void field_gameEndDetection(){
+	if (current_tetromino.position_y <= 0)
+		reset_game();
+}
 
 void request_hardDrop(){
 	hard_drop = 1;
@@ -540,12 +560,23 @@ void toggle_running(void){
 
 void start_game(){
 	seed = LPC_TIM0->TC;
+	current_score = 0;
 	game_started = 1;
 	tickN = 0;
 	field_placeRandomTetromino();
 }
 
+void reset_game(){
+	game_running = 0;
+	game_started = 0;
+	if (current_score > high_score)
+		high_score = current_score;
+	field_reset();
+	field_update();
+}
+
 void advance_game(){
+	uint8_t cleared_rows;
 	if (!game_running)
 		return;
 	tickN++;	
@@ -569,8 +600,16 @@ void advance_game(){
 	}
 	field_update();
 	if (current_tetromino.placed){
-		field_clearDetection();
-		field_placeRandomTetromino();
+		current_score += 10;
+		cleared_rows = field_clearDetection();
+		while (cleared_rows >= 4){
+			current_score += 600;
+			cleared_rows -= 4;
+		}
+		current_score += cleared_rows * 100;
+		field_gameEndDetection();
+		if (game_started)
+			field_placeRandomTetromino();
 	}
 	hard_drop = 0;
 	rotate = 0;

@@ -1898,7 +1898,22 @@ extern void RIT_IRQHandler (void);
 
 
 extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
-# 42 "Source/sample.c"
+
+
+
+
+
+
+
+//one second of emulation takes 22 seconds in real life
+//so I divide by 22 to make the timing the same on both the board and in the emulator
+
+
+
+
+
+
+
 int main(void){
  SystemInit();
  BUTTON_init();
