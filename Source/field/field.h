@@ -17,6 +17,7 @@ void field_rotateCurrentTetromino(void);
 void field_collisionDetection(void);
 uint8_t field_clearDetection(void);
 void field_clearRow(uint8_t y_toClear);
+void scoreboard_update(void);
 void reset_game(void);
 void request_hardDrop(void);
 void request_moveRight(void);

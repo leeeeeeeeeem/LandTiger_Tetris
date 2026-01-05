@@ -1925,7 +1925,7 @@ int main(void){
  __NVIC_SetPriority(TIMER1_IRQn, 1);
  enable_timer(0);
    LCD_Initialization();
- LCD_Clear(0x0000);
+ LCD_Clear(0x1083);
  field_init();
  scoreboard_init();
  enable_timer(1);

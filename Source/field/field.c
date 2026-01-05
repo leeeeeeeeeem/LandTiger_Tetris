@@ -1,6 +1,7 @@
 #include "field.h"
 #include "GLCD.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 #define FIELD_H 20
 #define FIELD_W 10
@@ -221,13 +222,13 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 										};
 
 uint16_t colors[N_COLORS] = {
-    0x94EA,
-    0xFB15,
-    0xCB5F,
-    0x8DBF,
-    0xFD47,
-    0xA761,
-    0xFB94,
+    0xADDE,
+    0xF6F5,
+    0xC53E,
+    0x859E,
+    0xF590,
+    0xA713,
+    0xEC54,
 };
 
 uint16_t field[FIELD_H][FIELD_W];
@@ -277,7 +278,7 @@ void field_reset(){
 	uint8_t y, x;
     for (y = 0; y < FIELD_H; y++) {
         for (x = 0; x < FIELD_W; x++) {
-			if (field[y][x])
+			if (field[y][x] != Black)
 				field_setBlock(x, y, 0xFFFF);
         }
     }
@@ -289,8 +290,8 @@ void field_update(){
 		x = toPlace[i].x;
 		y = toPlace[i].y;
 		if (field[y][x] == 0xFFFF) {
-			set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * x, FIELD_TOP_LEFT_Y + BLOCK_SIZE * y, BLOCK_SIZE, 0x0000);
-			field[y][x] = 0x0000;
+			set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * x, FIELD_TOP_LEFT_Y + BLOCK_SIZE * y, BLOCK_SIZE, Black);
+			field[y][x] = Black;
 		} 
 		else if (field[y][x]) {
 			set_block(FIELD_TOP_LEFT_X + BLOCK_SIZE * x, FIELD_TOP_LEFT_Y + BLOCK_SIZE * y, BLOCK_SIZE, field[y][x]);
@@ -308,7 +309,7 @@ void field_init(){
 	LCD_DrawLine(FIELD_BOTTOM_RIGHT_X, FIELD_BOTTOM_RIGHT_Y, FIELD_TOP_RIGHT_X, FIELD_TOP_RIGHT_Y - 1, Grey);
 	for (y = 0; y < FIELD_H; y++){
 		for (x = 0; x < FIELD_W; x++){
-			field[y][x] = 0;
+			field[y][x] = Black;
 		}
 	}
 }
@@ -395,7 +396,7 @@ void field_rotateCurrentTetromino(){
 					can_place = 0;
 					break;
 				}
-				if (field[current_y][current_x] != 0 && 
+				if (field[current_y][current_x] != Black && 
 				    field[current_y][current_x] != 0xFFFF) {
 					can_place = 0;
 					break;
@@ -427,7 +428,7 @@ void field_moveCurrentTetrominoRight(){
 					(current_tetromino.position_x + x + 1 >= FIELD_W	|| 
 						(((x != 3 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x + 1]) 
 						 || (x == 3) ) &&
-						 field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0 &&
+						 field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != Black &&
 						 field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0xFFFF)
 					)
 				){
@@ -456,7 +457,7 @@ void field_moveCurrentTetrominoLeft(){
 					(current_tetromino.position_x + x - 1 < 0	|| 
 						(((x != 0 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x -	1]) 
 						 || (x == 0) ) &&
-						 field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0 &&
+						 field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != Black &&
 						 field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0xFFFF)
 					)
 				){
@@ -485,7 +486,7 @@ void field_collisionDetection(){
 				(y == 3 || !tetrominoes[current_tetromino.index][current_tetromino.rotation][y + 1][x]) &&
 					(
 					 current_tetromino.position_y + y >= FIELD_H - 1 ||
-					 (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0 &&
+					 (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != Black &&
 					  field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0xFFFF)
 					)
 				) 
@@ -499,7 +500,7 @@ uint8_t field_clearDetection(){
     for (y = 0; y < FIELD_H; y++){
         cleared = 1;
         for (x = 0; x < FIELD_W; x++){
-            if (field[y][x] == 0x0000 || field[y][x] == 0xFFFF)
+            if (field[y][x] == Black || field[y][x] == 0xFFFF)
                 cleared = 0;
         }
         if (cleared){
@@ -514,9 +515,9 @@ void field_clearRow(uint8_t y_toClear){
     uint8_t y, x;
     for (y = y_toClear; y > 0; y--) {
         for (x = 0; x < FIELD_W; x++) {
-            if (field[y - 1][x] == 0x0000 && field[y][x] != 0x0000)
+            if (field[y - 1][x] == Black && field[y][x] != Black)
                 field_setBlock(x, y, 0xFFFF); 
-			else if (field[y - 1][x] != 0x0000)
+			else if (field[y - 1][x] != Black)
                 field_setBlock(x, y, field[y - 1][x]);
         }
     }
@@ -575,6 +576,9 @@ void reset_game(){
 	game_started = 0;
 	if (current_score > high_score)
 		high_score = current_score;
+	current_score = 0;
+	total_cleared_rows = 0;
+	scoreboard_update();
 	field_reset();
 	field_update();
 }
@@ -619,6 +623,7 @@ void advance_game(){
 			cleared_rows -= 4;
 		}
 		current_score += cleared_rows * 100;
+		scoreboard_update();
 		field_gameEndDetection();
 		if (game_started)
 			field_placeRandomTetromino();
@@ -632,9 +637,20 @@ void advance_game(){
 void scoreboard_init(){
 	GUI_Text(170, 70, (uint8_t*) "high", Grey, Black); 
 	GUI_Text(170, 90, (uint8_t*) "score", Grey, Black); 
-	GUI_Text(170, 110, (uint8_t*) "10000", Grey, Black); 
+	GUI_Text(170, 110, (uint8_t*) "0", Grey, Black); 
 	GUI_Text(170, 150, (uint8_t*) "score", Grey, Black); 
-	GUI_Text(170, 170, (uint8_t*) "100000", Grey, Black); 
+	GUI_Text(170, 170, (uint8_t*) "0", Grey, Black); 
 	GUI_Text(170, 210, (uint8_t*) "cleared", Grey, Black); 
-	GUI_Text(170, 230, (uint8_t*) "1000", Grey, Black); 
+	GUI_Text(170, 230, (uint8_t*) "0", Grey, Black); 
 }
+
+void scoreboard_update(){
+	char high_score_string[7], score_string[7], cleared_string[7];
+	sprintf(high_score_string, "%-6d", high_score);
+	sprintf(score_string, "%-6d", current_score);
+	sprintf(cleared_string, "%-6d", total_cleared_rows);
+	GUI_Text(170, 110, (uint8_t*) high_score_string, Grey, Black); 
+	GUI_Text(170, 170, (uint8_t*) score_string, Grey, Black); 
+	GUI_Text(170, 230, (uint8_t*) cleared_string, Grey, Black); 
+}
+

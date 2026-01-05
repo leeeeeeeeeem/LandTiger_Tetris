@@ -61,8 +61,8 @@
 
 /* LCD color */
 #define White          0xFFFF
-#define Black          0x0000
-#define Grey           0xF7DE
+#define Black          0x1083
+#define Grey           0xC69D
 #define Blue           0x001F
 #define Blue2          0x051F
 #define Red            0xF800

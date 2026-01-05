@@ -1801,6 +1801,7 @@ void field_rotateCurrentTetromino(void);
 void field_collisionDetection(void);
 uint8_t field_clearDetection(void);
 void field_clearRow(uint8_t y_toClear);
+void scoreboard_update(void);
 void reset_game(void);
 void request_hardDrop(void);
 void request_moveRight(void);
@@ -2007,7 +2008,309 @@ extern __attribute__((__nothrow__)) void __use_no_heap_region(void);
 extern __attribute__((__nothrow__)) char const *__C_library_version_string(void);
 extern __attribute__((__nothrow__)) int __C_library_version_number(void);
 # 4 "Source/field/field.c" 2
-# 24 "Source/field/field.c"
+# 1 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
+# 68 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+    typedef __builtin_va_list __va_list;
+# 87 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+typedef struct __fpos_t_struct {
+    unsigned long long int __pos;
+
+
+
+
+
+    struct {
+        unsigned int __state1, __state2;
+    } __mbstate;
+} fpos_t;
+# 108 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+typedef struct __FILE FILE;
+# 119 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+struct __FILE {
+    union {
+        long __FILE_alignment;
+
+
+
+        char __FILE_size[84];
+
+    } __FILE_opaque;
+};
+# 138 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern FILE __stdin, __stdout, __stderr;
+extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
+# 224 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int rename(const char * , const char * ) __attribute__((__nonnull__(1,2)));
+# 243 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) FILE *tmpfile(void);
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) char *tmpnam(char * );
+# 265 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fclose(FILE * ) __attribute__((__nonnull__(1)));
+# 275 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fflush(FILE * );
+# 285 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) FILE *fopen(const char * __restrict ,
+                           const char * __restrict ) __attribute__((__nonnull__(1,2)));
+# 329 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) FILE *freopen(const char * __restrict ,
+                    const char * __restrict ,
+                    FILE * __restrict ) __attribute__((__nonnull__(2,3)));
+# 342 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
+                    char * __restrict ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int setvbuf(FILE * __restrict ,
+                   char * __restrict ,
+                   int , size_t ) __attribute__((__nonnull__(1)));
+# 370 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int fprintf(FILE * __restrict ,
+                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 393 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _fprintf(FILE * __restrict ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int printf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _printf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int sprintf(char * __restrict , const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _sprintf(char * __restrict , const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int __ARM_snprintf(char * __restrict , size_t ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(3)));
+# 460 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
+                      const char * __restrict , ...) __attribute__((__nonnull__(3)));
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int fscanf(FILE * __restrict ,
+                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 503 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int _fscanf(FILE * __restrict ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int scanf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int _scanf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
+
+
+
+
+
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int sscanf(const char * __restrict ,
+                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 541 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __scanf_args
+extern __attribute__((__nothrow__)) int _sscanf(const char * __restrict ,
+                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
+# 555 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int _vfscanf(FILE * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
+extern __attribute__((__nothrow__)) int _vscanf(const char * __restrict , __va_list) __attribute__((__nonnull__(1)));
+extern __attribute__((__nothrow__)) int _vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
+extern __attribute__((__nothrow__)) int __ARM_vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
+
+extern __attribute__((__nothrow__)) int vprintf(const char * __restrict , __va_list ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int _vprintf(const char * __restrict , __va_list ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) int vfprintf(FILE * __restrict ,
+                    const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+# 584 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int vsprintf(char * __restrict ,
+                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+# 594 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int __ARM_vsnprintf(char * __restrict , size_t ,
+                     const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
+# 609 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int _vsprintf(char * __restrict ,
+                      const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) int _vfprintf(FILE * __restrict ,
+                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) int _vsnprintf(char * __restrict , size_t ,
+                      const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
+# 635 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+#pragma __printf_args
+extern __attribute__((__nothrow__)) int __ARM_asprintf(char ** , const char * __restrict , ...) __attribute__((__nonnull__(2)));
+extern __attribute__((__nothrow__)) int __ARM_vasprintf(char ** , const char * __restrict , __va_list ) __attribute__((__nonnull__(2)));
+# 649 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fgetc(FILE * ) __attribute__((__nonnull__(1)));
+# 659 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) char *fgets(char * __restrict , int ,
+                    FILE * __restrict ) __attribute__((__nonnull__(1,3)));
+# 673 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fputc(int , FILE * ) __attribute__((__nonnull__(2)));
+# 683 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * __restrict ) __attribute__((__nonnull__(1,2)));
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int getc(FILE * ) __attribute__((__nonnull__(1)));
+# 704 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+    extern __attribute__((__nothrow__)) int (getchar)(void);
+# 713 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) char *gets(char * ) __attribute__((__nonnull__(1)));
+# 725 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int putc(int , FILE * ) __attribute__((__nonnull__(2)));
+# 737 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+    extern __attribute__((__nothrow__)) int (putchar)(int );
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int puts(const char * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int ungetc(int , FILE * ) __attribute__((__nonnull__(2)));
+# 778 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) size_t fread(void * __restrict ,
+                    size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
+# 794 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) size_t __fread_bytes_avail(void * __restrict ,
+                    size_t , FILE * __restrict ) __attribute__((__nonnull__(1,3)));
+# 810 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) size_t fwrite(const void * __restrict ,
+                    size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
+# 822 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fgetpos(FILE * __restrict , fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
+# 833 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fseek(FILE * , long int , int ) __attribute__((__nonnull__(1)));
+# 850 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int fsetpos(FILE * __restrict , const fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
+# 863 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) long int ftell(FILE * ) __attribute__((__nonnull__(1)));
+# 877 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) void rewind(FILE * ) __attribute__((__nonnull__(1)));
+# 886 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) void clearerr(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int feof(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+
+extern __attribute__((__nothrow__)) int ferror(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+
+extern __attribute__((__nothrow__)) void perror(const char * );
+# 917 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnull__(1)));
+
+
+
+extern __attribute__((__nothrow__)) void __use_no_semihosting_swi(void);
+extern __attribute__((__nothrow__)) void __use_no_semihosting(void);
+# 5 "Source/field/field.c" 2
+# 25 "Source/field/field.c"
 typedef struct current_tetromino_s{
   uint8_t index;
   uint8_t rotation;
@@ -2208,13 +2511,13 @@ static uint8_t tetrominoes[7][4][4][4] = {
           };
 
 uint16_t colors[7] = {
-    0x94EA,
-    0xFB15,
-    0xCB5F,
-    0x8DBF,
-    0xFD47,
-    0xA761,
-    0xFB94,
+    0xADDE,
+    0xF6F5,
+    0xC53E,
+    0x859E,
+    0xF590,
+    0xA713,
+    0xEC54,
 };
 
 uint16_t field[20][10];
@@ -2264,7 +2567,7 @@ void field_reset(){
  uint8_t y, x;
     for (y = 0; y < 20; y++) {
         for (x = 0; x < 10; x++) {
-   if (field[y][x])
+   if (field[y][x] != 0x1083)
     field_setBlock(x, y, 0xFFFF);
         }
     }
@@ -2276,8 +2579,8 @@ void field_update(){
   x = toPlace[i].x;
   y = toPlace[i].y;
   if (field[y][x] == 0xFFFF) {
-   set_block(10 + 15 * x, 10 + 15 * y, 15, 0x0000);
-   field[y][x] = 0x0000;
+   set_block(10 + 15 * x, 10 + 15 * y, 15, 0x1083);
+   field[y][x] = 0x1083;
   }
   else if (field[y][x]) {
    set_block(10 + 15 * x, 10 + 15 * y, 15, field[y][x]);
@@ -2289,13 +2592,13 @@ void field_update(){
 
 void field_init(){
  uint8_t x, y;
- LCD_DrawLine(10 - 1, 10 - 1, 10 + 15 * 10, 10 - 1, 0xF7DE);
- LCD_DrawLine(10 - 1, 10 - 1, 10 - 1, 10 + 15 * 20, 0xF7DE);
- LCD_DrawLine(10 - 1, 10 + 15 * 20, 10 + 15 * 10, 10 + 15 * 20, 0xF7DE);
- LCD_DrawLine(10 + 15 * 10, 10 + 15 * 20, 10 + 15 * 10, 10 - 1, 0xF7DE);
+ LCD_DrawLine(10 - 1, 10 - 1, 10 + 15 * 10, 10 - 1, 0xC69D);
+ LCD_DrawLine(10 - 1, 10 - 1, 10 - 1, 10 + 15 * 20, 0xC69D);
+ LCD_DrawLine(10 - 1, 10 + 15 * 20, 10 + 15 * 10, 10 + 15 * 20, 0xC69D);
+ LCD_DrawLine(10 + 15 * 10, 10 + 15 * 20, 10 + 15 * 10, 10 - 1, 0xC69D);
  for (y = 0; y < 20; y++){
   for (x = 0; x < 10; x++){
-   field[y][x] = 0;
+   field[y][x] = 0x1083;
   }
  }
 }
@@ -2382,7 +2685,7 @@ void field_rotateCurrentTetromino(){
      can_place = 0;
      break;
     }
-    if (field[current_y][current_x] != 0 &&
+    if (field[current_y][current_x] != 0x1083 &&
         field[current_y][current_x] != 0xFFFF) {
      can_place = 0;
      break;
@@ -2414,7 +2717,7 @@ void field_moveCurrentTetrominoRight(){
      (current_tetromino.position_x + x + 1 >= 10 ||
       (((x != 3 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x + 1])
        || (x == 3) ) &&
-       field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0 &&
+       field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0x1083 &&
        field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0xFFFF)
      )
     ){
@@ -2443,7 +2746,7 @@ void field_moveCurrentTetrominoLeft(){
      (current_tetromino.position_x + x - 1 < 0 ||
       (((x != 0 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x - 1])
        || (x == 0) ) &&
-       field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0 &&
+       field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0x1083 &&
        field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0xFFFF)
      )
     ){
@@ -2472,7 +2775,7 @@ void field_collisionDetection(){
     (y == 3 || !tetrominoes[current_tetromino.index][current_tetromino.rotation][y + 1][x]) &&
      (
       current_tetromino.position_y + y >= 20 - 1 ||
-      (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0 &&
+      (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0x1083 &&
        field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0xFFFF)
      )
     )
@@ -2486,7 +2789,7 @@ uint8_t field_clearDetection(){
     for (y = 0; y < 20; y++){
         cleared = 1;
         for (x = 0; x < 10; x++){
-            if (field[y][x] == 0x0000 || field[y][x] == 0xFFFF)
+            if (field[y][x] == 0x1083 || field[y][x] == 0xFFFF)
                 cleared = 0;
         }
         if (cleared){
@@ -2501,9 +2804,9 @@ void field_clearRow(uint8_t y_toClear){
     uint8_t y, x;
     for (y = y_toClear; y > 0; y--) {
         for (x = 0; x < 10; x++) {
-            if (field[y - 1][x] == 0x0000 && field[y][x] != 0x0000)
+            if (field[y - 1][x] == 0x1083 && field[y][x] != 0x1083)
                 field_setBlock(x, y, 0xFFFF);
-   else if (field[y - 1][x] != 0x0000)
+   else if (field[y - 1][x] != 0x1083)
                 field_setBlock(x, y, field[y - 1][x]);
         }
     }
@@ -2562,6 +2865,9 @@ void reset_game(){
  game_started = 0;
  if (current_score > high_score)
   high_score = current_score;
+ current_score = 0;
+ total_cleared_rows = 0;
+ scoreboard_update();
  field_reset();
  field_update();
 }
@@ -2569,12 +2875,12 @@ void reset_game(){
 void advance_game(){
  uint8_t cleared_rows;
  if (!game_running){
-  GUI_Text(170, 10, (uint8_t*) "paused", 0xF7DE, 0x0000);
+  GUI_Text(170, 10, (uint8_t*) "paused", 0xC69D, 0x1083);
   paused_placed = 1;
   return;
  }
  if (paused_placed){
-  GUI_Text(170, 10, (uint8_t*) "paused", 0x0000, 0x0000);
+  GUI_Text(170, 10, (uint8_t*) "paused", 0x1083, 0x1083);
   paused_placed = 0;
  }
  tickN++;
@@ -2606,6 +2912,7 @@ void advance_game(){
    cleared_rows -= 4;
   }
   current_score += cleared_rows * 100;
+  scoreboard_update();
   field_gameEndDetection();
   if (game_started)
    field_placeRandomTetromino();
@@ -2617,11 +2924,21 @@ void advance_game(){
 }
 
 void scoreboard_init(){
- GUI_Text(170, 70, (uint8_t*) "high", 0xF7DE, 0x0000);
- GUI_Text(170, 90, (uint8_t*) "score", 0xF7DE, 0x0000);
- GUI_Text(170, 110, (uint8_t*) "10000", 0xF7DE, 0x0000);
- GUI_Text(170, 150, (uint8_t*) "score", 0xF7DE, 0x0000);
- GUI_Text(170, 170, (uint8_t*) "100000", 0xF7DE, 0x0000);
- GUI_Text(170, 210, (uint8_t*) "cleared", 0xF7DE, 0x0000);
- GUI_Text(170, 230, (uint8_t*) "1000", 0xF7DE, 0x0000);
+ GUI_Text(170, 70, (uint8_t*) "high", 0xC69D, 0x1083);
+ GUI_Text(170, 90, (uint8_t*) "score", 0xC69D, 0x1083);
+ GUI_Text(170, 110, (uint8_t*) "0", 0xC69D, 0x1083);
+ GUI_Text(170, 150, (uint8_t*) "score", 0xC69D, 0x1083);
+ GUI_Text(170, 170, (uint8_t*) "0", 0xC69D, 0x1083);
+ GUI_Text(170, 210, (uint8_t*) "cleared", 0xC69D, 0x1083);
+ GUI_Text(170, 230, (uint8_t*) "0", 0xC69D, 0x1083);
+}
+
+void scoreboard_update(){
+ char high_score_string[7], score_string[7], cleared_string[7];
+ sprintf(high_score_string, "%-6d", high_score);
+ sprintf(score_string, "%-6d", current_score);
+ sprintf(cleared_string, "%-6d", total_cleared_rows);
+ GUI_Text(170, 110, (uint8_t*) high_score_string, 0xC69D, 0x1083);
+ GUI_Text(170, 170, (uint8_t*) score_string, 0xC69D, 0x1083);
+ GUI_Text(170, 230, (uint8_t*) cleared_string, 0xC69D, 0x1083);
 }
