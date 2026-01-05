@@ -629,17 +629,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>field</GroupName>
+          <GroupName>game</GroupName>
           <Files>
             <File>
-              <FileName>field.c</FileName>
+              <FileName>game.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\field\field.c</FilePath>
+              <FilePath>.\Source\game\game.c</FilePath>
             </File>
             <File>
-              <FileName>field.h</FileName>
+              <FileName>game.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\field\field.h</FilePath>
+              <FilePath>.\Source\game\game.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1219,17 +1219,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>field</GroupName>
+          <GroupName>game</GroupName>
           <Files>
             <File>
-              <FileName>field.c</FileName>
+              <FileName>game.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Source\field\field.c</FilePath>
+              <FilePath>.\Source\game\game.c</FilePath>
             </File>
             <File>
-              <FileName>field.h</FileName>
+              <FileName>game.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\Source\field\field.h</FilePath>
+              <FilePath>.\Source\game\game.h</FilePath>
             </File>
           </Files>
         </Group>

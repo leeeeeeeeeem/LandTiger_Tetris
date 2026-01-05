@@ -1,69 +1,11 @@
-# 1 "Source/RIT/IRQ_RIT.c"
+# 1 "Source/game/game.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 404 "<built-in>" 3
 # 1 "<command line>" 1
 # 1 "<built-in>" 2
-# 1 "Source/RIT/IRQ_RIT.c" 2
-# 10 "Source/RIT/IRQ_RIT.c"
-# 1 "C:/Users/lem/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 1
-# 41 "C:/Users/lem/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
-typedef enum IRQn
-{
-
-  Reset_IRQn = -15,
-  NonMaskableInt_IRQn = -14,
-  HardFault_IRQn = -13,
-  MemoryManagement_IRQn = -12,
-  BusFault_IRQn = -11,
-  UsageFault_IRQn = -10,
-  SVCall_IRQn = -5,
-  DebugMonitor_IRQn = -4,
-  PendSV_IRQn = -2,
-  SysTick_IRQn = -1,
-
-
-  WDT_IRQn = 0,
-  TIMER0_IRQn = 1,
-  TIMER1_IRQn = 2,
-  TIMER2_IRQn = 3,
-  TIMER3_IRQn = 4,
-  UART0_IRQn = 5,
-  UART1_IRQn = 6,
-  UART2_IRQn = 7,
-  UART3_IRQn = 8,
-  PWM1_IRQn = 9,
-  I2C0_IRQn = 10,
-  I2C1_IRQn = 11,
-  I2C2_IRQn = 12,
-  SPI_IRQn = 13,
-  SSP0_IRQn = 14,
-  SSP1_IRQn = 15,
-  PLL0_IRQn = 16,
-  RTC_IRQn = 17,
-  EINT0_IRQn = 18,
-  EINT1_IRQn = 19,
-  EINT2_IRQn = 20,
-  EINT3_IRQn = 21,
-  ADC_IRQn = 22,
-  BOD_IRQn = 23,
-  USB_IRQn = 24,
-  CAN_IRQn = 25,
-  DMA_IRQn = 26,
-  I2S_IRQn = 27,
-  ENET_IRQn = 28,
-  RIT_IRQn = 29,
-  MCPWM_IRQn = 30,
-  QEI_IRQn = 31,
-  PLL1_IRQn = 32,
-  USBActivity_IRQn = 33,
-  CANActivity_IRQn = 34,
-} IRQn_Type;
-# 106 "C:/Users/lem/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
-# 1 "./Source/CMSIS_core\\core_cm3.h" 1
-# 29 "./Source/CMSIS_core\\core_cm3.h" 3
-
-
+# 1 "Source/game/game.c" 2
+# 1 "Source/game\\game.h" 1
 
 
 
@@ -121,7 +63,63 @@ typedef unsigned int uintptr_t;
 
 typedef signed long long intmax_t;
 typedef unsigned long long uintmax_t;
-# 35 "./Source/CMSIS_core\\core_cm3.h" 2 3
+# 5 "Source/game\\game.h" 2
+# 1 "C:/Users/lem/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h" 1
+# 41 "C:/Users/lem/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+typedef enum IRQn
+{
+
+  Reset_IRQn = -15,
+  NonMaskableInt_IRQn = -14,
+  HardFault_IRQn = -13,
+  MemoryManagement_IRQn = -12,
+  BusFault_IRQn = -11,
+  UsageFault_IRQn = -10,
+  SVCall_IRQn = -5,
+  DebugMonitor_IRQn = -4,
+  PendSV_IRQn = -2,
+  SysTick_IRQn = -1,
+
+
+  WDT_IRQn = 0,
+  TIMER0_IRQn = 1,
+  TIMER1_IRQn = 2,
+  TIMER2_IRQn = 3,
+  TIMER3_IRQn = 4,
+  UART0_IRQn = 5,
+  UART1_IRQn = 6,
+  UART2_IRQn = 7,
+  UART3_IRQn = 8,
+  PWM1_IRQn = 9,
+  I2C0_IRQn = 10,
+  I2C1_IRQn = 11,
+  I2C2_IRQn = 12,
+  SPI_IRQn = 13,
+  SSP0_IRQn = 14,
+  SSP1_IRQn = 15,
+  PLL0_IRQn = 16,
+  RTC_IRQn = 17,
+  EINT0_IRQn = 18,
+  EINT1_IRQn = 19,
+  EINT2_IRQn = 20,
+  EINT3_IRQn = 21,
+  ADC_IRQn = 22,
+  BOD_IRQn = 23,
+  USB_IRQn = 24,
+  CAN_IRQn = 25,
+  DMA_IRQn = 26,
+  I2S_IRQn = 27,
+  ENET_IRQn = 28,
+  RIT_IRQn = 29,
+  MCPWM_IRQn = 30,
+  QEI_IRQn = 31,
+  PLL1_IRQn = 32,
+  USBActivity_IRQn = 33,
+  CANActivity_IRQn = 34,
+} IRQn_Type;
+# 106 "C:/Users/lem/AppData/Local/Arm/Packs/Keil/LPC1700_DFP/2.7.2/Device/Include\\LPC17xx.h"
+# 1 "./Source/CMSIS_core\\core_cm3.h" 1
+# 29 "./Source/CMSIS_core\\core_cm3.h" 3
 # 63 "./Source/CMSIS_core\\core_cm3.h" 3
 # 1 "./Source/CMSIS_core\\cmsis_version.h" 1 3
 # 29 "./Source/CMSIS_core\\cmsis_version.h" 3
@@ -1782,29 +1780,231 @@ typedef struct
        uint32_t RESERVED8;
   volatile uint32_t Module_ID;
 } LPC_EMAC_TypeDef;
-# 11 "Source/RIT/IRQ_RIT.c" 2
-# 1 "Source/RIT\\RIT.h" 1
-# 14 "Source/RIT\\RIT.h"
-extern uint32_t init_RIT( uint32_t RITInterval );
-extern void enable_RIT( void );
-extern void disable_RIT( void );
-extern void reset_RIT( void );
+# 6 "Source/game\\game.h" 2
+# 20 "Source/game\\game.h"
+typedef struct {
+    uint8_t x;
+    uint8_t y;
+} cell_t;
 
-extern void RIT_IRQHandler (void);
-# 12 "Source/RIT/IRQ_RIT.c" 2
-# 1 "Source/RIT\\../led/led.h" 1
-# 12 "Source/RIT\\../led/led.h"
-void LED_init(void);
-void LED_deinit(void);
+typedef struct {
+    uint8_t index;
+    uint8_t rotation;
+    uint8_t position_x;
+    uint8_t position_y;
+    uint8_t placed;
+    uint16_t color;
+} current_tetromino_t;
 
+void field_init(void);
+void scoreboard_init(void);
 
-void LED_On (unsigned int num);
-void LED_Off (unsigned int num);
-void LED_Out(unsigned int value);
-# 13 "Source/RIT/IRQ_RIT.c" 2
-# 1 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
-# 53 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
+void advance_game(void);
+
+void request_hardDrop(void);
+void request_moveRight(void);
+void request_moveLeft(void);
+void request_rotate(void);
+void set_softDrop(void);
+void unset_softDrop(void);
+void toggle_running(void);
+# 2 "Source/game/game.c" 2
+# 1 "./Source/GLCD\\GLCD.h" 1
+# 90 "./Source/GLCD\\GLCD.h"
+void LCD_Initialization(void);
+void LCD_Clear(uint16_t Color);
+uint16_t LCD_GetPoint(uint16_t Xpos,uint16_t Ypos);
+void LCD_SetPoint(uint16_t Xpos,uint16_t Ypos,uint16_t point);
+void LCD_DrawLine( uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1 , uint16_t color );
+void PutChar( uint16_t Xpos, uint16_t Ypos, uint8_t ASCI, uint16_t charColor, uint16_t bkColor );
+void GUI_Text(uint16_t Xpos, uint16_t Ypos, uint8_t *str,uint16_t Color, uint16_t bkColor);
+void set_block(uint16_t Xpos, uint16_t Ypos, uint8_t size, uint16_t color);
+# 3 "Source/game/game.c" 2
+# 1 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 1 3
+# 71 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
     typedef unsigned int size_t;
+# 91 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+    typedef unsigned short wchar_t;
+
+
+
+
+typedef struct div_t { int quot, rem; } div_t;
+
+typedef struct ldiv_t { long int quot, rem; } ldiv_t;
+# 139 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) int __aeabi_MB_CUR_MAX(void);
+# 158 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) double atof(const char * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) int atoi(const char * ) __attribute__((__nonnull__(1)));
+
+
+
+
+
+extern __attribute__((__nothrow__)) long int atol(const char * ) __attribute__((__nonnull__(1)));
+# 185 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) double strtod(const char * __restrict , char ** __restrict ) __attribute__((__nonnull__(1)));
+# 212 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) long int strtol(const char * __restrict ,
+                        char ** __restrict , int ) __attribute__((__nonnull__(1)));
+# 243 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) unsigned long int strtoul(const char * __restrict ,
+                                       char ** __restrict , int ) __attribute__((__nonnull__(1)));
+# 275 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) long long strtoll(const char * __restrict ,
+                                  char ** __restrict , int )
+                          __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) unsigned long long strtoull(const char * __restrict ,
+                                            char ** __restrict , int )
+                                   __attribute__((__nonnull__(1)));
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) int rand(void);
+# 303 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) void srand(unsigned int );
+# 313 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+struct _rand_state { int __x[57]; };
+extern __attribute__((__nothrow__)) int _rand_r(struct _rand_state *);
+extern __attribute__((__nothrow__)) void _srand_r(struct _rand_state *, unsigned int);
+struct _ANSI_rand_state { int __x[1]; };
+extern __attribute__((__nothrow__)) int _ANSI_rand_r(struct _ANSI_rand_state *);
+extern __attribute__((__nothrow__)) void _ANSI_srand_r(struct _ANSI_rand_state *, unsigned int);
+
+
+
+
+
+extern __attribute__((__nothrow__)) void *calloc(size_t , size_t );
+
+
+
+
+
+extern __attribute__((__nothrow__)) void free(void * );
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) void *malloc(size_t );
+
+
+
+
+
+extern __attribute__((__nothrow__)) void *realloc(void * , size_t );
+# 374 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+typedef int (*__heapprt)(void *, char const *, ...);
+extern __attribute__((__nothrow__)) void __heapstats(int (* )(void * ,
+                                           char const * , ...),
+                        void * ) __attribute__((__nonnull__(1)));
+# 390 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) int __heapvalid(int (* )(void * ,
+                                           char const * , ...),
+                       void * , int ) __attribute__((__nonnull__(1)));
+# 411 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) __attribute__((__noreturn__)) void abort(void);
+# 422 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) int atexit(void (* )(void)) __attribute__((__nonnull__(1)));
+# 444 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) __attribute__((__noreturn__)) void exit(int );
+# 460 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) __attribute__((__noreturn__)) void _Exit(int );
+# 471 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) char *getenv(const char * ) __attribute__((__nonnull__(1)));
+# 484 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) int system(const char * );
+# 497 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern void *bsearch(const void * , const void * ,
+              size_t , size_t ,
+              int (* )(const void *, const void *)) __attribute__((__nonnull__(1,2,5)));
+# 532 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern void qsort(void * , size_t , size_t ,
+           int (* )(const void *, const void *)) __attribute__((__nonnull__(1,4)));
+# 560 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) __attribute__((__const__)) int abs(int );
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) __attribute__((__const__)) div_t div(int , int );
+# 579 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) __attribute__((__const__)) long int labs(long int );
+# 589 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) __attribute__((__const__)) ldiv_t ldiv(long int , long int );
+# 644 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+typedef struct __sdiv32by16 { long quot, rem; } __sdiv32by16;
+typedef struct __udiv32by16 { unsigned long quot, rem; } __udiv32by16;
+
+typedef struct __sdiv64by32 { long rem, quot; } __sdiv64by32;
+
+__attribute__((__value_in_regs__)) extern __attribute__((__nothrow__)) __attribute__((__const__)) __sdiv32by16 __rt_sdiv32by16(
+     int ,
+     short int );
+
+
+
+__attribute__((__value_in_regs__)) extern __attribute__((__nothrow__)) __attribute__((__const__)) __udiv32by16 __rt_udiv32by16(
+     unsigned int ,
+     unsigned short );
+
+
+
+__attribute__((__value_in_regs__)) extern __attribute__((__nothrow__)) __attribute__((__const__)) __sdiv64by32 __rt_sdiv64by32(
+     int , unsigned int ,
+     int );
+
+
+
+
+
+
+
+extern __attribute__((__nothrow__)) unsigned int __fp_status(unsigned int , unsigned int );
+# 705 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) int mblen(const char * , size_t );
+# 720 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) int mbtowc(wchar_t * __restrict ,
+                   const char * __restrict , size_t );
+# 739 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) int wctomb(char * , wchar_t );
+# 761 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) size_t mbstowcs(wchar_t * __restrict ,
+                      const char * __restrict , size_t ) __attribute__((__nonnull__(2)));
+# 779 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) size_t wcstombs(char * __restrict ,
+                      const wchar_t * __restrict , size_t ) __attribute__((__nonnull__(2)));
+# 798 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdlib.h" 3
+extern __attribute__((__nothrow__)) void __use_realtime_heap(void);
+extern __attribute__((__nothrow__)) void __use_realtime_division(void);
+extern __attribute__((__nothrow__)) void __use_two_region_memory(void);
+extern __attribute__((__nothrow__)) void __use_no_heap(void);
+extern __attribute__((__nothrow__)) void __use_no_heap_region(void);
+
+extern __attribute__((__nothrow__)) char const *__C_library_version_string(void);
+extern __attribute__((__nothrow__)) int __C_library_version_number(void);
+# 4 "Source/game/game.c" 2
+# 1 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 1 3
 # 68 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
     typedef __builtin_va_list __va_list;
 # 87 "C:\\Users\\lem\\AppData\\Local\\Keil_v5\\ARM\\ARMCLANG\\bin\\..\\include\\stdio.h" 3
@@ -2105,443 +2305,629 @@ extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnu
 
 extern __attribute__((__nothrow__)) void __use_no_semihosting_swi(void);
 extern __attribute__((__nothrow__)) void __use_no_semihosting(void);
-# 14 "Source/RIT/IRQ_RIT.c" 2
-# 1 "./Source\\timer/timer.h" 1
-# 14 "./Source\\timer/timer.h"
-extern uint32_t init_timer( uint8_t timer_num, uint32_t timerInterval );
-extern void enable_timer( uint8_t timer_num );
-extern void disable_timer( uint8_t timer_num );
-extern void reset_timer( uint8_t timer_num );
-
-extern void TIMER0_IRQHandler (void);
-extern void TIMER1_IRQHandler (void);
-# 15 "Source/RIT/IRQ_RIT.c" 2
+# 5 "Source/game/game.c" 2
 
 
 
-# 1 "Source/RIT\\../game/game.h" 1
-# 20 "Source/RIT\\../game/game.h"
-typedef struct {
-    uint8_t x;
-    uint8_t y;
-} cell_t;
 
-typedef struct {
-    uint8_t index;
-    uint8_t rotation;
-    uint8_t position_x;
-    uint8_t position_y;
-    uint8_t placed;
-    uint16_t color;
-} current_tetromino_t;
+static current_tetromino_t current_tetromino;
 
-void field_init(void);
-void scoreboard_init(void);
+static uint8_t tetrominoes[7][4][4][4] = {
+           {
+            {
+             {1, 1, 1, 1},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 0, 0, 0},
+             {1, 0, 0, 0},
+             {1, 0, 0, 0},
+             {1, 0, 0, 0}
+            },
+            {
+             {1, 1, 1, 1},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 0, 0, 0},
+             {1, 0, 0, 0},
+             {1, 0, 0, 0},
+             {1, 0, 0, 0}
+            }
+           },
+           {
+            {
+             {1, 1, 0, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 0, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 0, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 0, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            }
+           },
+           {
+            {
+             {1, 1, 1, 0},
+             {0, 1, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {0, 1, 0, 0},
+             {1, 1, 0, 0},
+             {0, 1, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {0, 1, 0, 0},
+             {1, 1, 1, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 0, 0, 0},
+             {1, 1, 0, 0},
+             {1, 0, 0, 0},
+             {0, 0, 0, 0}
+            }
+           },
+           {
+            {
+             {0, 1, 0, 0},
+             {0, 1, 0, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 0, 0, 0},
+             {1, 1, 1, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 0, 0},
+             {1, 0, 0, 0},
+             {1, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 1, 0},
+             {0, 0, 1, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            }
+           },
+           {
+            {
+             {1, 0, 0, 0},
+             {1, 0, 0, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 1, 0},
+             {1, 0, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 0, 0},
+             {0, 1, 0, 0},
+             {0, 1, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {0, 0, 1, 0},
+             {1, 1, 1, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            }
+           },
+           {
+            {
+             {0, 1, 1, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 0, 0, 0},
+             {1, 1, 0, 0},
+             {0, 1, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {0, 1, 1, 0},
+             {1, 1, 0, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 0, 0, 0},
+             {1, 1, 0, 0},
+             {0, 1, 0, 0},
+             {0, 0, 0, 0}
+            }
+           },
+           {
+            {
+             {1, 1, 0, 0},
+             {0, 1, 1, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {0, 1, 0, 0},
+             {1, 1, 0, 0},
+             {1, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {1, 1, 0, 0},
+             {0, 1, 1, 0},
+             {0, 0, 0, 0},
+             {0, 0, 0, 0}
+            },
+            {
+             {0, 1, 0, 0},
+             {1, 1, 0, 0},
+             {1, 0, 0, 0},
+             {0, 0, 0, 0}
+            }
+           }
+          };
 
-void advance_game(void);
+static uint16_t colors[7] = {
+    0xADDE,
+    0xF6F5,
+    0xC53E,
+    0x859E,
+    0xF590,
+    0xA713,
+    0xEC54,
+};
 
-void request_hardDrop(void);
-void request_moveRight(void);
-void request_moveLeft(void);
-void request_rotate(void);
-void set_softDrop(void);
-void unset_softDrop(void);
-void toggle_running(void);
-# 19 "Source/RIT/IRQ_RIT.c" 2
+static uint16_t field[20][10];
 
+static cell_t toPlace[20 * 10];
+static uint8_t toPlace_count = 0;
 
+static uint8_t game_started = 0;
+static uint8_t game_running = 0;
+static uint8_t soft_drop = 0;
+static uint8_t hard_drop = 0;
+static uint8_t move_left = 0;
+static uint8_t move_right = 0;
+static uint8_t rotate = 0;
 
-volatile int down_0 = 0;
-volatile int down_1 = 0;
-volatile int down_2 = 0;
-volatile int toRelease_down_0 = 0;
-volatile int toRelease_down_1 = 0;
-volatile int toRelease_down_2 = 0;
+static uint8_t tickN = 0;
 
-volatile int J_up = 0;
-volatile int J_down = 0;
-volatile int J_right = 0;
-volatile int J_left = 0;
-volatile int J_click = 0;
-volatile int J_up_left = 0;
-volatile int J_up_right = 0;
-volatile int J_down_left = 0;
-volatile int J_down_right = 0;
+static uint32_t current_score;
+static uint32_t high_score = 0;
+static uint8_t total_cleared_rows = 0;
 
+static uint8_t paused_placed = 0;
 
-
-int const long_press_count_1 = 0; // => count = x / 50ms ; where x = time long press
-//int const long_press_count_2 = 0;
-# 54 "Source/RIT/IRQ_RIT.c"
-void RIT_IRQHandler(void)
-{
-
- unsigned char UP_LEFT_activated = 0;
- unsigned char UP_RIGHT_activated = 0;
- unsigned char DOWN_LEFT_activated = 0;
- unsigned char DOWN_RIGHT_activated = 0;
-
-
-
- if(down_0 !=0) {
-  down_0++;
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<10)) == 0){
-   switch(down_0) {
-    case 2:
-     // short press
-       // your_code
-     toRelease_down_0 = 1;
-     break;
-    case long_press_count_1:
-     // your code here (for long press)
-     break;
-    default:
-     break;
-   }
-  }
-  else {
-   if(toRelease_down_0){
-    //add code to manage release.
-    toRelease_down_0=0;
-   }
-   down_0=0;
-   __NVIC_EnableIRQ(EINT0_IRQn);
-   ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 |= (1 << 20);
-  }
- } // end INT0
-
- ///////////////////////////////////////////////////////////////////
-
-
-
- if(down_1 !=0) {
-  down_1++;
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<11)) == 0){
-   switch(down_1){
-    case 2:
-     toggle_running();
-     toRelease_down_1=1;
-     break;
-    case long_press_count_1:
-     break;
-    default:
-     break;
-   }
-  }
-  else {
-   if(toRelease_down_1){
-    //add code to manage release.
-    toRelease_down_1=0;
-   }
-   down_1=0;
-   __NVIC_EnableIRQ(EINT1_IRQn);
-   ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 |= (1 << 22);
-  }
- } // end KEY1
-
- ///////////////////////////////////////////////////////////////////
-
-
-
- if(down_2 !=0) {
-  down_2++;
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00040) )->FIOPIN & (1<<12)) == 0){
-   switch(down_2){
-    case 2:
-     request_hardDrop();
-     toRelease_down_2=1;
-     break;
-    case long_press_count_1:
-     request_hardDrop();
-     break;
-    default:
-     break;
-   }
-  }
-  else {
-   if(toRelease_down_2){
-    //add code to manage release.
-    toRelease_down_2=0;
-   }
-   down_2=0;
-   __NVIC_EnableIRQ(EINT2_IRQn);
-   ((LPC_PINCON_TypeDef *) ((0x40000000UL) + 0x2C000) )->PINSEL4 |= (1 << 24);
-  }
- } // end KEY2
-
- ///////////////////////////////////////////////////////////////////
-
-
- if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<27)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<29)) == 0)) {
-
-  J_up_left++;
-  UP_LEFT_activated = 1;
-  switch(J_up_left){
-   case 1:
-    //short press
-    //your code
-
-    //for just enabling up-left and not up-left + left + up without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   case long_press_count_1:
-    // your code here (for long press)
-
-    //for just enabling up-left and not up-left + left + up without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   default:
-    // potential other code here
-
-    //for just enabling up-left and not up-left + left + up without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-  }
- }
- else {
-  J_up_left=0;
- } // end Joystick UP-LEFT
-
- ///////////////////////////////////////////////////////////////////
-
-
- if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<28)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<29)) == 0)) {
-
-  J_up_right++;
-  UP_RIGHT_activated = 1;
-  switch(J_up_right){
-   case 1:
-    //short press
-    //your code
-
-    //for just enabling up-right and not up-right + right + up without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   case long_press_count_1:
-    // your code here (for long press)
-
-    //for just enabling up-right and not up-right + right + up without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   default:
-    // J_uppotential other code here
-
-    //for just enabling up-right and not up-right + right + up without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-  }
- }
- else {
-  J_up_right=0;
- } // end Joystick UP-RIGHT
-
- ///////////////////////////////////////////////////////////////////
+static uint32_t seed;
 
 
- if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<27)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<26)) == 0)) {
+void mark_toPlace(uint8_t x, uint8_t y) {
+    if (toPlace_count < 20 * 10) {
+        toPlace[toPlace_count].x = x;
+        toPlace[toPlace_count].y = y;
+        toPlace_count++;
+    }
+}
 
-  J_down_left++;
-  DOWN_LEFT_activated = 0;
-  switch(J_down_left){
-   case 1:
-    //short press
+void field_setBlock(int x, int y, uint16_t color){
+ if (field[y][x] != color) {
+     field[y][x] = color;
+     mark_toPlace(x, y);
+    }
+}
 
-    //your code
+void field_reset(){
+ uint8_t y, x;
+    for (y = 0; y < 20; y++) {
+        for (x = 0; x < 10; x++) {
+   if (field[y][x] != 0x1083)
+    field_setBlock(x, y, 0xFFFF);
+        }
+    }
+}
 
-    //for just enabling down-left and not down-left + down + left without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   case long_press_count_1:
-    // your code here (for long press)
-
-    //for just enabling down-left and not down-left + down + left without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   default:
-    // potential other code here
-
-    //for just enabling down-left and not down-left + down + left without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
+void collisionDetection(){
+ uint8_t y, x;
+ for (y = 0; y < 4; y++) {
+  for (x = 0; x < 4; x++) {
+   if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
+    (y == 3 || !tetrominoes[current_tetromino.index][current_tetromino.rotation][y + 1][x]) &&
+     (
+      current_tetromino.position_y + y >= 20 - 1 ||
+      (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0x1083 &&
+       field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0xFFFF)
+     )
+    )
+      current_tetromino.placed = 1;
   }
  }
- else {
-  J_down_left=0;
- } // end Joystick DOWN-LEFT
+}
 
- ///////////////////////////////////////////////////////////////////
-
-
- if(((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<26)) == 0) && ((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<28)) == 0)) {
-
-  J_down_right++;
-  DOWN_RIGHT_activated = 0;
-  switch(J_down_right){
-   case 1:
-    //short press
-    //your code
-
-    //for just enabling down-right and not down-left + down + right without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   case long_press_count_1:
-    // your code here (for long press)
-
-    //for just enabling down-right and not down-left + down + right without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
-   default:
-    // potential other code here
-
-
-    //for just enabling down-right and not down-left + down + right without flags
-    //((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
-    //return;
-    break;
+void field_update(){
+ uint8_t i, x, y;
+ for (i = 0; i < toPlace_count; i++) {
+  x = toPlace[i].x;
+  y = toPlace[i].y;
+  if (field[y][x] == 0xFFFF) {
+   set_block(10 + 15 * x, 10 + 15 * y, 15, 0x1083);
+   field[y][x] = 0x1083;
+  }
+  else if (field[y][x]) {
+   set_block(10 + 15 * x, 10 + 15 * y, 15, field[y][x]);
   }
  }
- else {
-  J_down_right=0;
- } // end Joystick DOWN-RIGHT
+ toPlace_count = 0;
+}
 
- ///////////////////////////////////////////////////////////////////
+void field_init(){
+ uint8_t x, y;
+ LCD_DrawLine(10 - 1, 10 - 1, (10 + 15 * 10), 10 - 1, 0xC69D);
+ LCD_DrawLine(10 - 1, 10 - 1, 10 - 1, (10 + 15 * 20), 0xC69D);
+ LCD_DrawLine(10 - 1, (10 + 15 * 20), (10 + 15 * 10), (10 + 15 * 20), 0xC69D);
+ LCD_DrawLine((10 + 15 * 10), (10 + 15 * 20), (10 + 15 * 10), 10 - 1, 0xC69D);
+ for (y = 0; y < 20; y++){
+  for (x = 0; x < 10; x++){
+   field[y][x] = 0x1083;
+  }
+ }
+}
 
+void placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color, uint8_t update){
+ uint8_t i, j;
+ for (i = 0; i < 4; i++){
+  for (j = 0; j < 4; j++){
+   if (tetrominoes[idx][rotation][i][j])
+    field_setBlock(x + j, y + i, color);
+  }
+ }
+ current_tetromino.index = idx;
+ current_tetromino.position_x = x;
+ current_tetromino.position_y = y;
+ current_tetromino.rotation = rotation;
+ current_tetromino.placed = 0;
+ current_tetromino.color = color;
+ if (update)
+  field_update();
+}
 
+uint8_t generate_idx(){
+ seed = seed * 1103515245u + 12345u;
+ return (uint8_t)(((seed >> 16) * 7u) >> 16);
+}
 
- if(UP_LEFT_activated==0 && UP_RIGHT_activated==0){
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<29)) == 0 ) {
+void placeRandomTetromino(){
+ int idx = generate_idx();
+ if (idx == current_tetromino.index)
+  idx++;
+ placeTetromino(4, 0, idx, 0, colors[idx], 1);
+}
 
-   J_up++;
-   switch(J_up){
-    case 1:
-     request_rotate();
-     break;
-    case long_press_count_1:
-     request_rotate();
-     break;
-    default:
-     // potential other code here
-     break;
+void deleteCurrentTetromino(){
+ uint8_t i, j;
+ for (i = 0; i < 4; i++) {
+  for (j = 0; j < 4; j++) {
+   if (tetrominoes[current_tetromino.index][current_tetromino.rotation][i][j]) {
+    field_setBlock(current_tetromino.position_x + j,
+     current_tetromino.position_y + i,
+     0xFFFF);
    }
   }
-  else {
-   J_up=0;
-  } // end Joystick UP
  }
+}
 
- ///////////////////////////////////////////////////////////////////
+void dropCurrentTetromino(){
+ deleteCurrentTetromino();
+ current_tetromino.position_y++;
+ placeTetromino(
+  current_tetromino.position_x,
+  current_tetromino.position_y,
+  current_tetromino.index,
+  current_tetromino.rotation,
+  current_tetromino.color,
+  0);
+}
 
+void hardDropCurrentTetromino(){
+    deleteCurrentTetromino();
+    while (!current_tetromino.placed){
+        current_tetromino.position_y++;
+        collisionDetection();
+    }
+    placeTetromino(
+        current_tetromino.position_x,
+        current_tetromino.position_y,
+        current_tetromino.index,
+        current_tetromino.rotation,
+        current_tetromino.color,
+        0
+    );
+}
 
-
- if(DOWN_LEFT_activated==0 && DOWN_RIGHT_activated==0){
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<26)) == 0) {
-
-   J_down++;
-   switch(J_down){
-    case 1:
-     set_softDrop();
+void rotateCurrentTetromino(){
+ uint8_t y, x, current_x, current_y, can_place = 1;
+ uint8_t new_rotation = (current_tetromino.rotation + 1) % 4;
+ for (y = 0; y < 4; y++) {
+  for (x = 0; x < 4; x++) {
+   if (tetrominoes[current_tetromino.index][new_rotation][y][x] &&
+     !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x]) {
+    current_x = current_tetromino.position_x + x;
+    current_y = current_tetromino.position_y + y;
+    if (current_x >= 10 || current_y >= 20) {
+     can_place = 0;
      break;
-    case long_press_count_1:
-     // your code here (for long press)
+    }
+    if (field[current_y][current_x] != 0x1083 &&
+        field[current_y][current_x] != 0xFFFF) {
+     can_place = 0;
      break;
-    default:
-     // potential other code here
-     break;
+    }
    }
   }
-  else{
-   unset_softDrop();
-   J_down=0;
-  } // end Joystick DOWN
+  if (!can_place)
+   break;
  }
-
- ///////////////////////////////////////////////////////////////////
-
-
-
- if(DOWN_RIGHT_activated==0 && UP_RIGHT_activated==0){
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<28)) == 0) {
-
-   J_right++;
-   switch(J_right){
-    case 1:
-     request_moveRight();
-     break;
-    case long_press_count_1:
-     request_moveRight();
-     break;
-    default:
-     // potential other code here
-     break;
-   }
-  }
-  else {
-   J_right=0;
-  } // end Joystick RIGHT
+ if (can_place) {
+  deleteCurrentTetromino();
+  current_tetromino.rotation = new_rotation;
+  placeTetromino(
+   current_tetromino.position_x,
+   current_tetromino.position_y,
+   current_tetromino.index,
+   current_tetromino.rotation,
+   current_tetromino.color,
+   0);
  }
-
- ///////////////////////////////////////////////////////////////////
-
+}
 
 
- if(UP_LEFT_activated==0 && DOWN_LEFT_activated==0){
-  if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<27)) == 0) {
-
-   J_left++;
-   switch(J_left){
-    case 1:
-     request_moveLeft();
+void moveCurrentTetrominoRight(){
+ uint8_t y, x, can_place = 1;
+ for (y = 0; y < 4; y++) {
+  for (x = 0; x < 4; x++) {
+   if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
+     (current_tetromino.position_x + x + 1 >= 10 ||
+      (((x != 3 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x + 1])
+       || (x == 3) ) &&
+       field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0x1083 &&
+       field[current_tetromino.position_y + y][current_tetromino.position_x + x + 1] != 0xFFFF)
+     )
+    ){
+     can_place = 0;
      break;
-    case long_press_count_1:
-     request_moveLeft();
-     break;
-    default:
-     // potential other code here
-     break;
-   }
-  }
-  else {
-   J_left=0;
-  } // end Joystick LEFT
- }
-
- ///////////////////////////////////////////////////////////////////
-
-
-
- if((((LPC_GPIO_TypeDef *) ((0x2009C000UL) + 0x00020) )->FIOPIN & (1<<25)) == 0) {
-
-  J_click++;
-  switch(J_click){
-   case 1:
-    //short press
-    // your code here
-    break;
-   case long_press_count_1:
-    // your code here (for long press)
-    break;
-   default:
-    // potential other code here
-    break;
+     }
   }
  }
- else {
-  J_click=0;
- } // end Joystick CLICK
+ if (can_place){
+  deleteCurrentTetromino();
+  placeTetromino(
+   current_tetromino.position_x + 1,
+   current_tetromino.position_y,
+   current_tetromino.index,
+   current_tetromino.rotation,
+   current_tetromino.color,
+   0);
+ }
+}
 
- //reset_RIT(); // se ci sono cose strane come il rit che si ferma
- ((LPC_RIT_TypeDef *) ((0x40080000UL) + 0x30000) )->RICTRL |= 0x1;
+void moveCurrentTetrominoLeft(){
+ uint8_t y, x, can_place = 1;
+ for (y = 0; y < 4; y++) {
+  for (x = 0; x < 4; x++) {
+   if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
+     (current_tetromino.position_x + x - 1 < 0 ||
+      (((x != 0 && !tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x - 1])
+       || (x == 0) ) &&
+       field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0x1083 &&
+       field[current_tetromino.position_y + y][current_tetromino.position_x + x - 1] != 0xFFFF)
+     )
+    ){
+     can_place = 0;
+     break;
+     }
+  }
+ }
+ if (can_place){
+  deleteCurrentTetromino();
+  placeTetromino(
+   current_tetromino.position_x - 1,
+   current_tetromino.position_y,
+   current_tetromino.index,
+   current_tetromino.rotation,
+   current_tetromino.color,
+   0);
+ }
+}
 
- return;
+void clearRow(uint8_t y_toClear){
+    uint8_t y, x;
+    for (y = y_toClear; y > 0; y--) {
+        for (x = 0; x < 10; x++) {
+            if (field[y - 1][x] == 0x1083 && field[y][x] != 0x1083)
+                field_setBlock(x, y, 0xFFFF);
+   else if (field[y - 1][x] != 0x1083)
+                field_setBlock(x, y, field[y - 1][x]);
+        }
+    }
+    for (x = 0; x < 10; x++) {
+        field_setBlock(x, 0, 0xFFFF);
+    }
+    field_update();
+}
+
+uint8_t clearDetection(){
+    uint8_t y, x, cleared, cleared_rows = 0;
+    for (y = 0; y < 20; y++){
+        cleared = 1;
+        for (x = 0; x < 10; x++){
+            if (field[y][x] == 0x1083 || field[y][x] == 0xFFFF)
+                cleared = 0;
+        }
+        if (cleared){
+            clearRow(y);
+   cleared_rows++;
+  }
+    }
+ return cleared_rows;
+}
+
+void scoreboard_init(){
+ GUI_Text(170, 70, (uint8_t*) "high", 0xC69D, 0x1083);
+ GUI_Text(170, 90, (uint8_t*) "score", 0xC69D, 0x1083);
+ GUI_Text(170, 110, (uint8_t*) "0", 0xC69D, 0x1083);
+ GUI_Text(170, 150, (uint8_t*) "score", 0xC69D, 0x1083);
+ GUI_Text(170, 170, (uint8_t*) "0", 0xC69D, 0x1083);
+ GUI_Text(170, 210, (uint8_t*) "cleared", 0xC69D, 0x1083);
+ GUI_Text(170, 230, (uint8_t*) "0", 0xC69D, 0x1083);
+}
+
+void scoreboard_update(){
+ char high_score_string[7], score_string[7], cleared_string[7];
+ sprintf(high_score_string, "%-6d", high_score);
+ sprintf(score_string, "%-6d", current_score);
+ sprintf(cleared_string, "%-6d", total_cleared_rows);
+ GUI_Text(170, 110, (uint8_t*) high_score_string, 0xC69D, 0x1083);
+ GUI_Text(170, 170, (uint8_t*) score_string, 0xC69D, 0x1083);
+ GUI_Text(170, 230, (uint8_t*) cleared_string, 0xC69D, 0x1083);
+}
+
+void request_hardDrop(){
+ hard_drop = 1;
+}
+
+void request_moveRight(){
+ move_right = 1;
+}
+
+void request_moveLeft(){
+ move_left = 1;
+}
+
+void request_rotate(){
+ rotate = 1;
+}
+
+void set_softDrop(void){
+ soft_drop = 1;
+}
+
+void unset_softDrop(void){
+ soft_drop = 0;
+}
+
+void start_game(){
+ seed = ((LPC_TIM_TypeDef *) ((0x40000000UL) + 0x04000) )->TC;
+ current_score = 0;
+ total_cleared_rows = 0;
+ game_started = 1;
+ tickN = 0;
+ current_tetromino.index = 10;
+ placeRandomTetromino();
+}
+
+void toggle_running(void){
+ game_running = !game_running;
+ if (game_running && !game_started)
+  start_game();
+}
+
+void reset_game(){
+ game_running = 0;
+ game_started = 0;
+ if (current_score > high_score)
+  high_score = current_score;
+ current_score = 0;
+ total_cleared_rows = 0;
+ scoreboard_update();
+ field_reset();
+ field_update();
+}
+
+void gameEndDetection(){
+ if (current_tetromino.position_y <= 0)
+  reset_game();
+}
+
+void advance_game(){
+ uint8_t cleared_rows;
+ if (!game_running){
+  GUI_Text(170, 10, (uint8_t*) "paused", 0xC69D, 0x1083);
+  paused_placed = 1;
+  return;
+ }
+ if (paused_placed){
+  GUI_Text(170, 10, (uint8_t*) "paused", 0x1083, 0x1083);
+  paused_placed = 0;
+ }
+ tickN++;
+ if (rotate)
+  rotateCurrentTetromino();
+ if (move_left)
+  moveCurrentTetrominoLeft();
+ if (move_right)
+  moveCurrentTetrominoRight();
+ collisionDetection();
+ if (!current_tetromino.placed && hard_drop){
+  hardDropCurrentTetromino();
+  tickN = 0;
+ }
+ else if (!current_tetromino.placed && soft_drop && tickN == 3){
+  dropCurrentTetromino();
+  tickN = 0;
+ }
+ else if (!current_tetromino.placed && tickN == 6){
+  dropCurrentTetromino();
+  tickN = 0;
+ }
+ field_update();
+ collisionDetection();
+ if (current_tetromino.placed){
+  current_score += 10;
+  cleared_rows = clearDetection();
+  total_cleared_rows += cleared_rows;
+  while (cleared_rows >= 4){
+   current_score += 600;
+   cleared_rows -= 4;
+  }
+  current_score += cleared_rows * 100;
+  scoreboard_update();
+  gameEndDetection();
+  if (game_started){
+   placeRandomTetromino();
+   tickN = 0;
+  }
+ }
+ hard_drop = 0;
+ rotate = 0;
+ move_left = 0;
+ move_right = 0;
 }

@@ -1,43 +1,15 @@
-#include "field.h"
+#include "game.h"
 #include "GLCD.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-#define FIELD_H 20
-#define FIELD_W 10
-
-#define BLOCK_SIZE 15
-
-#define FIELD_PADDING 10
-
-#define FIELD_TOP_LEFT_X FIELD_PADDING
-#define FIELD_TOP_LEFT_Y FIELD_PADDING
-#define FIELD_TOP_RIGHT_X FIELD_PADDING + BLOCK_SIZE * FIELD_W
-#define FIELD_TOP_RIGHT_Y FIELD_PADDING
-#define FIELD_BOTTOM_LEFT_X FIELD_PADDING
-#define FIELD_BOTTOM_LEFT_Y FIELD_PADDING + BLOCK_SIZE * FIELD_H
-#define FIELD_BOTTOM_RIGHT_X FIELD_PADDING + BLOCK_SIZE * FIELD_W
-#define FIELD_BOTTOM_RIGHT_Y FIELD_PADDING + BLOCK_SIZE * FIELD_H
-
 #define N_TETROMINOES 7
 #define N_COLORS 7
 
-typedef struct current_tetromino_s{
-		uint8_t index;
-		uint8_t rotation;
-		uint8_t position_x;
-		uint8_t position_y;
-		uint8_t placed;
-		uint16_t color;
-	} current_tetromino_t;
-
-current_tetromino_t current_tetromino;
+static current_tetromino_t current_tetromino;
 
 static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {			
-													// Static data structure containing all 7 tetrominoes with
-													// all 4 rotations.
-													
-											{ 		// I-shaped 
+											{
 												{
 													{1, 1, 1, 1},
 													{0, 0, 0, 0},
@@ -63,7 +35,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 													{1, 0, 0, 0}
 												}
 											},	
-											{ 		// O-shaped 
+											{
 												{
 													{1, 1, 0, 0},
 													{1, 1, 0, 0},
@@ -89,7 +61,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 													{0, 0, 0, 0}
 												}
 											},
-											{ 		// T-shaped 
+											{
 												{
 													{1, 1, 1, 0},
 													{0, 1, 0, 0},
@@ -115,7 +87,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 													{0, 0, 0, 0}
 												}
 											},
-											{ 		// J-shaped 
+											{
 												{
 													{0, 1, 0, 0},
 													{0, 1, 0, 0},
@@ -141,7 +113,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 													{0, 0, 0, 0}
 												}
 											},
-											{ 		// L-shaped 
+											{
 												{
 													{1, 0, 0, 0},
 													{1, 0, 0, 0},
@@ -167,7 +139,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 													{0, 0, 0, 0}
 												}
 											},
-											{ 		// S-shaped 
+											{
 												{
 													{0, 1, 1, 0},
 													{1, 1, 0, 0},
@@ -193,7 +165,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 													{0, 0, 0, 0}
 												}
 											},
-											{ 		// Z-shaped 
+											{ 
 												{
 													{1, 1, 0, 0},
 													{0, 1, 1, 0},
@@ -221,7 +193,7 @@ static uint8_t tetrominoes[N_TETROMINOES][4][4][4] = {
 											}
 										};
 
-uint16_t colors[N_COLORS] = {
+static uint16_t colors[N_COLORS] = {
     0xADDE,
     0xF6F5,
     0xC53E,
@@ -231,33 +203,29 @@ uint16_t colors[N_COLORS] = {
     0xEC54,
 };
 
-uint16_t field[FIELD_H][FIELD_W];
+static uint16_t field[FIELD_H][FIELD_W];
 
-typedef struct {
-    uint8_t x;
-    uint8_t y;
-} cell_t;
+static cell_t toPlace[FIELD_H * FIELD_W];
+static uint8_t toPlace_count = 0;
 
-cell_t toPlace[FIELD_H * FIELD_W];
-uint8_t toPlace_count = 0;
+static uint8_t game_started = 0;
+static uint8_t game_running = 0;
+static uint8_t soft_drop = 0;
+static uint8_t hard_drop = 0;
+static uint8_t move_left = 0;
+static uint8_t move_right = 0;
+static uint8_t rotate = 0;
 
-uint8_t game_started = 0;
-uint8_t game_running = 0;
-uint8_t soft_drop = 0;
-uint8_t hard_drop = 0;
-uint8_t move_left = 0;
-uint8_t move_right = 0;
-uint8_t rotate = 0;
+static uint8_t tickN = 0;
 
-uint8_t tickN = 0;
+static uint32_t current_score;
+static uint32_t high_score = 0;
+static uint8_t total_cleared_rows = 0;
 
-uint32_t current_score;
-uint32_t high_score = 0;
-uint8_t total_cleared_rows = 0;
+static uint8_t paused_placed = 0;
 
-uint32_t seed;
+static uint32_t seed;
 
-uint8_t paused_placed = 0;
 
 void mark_toPlace(uint8_t x, uint8_t y) {
     if (toPlace_count < FIELD_H * FIELD_W) {
@@ -284,6 +252,23 @@ void field_reset(){
     }
 }
 
+void collisionDetection(){
+	uint8_t y, x;
+	for (y = 0; y < 4; y++) {
+		for (x = 0; x < 4; x++) {
+			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
+				(y == 3 || !tetrominoes[current_tetromino.index][current_tetromino.rotation][y + 1][x]) &&
+					(
+					 current_tetromino.position_y + y >= FIELD_H - 1 ||
+					 (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != Black &&
+					  field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0xFFFF)
+					)
+				) 
+						current_tetromino.placed = 1;
+		}
+	}
+}
+
 void field_update(){
 	uint8_t i, x, y;
 	for (i = 0; i < toPlace_count; i++) {
@@ -298,7 +283,6 @@ void field_update(){
 		}
 	}
 	toPlace_count = 0;
-	field_collisionDetection();
 }
 
 void field_init(){
@@ -314,7 +298,7 @@ void field_init(){
 	}
 }
 
-void field_placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color, uint8_t update){
+void placeTetromino(uint8_t x, uint8_t y, uint8_t idx, uint8_t rotation, uint16_t color, uint8_t update){
 	uint8_t i, j;
 	for (i = 0; i < 4; i++){
 		for (j = 0; j < 4; j++){
@@ -337,14 +321,14 @@ uint8_t generate_idx(){
 	return (uint8_t)(((seed >> 16) * 7u) >> 16);
 }
 
-void field_placeRandomTetromino(){
+void placeRandomTetromino(){
 	int idx = generate_idx();
 	if (idx == current_tetromino.index)
 		idx++;
-	field_placeTetromino(4, 0, idx, 0, colors[idx], 1);
+	placeTetromino(4, 0, idx, 0, colors[idx], 1);
 }
 
-void field_deleteCurrentTetromino(){
+void deleteCurrentTetromino(){
 	uint8_t i, j;
 	for (i = 0; i < 4; i++) {
 		for (j = 0; j < 4; j++) {
@@ -357,10 +341,10 @@ void field_deleteCurrentTetromino(){
 	}
 }
 
-void field_dropCurrentTetromino(){
-	field_deleteCurrentTetromino();
+void dropCurrentTetromino(){
+	deleteCurrentTetromino();
 	current_tetromino.position_y++;
-	field_placeTetromino(
+	placeTetromino(
 		current_tetromino.position_x, 
 		current_tetromino.position_y,
 		current_tetromino.index,
@@ -369,13 +353,13 @@ void field_dropCurrentTetromino(){
 		0);
 }
 
-void field_hardDropCurrentTetromino(){
-    field_deleteCurrentTetromino();
+void hardDropCurrentTetromino(){
+    deleteCurrentTetromino();
     while (!current_tetromino.placed){
         current_tetromino.position_y++;
-        field_collisionDetection();
+        collisionDetection();
     }
-    field_placeTetromino(
+    placeTetromino(
         current_tetromino.position_x,
         current_tetromino.position_y,
         current_tetromino.index,
@@ -385,7 +369,7 @@ void field_hardDropCurrentTetromino(){
     );
 }
 
-void field_rotateCurrentTetromino(){
+void rotateCurrentTetromino(){
 	uint8_t y, x, current_x, current_y, can_place = 1;
 	uint8_t new_rotation = (current_tetromino.rotation + 1) % 4;
 	for (y = 0; y < 4; y++) {
@@ -409,9 +393,9 @@ void field_rotateCurrentTetromino(){
 			break;
 	}
 	if (can_place) {
-		field_deleteCurrentTetromino();
+		deleteCurrentTetromino();
 		current_tetromino.rotation = new_rotation;
-		field_placeTetromino(
+		placeTetromino(
 			current_tetromino.position_x, 
 			current_tetromino.position_y,
 			current_tetromino.index,
@@ -422,7 +406,7 @@ void field_rotateCurrentTetromino(){
 }
 
 
-void field_moveCurrentTetrominoRight(){
+void moveCurrentTetrominoRight(){
 	uint8_t y, x, can_place = 1;
 	for (y = 0; y < 4; y++) {
 		for (x = 0; x < 4; x++) {
@@ -440,8 +424,8 @@ void field_moveCurrentTetrominoRight(){
 		}
 	}
 	if (can_place){
-		field_deleteCurrentTetromino();
-		field_placeTetromino(
+		deleteCurrentTetromino();
+		placeTetromino(
 			current_tetromino.position_x + 1, 
 			current_tetromino.position_y,
 			current_tetromino.index,
@@ -451,7 +435,7 @@ void field_moveCurrentTetrominoRight(){
 	}
 }
 		
-void field_moveCurrentTetrominoLeft(){	
+void moveCurrentTetrominoLeft(){	
 	uint8_t y, x, can_place = 1;
 	for (y = 0; y < 4; y++) {
 		for (x = 0; x < 4; x++) {
@@ -469,8 +453,8 @@ void field_moveCurrentTetrominoLeft(){
 		}
 	}
 	if (can_place){
-		field_deleteCurrentTetromino();
-		field_placeTetromino(
+		deleteCurrentTetromino();
+		placeTetromino(
 			current_tetromino.position_x - 1, 
 			current_tetromino.position_y,
 			current_tetromino.index,
@@ -480,40 +464,7 @@ void field_moveCurrentTetrominoLeft(){
 	}
 }
 
-void field_collisionDetection(){
-	uint8_t y, x;
-	for (y = 0; y < 4; y++) {
-		for (x = 0; x < 4; x++) {
-			if (tetrominoes[current_tetromino.index][current_tetromino.rotation][y][x] &&
-				(y == 3 || !tetrominoes[current_tetromino.index][current_tetromino.rotation][y + 1][x]) &&
-					(
-					 current_tetromino.position_y + y >= FIELD_H - 1 ||
-					 (field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != Black &&
-					  field[current_tetromino.position_y + y + 1][current_tetromino.position_x + x] != 0xFFFF)
-					)
-				) 
-						current_tetromino.placed = 1;
-		}
-	}
-}
-
-uint8_t field_clearDetection(){
-    uint8_t y, x, cleared, cleared_rows = 0;
-    for (y = 0; y < FIELD_H; y++){
-        cleared = 1;
-        for (x = 0; x < FIELD_W; x++){
-            if (field[y][x] == Black || field[y][x] == 0xFFFF)
-                cleared = 0;
-        }
-        if (cleared){
-            field_clearRow(y);
-			cleared_rows++;
-		}
-    }
-	return cleared_rows;
-}
-
-void field_clearRow(uint8_t y_toClear){
+void clearRow(uint8_t y_toClear){
     uint8_t y, x;
     for (y = y_toClear; y > 0; y--) {
         for (x = 0; x < FIELD_W; x++) {
@@ -529,9 +480,40 @@ void field_clearRow(uint8_t y_toClear){
     field_update();
 }
 
-void field_gameEndDetection(){
-	if (current_tetromino.position_y <= 0)
-		reset_game();
+uint8_t clearDetection(){
+    uint8_t y, x, cleared, cleared_rows = 0;
+    for (y = 0; y < FIELD_H; y++){
+        cleared = 1;
+        for (x = 0; x < FIELD_W; x++){
+            if (field[y][x] == Black || field[y][x] == 0xFFFF)
+                cleared = 0;
+        }
+        if (cleared){
+            clearRow(y);
+			cleared_rows++;
+		}
+    }
+	return cleared_rows;
+}
+
+void scoreboard_init(){
+	GUI_Text(170, 70, (uint8_t*) "high", Grey, Black); 
+	GUI_Text(170, 90, (uint8_t*) "score", Grey, Black); 
+	GUI_Text(170, 110, (uint8_t*) "0", Grey, Black); 
+	GUI_Text(170, 150, (uint8_t*) "score", Grey, Black); 
+	GUI_Text(170, 170, (uint8_t*) "0", Grey, Black); 
+	GUI_Text(170, 210, (uint8_t*) "cleared", Grey, Black); 
+	GUI_Text(170, 230, (uint8_t*) "0", Grey, Black); 
+}
+
+void scoreboard_update(){
+	char high_score_string[7], score_string[7], cleared_string[7];
+	sprintf(high_score_string, "%-6d", high_score);
+	sprintf(score_string, "%-6d", current_score);
+	sprintf(cleared_string, "%-6d", total_cleared_rows);
+	GUI_Text(170, 110, (uint8_t*) high_score_string, Grey, Black); 
+	GUI_Text(170, 170, (uint8_t*) score_string, Grey, Black); 
+	GUI_Text(170, 230, (uint8_t*) cleared_string, Grey, Black); 
 }
 
 void request_hardDrop(){
@@ -558,12 +540,6 @@ void unset_softDrop(void){
 	soft_drop = 0;
 }
 
-void toggle_running(void){
-	game_running = !game_running;
-	if (game_running && !game_started)
-		start_game();
-}
-
 void start_game(){
 	seed = LPC_TIM0->TC;
 	current_score = 0;
@@ -571,7 +547,13 @@ void start_game(){
 	game_started = 1;
 	tickN = 0;
 	current_tetromino.index = 10;
-	field_placeRandomTetromino();
+	placeRandomTetromino();
+}
+
+void toggle_running(void){
+	game_running = !game_running;
+	if (game_running && !game_started)
+		start_game();
 }
 
 void reset_game(){
@@ -584,6 +566,11 @@ void reset_game(){
 	scoreboard_update();
 	field_reset();
 	field_update();
+}
+
+void gameEndDetection(){
+	if (current_tetromino.position_y <= 0)
+		reset_game();
 }
 
 void advance_game(){
@@ -599,27 +586,29 @@ void advance_game(){
 	}
 	tickN++;	
 	if (rotate)
-		field_rotateCurrentTetromino();
+		rotateCurrentTetromino();
 	if (move_left)
-		field_moveCurrentTetrominoLeft();
+		moveCurrentTetrominoLeft();
 	if (move_right)
-		field_moveCurrentTetrominoRight();
-	if (hard_drop){
-		field_hardDropCurrentTetromino();
+		moveCurrentTetrominoRight();
+	collisionDetection();
+	if (!current_tetromino.placed && hard_drop){
+		hardDropCurrentTetromino();
 		tickN = 0;
 	}
-	else if (soft_drop && tickN == 3){
-		field_dropCurrentTetromino();
+	else if (!current_tetromino.placed && soft_drop && tickN == 3){
+		dropCurrentTetromino();
 		tickN = 0;
 	}
-	else if (tickN == 6){
-		field_dropCurrentTetromino();
+	else if (!current_tetromino.placed && tickN == 6){
+		dropCurrentTetromino();
 		tickN = 0;
 	}
 	field_update();
+	collisionDetection();
 	if (current_tetromino.placed){
 		current_score += 10;
-		cleared_rows = field_clearDetection();
+		cleared_rows = clearDetection();
 		total_cleared_rows += cleared_rows;
 		while (cleared_rows >= 4){
 			current_score += 600;
@@ -627,33 +616,14 @@ void advance_game(){
 		}
 		current_score += cleared_rows * 100;
 		scoreboard_update();
-		field_gameEndDetection();
-		if (game_started)
-			field_placeRandomTetromino();
+		gameEndDetection();
+		if (game_started){
+			placeRandomTetromino();
+			tickN = 0;
+		}
 	}
 	hard_drop = 0;
 	rotate = 0;
 	move_left = 0;
 	move_right = 0;
 }
-
-void scoreboard_init(){
-	GUI_Text(170, 70, (uint8_t*) "high", Grey, Black); 
-	GUI_Text(170, 90, (uint8_t*) "score", Grey, Black); 
-	GUI_Text(170, 110, (uint8_t*) "0", Grey, Black); 
-	GUI_Text(170, 150, (uint8_t*) "score", Grey, Black); 
-	GUI_Text(170, 170, (uint8_t*) "0", Grey, Black); 
-	GUI_Text(170, 210, (uint8_t*) "cleared", Grey, Black); 
-	GUI_Text(170, 230, (uint8_t*) "0", Grey, Black); 
-}
-
-void scoreboard_update(){
-	char high_score_string[7], score_string[7], cleared_string[7];
-	sprintf(high_score_string, "%-6d", high_score);
-	sprintf(score_string, "%-6d", current_score);
-	sprintf(cleared_string, "%-6d", total_cleared_rows);
-	GUI_Text(170, 110, (uint8_t*) high_score_string, Grey, Black); 
-	GUI_Text(170, 170, (uint8_t*) score_string, Grey, Black); 
-	GUI_Text(170, 230, (uint8_t*) cleared_string, Grey, Black); 
-}
-
