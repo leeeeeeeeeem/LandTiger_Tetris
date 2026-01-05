@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\sample_GLCD_TP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\sample_GLCD_TP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Mon Jan  5 06:53:34 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6240002: Last Updated: Mon Jan  5 07:20:49 2026
 <BR><P>
 <H3>Maximum Stack Usage =        264 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -513,7 +513,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[27]"></a>RIT_IRQHandler</STRONG> (Thumb, 734 bytes, Stack size 16 bytes, irq_rit.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = RIT_IRQHandler
+<BR><BR>[Stack]<UL><LI>Max Depth = 140<LI>Call Chain = RIT_IRQHandler &rArr; toggle_running &rArr; field_placeRandomTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
 </UL>
 <BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;request_moveLeft
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;request_moveRight
@@ -561,8 +561,7 @@ Global Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;set_block
 </UL>
-<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_game
-<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_game
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;reset_game
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_clearRow
 <LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_placeRandomTetromino
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_placeTetromino
@@ -585,8 +584,14 @@ Global Symbols
 
 <P><STRONG><a name="[a3]"></a>generate_idx</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
 
-<P><STRONG><a name="[5c]"></a>field_placeRandomTetromino</STRONG> (Thumb, 198 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
+<P><STRONG><a name="[5c]"></a>field_placeRandomTetromino</STRONG> (Thumb, 220 bytes, Stack size 28 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = field_placeRandomTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
+</UL>
+<BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_game
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;toggle_running
+<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;advance_game
 </UL>
 
 <P><STRONG><a name="[a4]"></a>field_deleteCurrentTetromino</STRONG> (Thumb, 174 bytes, Stack size 32 bytes, field.o(.text), UNUSED)
@@ -671,12 +676,16 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[53]"></a>toggle_running</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, field.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
+<P><STRONG><a name="[53]"></a>toggle_running</STRONG> (Thumb, 108 bytes, Stack size 0 bytes, field.o(.text))
+<BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = toggle_running &rArr; field_placeRandomTetromino &rArr; field_update &rArr; set_block &rArr; LCD_SetPoint
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_placeRandomTetromino
+</UL>
+<BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RIT_IRQHandler
 </UL>
 
-<P><STRONG><a name="[61]"></a>start_game</STRONG> (Thumb, 246 bytes, Stack size 24 bytes, field.o(.text), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
+<P><STRONG><a name="[61]"></a>start_game</STRONG> (Thumb, 80 bytes, Stack size 0 bytes, field.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_placeRandomTetromino
 </UL>
 
 <P><STRONG><a name="[62]"></a>scoreboard_update</STRONG> (Thumb, 134 bytes, Stack size 48 bytes, field.o(.text), UNUSED)
@@ -684,7 +693,7 @@ Global Symbols
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GUI_Text
 </UL>
 
-<P><STRONG><a name="[4c]"></a>advance_game</STRONG> (Thumb, 776 bytes, Stack size 64 bytes, field.o(.text))
+<P><STRONG><a name="[4c]"></a>advance_game</STRONG> (Thumb, 592 bytes, Stack size 64 bytes, field.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 256 + Unknown Stack Size
 <LI>Call Chain = advance_game &rArr; reset_game &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -696,6 +705,7 @@ Global Symbols
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_rotateCurrentTetromino
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_hardDropCurrentTetromino
 <LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_dropCurrentTetromino
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_placeRandomTetromino
 <LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;field_update
 <LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GUI_Text
 </UL>

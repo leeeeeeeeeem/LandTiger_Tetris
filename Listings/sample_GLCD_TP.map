@@ -513,32 +513,32 @@ Image Symbol Table
     [Anonymous Symbol]                       0x00001fbc   Section        0  irq_button.o(.text)
     [Anonymous Symbol]                       0x00002088   Section        0  lib_button.o(.text)
     [Anonymous Symbol]                       0x00002104   Section        0  field.o(.text)
-    .text                                    0x00003738   Section        0  noretval__2sprintf.o(.text)
-    .text                                    0x00003760   Section        0  _printf_pad.o(.text)
-    .text                                    0x000037b0   Section        0  _printf_dec.o(.text)
-    .text                                    0x00003828   Section        0  __printf_flags_wp.o(.text)
-    .text                                    0x00003960   Section        0  heapauxi.o(.text)
-    .text                                    0x00003966   Section        0  _printf_intcommon.o(.text)
-    _printf_input_char                       0x00003a19   Thumb Code    10  _printf_char_common.o(.text)
-    .text                                    0x00003a18   Section        0  _printf_char_common.o(.text)
-    .text                                    0x00003a48   Section        0  _sputc.o(.text)
-    .text                                    0x00003a52   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x00003a9c   Section        0  exit.o(.text)
-    .text                                    0x00003ab0   Section        8  libspace.o(.text)
-    .text                                    0x00003ab8   Section        0  sys_exit.o(.text)
-    .text                                    0x00003ac4   Section        0  indicate_semi.o(.text)
-    i._is_digit                              0x00003ac4   Section        0  __printf_wp.o(i._is_digit)
-    maptable                                 0x00003ad2   Data          17  __printf_flags_wp.o(.constdata)
-    .constdata                               0x00003ad2   Section       17  __printf_flags_wp.o(.constdata)
-    AsciiLib                                 0x00003ae3   Data        1520  asciilib.o(.rodata.AsciiLib)
-    [Anonymous Symbol]                       0x00003ae3   Section        0  asciilib.o(.rodata.AsciiLib)
-    .L.str.3                                 0x000040d3   Data           2  field.o(.rodata.str1.1)
-    [Anonymous Symbol]                       0x000040d3   Section        0  field.o(.rodata.str1.1)
-    .L.str.5                                 0x000040d5   Data           5  field.o(.rodata.str1.1)
-    .L.str                                   0x000040da   Data           7  field.o(.rodata.str1.1)
-    .L.str.2                                 0x000040e1   Data           6  field.o(.rodata.str1.1)
-    tetrominoes                              0x000040e7   Data         448  field.o(.rodata.tetrominoes)
-    [Anonymous Symbol]                       0x000040e7   Section        0  field.o(.rodata.tetrominoes)
+    .text                                    0x00003630   Section        0  noretval__2sprintf.o(.text)
+    .text                                    0x00003658   Section        0  _printf_pad.o(.text)
+    .text                                    0x000036a8   Section        0  _printf_dec.o(.text)
+    .text                                    0x00003720   Section        0  __printf_flags_wp.o(.text)
+    .text                                    0x00003858   Section        0  heapauxi.o(.text)
+    .text                                    0x0000385e   Section        0  _printf_intcommon.o(.text)
+    _printf_input_char                       0x00003911   Thumb Code    10  _printf_char_common.o(.text)
+    .text                                    0x00003910   Section        0  _printf_char_common.o(.text)
+    .text                                    0x00003940   Section        0  _sputc.o(.text)
+    .text                                    0x0000394a   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x00003994   Section        0  exit.o(.text)
+    .text                                    0x000039a8   Section        8  libspace.o(.text)
+    .text                                    0x000039b0   Section        0  sys_exit.o(.text)
+    .text                                    0x000039bc   Section        0  indicate_semi.o(.text)
+    i._is_digit                              0x000039bc   Section        0  __printf_wp.o(i._is_digit)
+    maptable                                 0x000039ca   Data          17  __printf_flags_wp.o(.constdata)
+    .constdata                               0x000039ca   Section       17  __printf_flags_wp.o(.constdata)
+    AsciiLib                                 0x000039db   Data        1520  asciilib.o(.rodata.AsciiLib)
+    [Anonymous Symbol]                       0x000039db   Section        0  asciilib.o(.rodata.AsciiLib)
+    .L.str.3                                 0x00003fcb   Data           2  field.o(.rodata.str1.1)
+    [Anonymous Symbol]                       0x00003fcb   Section        0  field.o(.rodata.str1.1)
+    .L.str.5                                 0x00003fcd   Data           5  field.o(.rodata.str1.1)
+    .L.str                                   0x00003fd2   Data           7  field.o(.rodata.str1.1)
+    .L.str.2                                 0x00003fd9   Data           6  field.o(.rodata.str1.1)
+    tetrominoes                              0x00003fdf   Data         448  field.o(.rodata.tetrominoes)
+    [Anonymous Symbol]                       0x00003fdf   Section        0  field.o(.rodata.tetrominoes)
     Stack_Mem                                0x10000000   Data        1024  startup_lpc17xx.o(STACK)
     STACK                                    0x10000000   Section     1024  startup_lpc17xx.o(STACK)
     __initial_sp                             0x10000400   Data           0  startup_lpc17xx.o(STACK)
@@ -718,49 +718,49 @@ Image Symbol Table
     field_init                               0x000023ad   Thumb Code   116  field.o(.text)
     field_placeTetromino                     0x00002421   Thumb Code   214  field.o(.text)
     generate_idx                             0x000024f9   Thumb Code    40  field.o(.text)
-    field_placeRandomTetromino               0x00002521   Thumb Code   198  field.o(.text)
-    field_deleteCurrentTetromino             0x000025e9   Thumb Code   174  field.o(.text)
-    field_dropCurrentTetromino               0x00002699   Thumb Code   326  field.o(.text)
-    field_hardDropCurrentTetromino           0x000027e1   Thumb Code   486  field.o(.text)
-    field_rotateCurrentTetromino             0x000029c9   Thumb Code   470  field.o(.text)
-    field_moveCurrentTetrominoRight          0x00002ba1   Thumb Code   460  field.o(.text)
-    field_moveCurrentTetrominoLeft           0x00002d6d   Thumb Code   460  field.o(.text)
-    field_clearDetection                     0x00002f39   Thumb Code    92  field.o(.text)
-    field_clearRow                           0x00002f95   Thumb Code   208  field.o(.text)
-    field_gameEndDetection                   0x00003065   Thumb Code    20  field.o(.text)
-    reset_game                               0x00003079   Thumb Code   274  field.o(.text)
-    request_hardDrop                         0x0000318d   Thumb Code    14  field.o(.text)
-    request_moveRight                        0x0000319d   Thumb Code    14  field.o(.text)
-    request_moveLeft                         0x000031ad   Thumb Code    14  field.o(.text)
-    request_rotate                           0x000031bd   Thumb Code    14  field.o(.text)
-    set_softDrop                             0x000031cd   Thumb Code    14  field.o(.text)
-    unset_softDrop                           0x000031dd   Thumb Code    14  field.o(.text)
-    toggle_running                           0x000031ed   Thumb Code    40  field.o(.text)
-    start_game                               0x00003215   Thumb Code   246  field.o(.text)
-    scoreboard_update                        0x0000330d   Thumb Code   134  field.o(.text)
-    advance_game                             0x00003395   Thumb Code   776  field.o(.text)
-    scoreboard_init                          0x0000369d   Thumb Code   140  field.o(.text)
-    __2sprintf                               0x00003739   Thumb Code    34  noretval__2sprintf.o(.text)
-    _printf_pre_padding                      0x00003761   Thumb Code    44  _printf_pad.o(.text)
-    _printf_post_padding                     0x0000378d   Thumb Code    34  _printf_pad.o(.text)
-    _printf_int_dec                          0x000037b1   Thumb Code   104  _printf_dec.o(.text)
-    __printf                                 0x00003829   Thumb Code   308  __printf_flags_wp.o(.text)
-    __use_two_region_memory                  0x00003961   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x00003963   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x00003965   Thumb Code     2  heapauxi.o(.text)
-    _printf_int_common                       0x00003967   Thumb Code   178  _printf_intcommon.o(.text)
-    _printf_char_common                      0x00003a23   Thumb Code    32  _printf_char_common.o(.text)
-    _sputc                                   0x00003a49   Thumb Code    10  _sputc.o(.text)
-    __user_setup_stackheap                   0x00003a53   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x00003a9d   Thumb Code    18  exit.o(.text)
-    __user_libspace                          0x00003ab1   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x00003ab1   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x00003ab1   Thumb Code     0  libspace.o(.text)
-    _sys_exit                                0x00003ab9   Thumb Code     8  sys_exit.o(.text)
-    __semihosting_library_function           0x00003ac5   Thumb Code     0  indicate_semi.o(.text)
-    _is_digit                                0x00003ac5   Thumb Code    14  __printf_wp.o(i._is_digit)
-    Region$$Table$$Base                      0x000042a8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x000042d8   Number         0  anon$$obj.o(Region$$Table)
+    field_placeRandomTetromino               0x00002521   Thumb Code   220  field.o(.text)
+    field_deleteCurrentTetromino             0x000025fd   Thumb Code   174  field.o(.text)
+    field_dropCurrentTetromino               0x000026ad   Thumb Code   326  field.o(.text)
+    field_hardDropCurrentTetromino           0x000027f5   Thumb Code   486  field.o(.text)
+    field_rotateCurrentTetromino             0x000029dd   Thumb Code   470  field.o(.text)
+    field_moveCurrentTetrominoRight          0x00002bb5   Thumb Code   460  field.o(.text)
+    field_moveCurrentTetrominoLeft           0x00002d81   Thumb Code   460  field.o(.text)
+    field_clearDetection                     0x00002f4d   Thumb Code    92  field.o(.text)
+    field_clearRow                           0x00002fa9   Thumb Code   208  field.o(.text)
+    field_gameEndDetection                   0x00003079   Thumb Code    20  field.o(.text)
+    reset_game                               0x0000308d   Thumb Code   274  field.o(.text)
+    request_hardDrop                         0x000031a1   Thumb Code    14  field.o(.text)
+    request_moveRight                        0x000031b1   Thumb Code    14  field.o(.text)
+    request_moveLeft                         0x000031c1   Thumb Code    14  field.o(.text)
+    request_rotate                           0x000031d1   Thumb Code    14  field.o(.text)
+    set_softDrop                             0x000031e1   Thumb Code    14  field.o(.text)
+    unset_softDrop                           0x000031f1   Thumb Code    14  field.o(.text)
+    toggle_running                           0x00003201   Thumb Code   108  field.o(.text)
+    start_game                               0x0000326d   Thumb Code    80  field.o(.text)
+    scoreboard_update                        0x000032bd   Thumb Code   134  field.o(.text)
+    advance_game                             0x00003345   Thumb Code   592  field.o(.text)
+    scoreboard_init                          0x00003595   Thumb Code   140  field.o(.text)
+    __2sprintf                               0x00003631   Thumb Code    34  noretval__2sprintf.o(.text)
+    _printf_pre_padding                      0x00003659   Thumb Code    44  _printf_pad.o(.text)
+    _printf_post_padding                     0x00003685   Thumb Code    34  _printf_pad.o(.text)
+    _printf_int_dec                          0x000036a9   Thumb Code   104  _printf_dec.o(.text)
+    __printf                                 0x00003721   Thumb Code   308  __printf_flags_wp.o(.text)
+    __use_two_region_memory                  0x00003859   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x0000385b   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x0000385d   Thumb Code     2  heapauxi.o(.text)
+    _printf_int_common                       0x0000385f   Thumb Code   178  _printf_intcommon.o(.text)
+    _printf_char_common                      0x0000391b   Thumb Code    32  _printf_char_common.o(.text)
+    _sputc                                   0x00003941   Thumb Code    10  _sputc.o(.text)
+    __user_setup_stackheap                   0x0000394b   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x00003995   Thumb Code    18  exit.o(.text)
+    __user_libspace                          0x000039a9   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x000039a9   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x000039a9   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x000039b1   Thumb Code     8  sys_exit.o(.text)
+    __semihosting_library_function           0x000039bd   Thumb Code     0  indicate_semi.o(.text)
+    _is_digit                                0x000039bd   Thumb Code    14  __printf_wp.o(i._is_digit)
+    Region$$Table$$Base                      0x000041a0   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x000041d0   Number         0  anon$$obj.o(Region$$Table)
     SystemFrequency                          0x2007c000   Data           4  system_lpc17xx.o(.data.SystemFrequency)
     colors                                   0x2007c004   Data          14  field.o(.data.colors)
     __libspace_start                         0x2007c018   Data          96  libspace.o(.bss)
@@ -807,9 +807,9 @@ Memory Map of the image
 
   Image Entry point : 0x000000cd
 
-  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000042f0, Max: 0x00080000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000041e8, Max: 0x00080000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000042d8, Max: 0x00080000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000041d0, Max: 0x00080000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -883,45 +883,45 @@ Memory Map of the image
     0x00001f40   0x00001f40   0x0000007c   Code   RO           97    .text               lib_rit.o
     0x00001fbc   0x00001fbc   0x000000cc   Code   RO          119    .text               irq_button.o
     0x00002088   0x00002088   0x0000007c   Code   RO          126    .text               lib_button.o
-    0x00002104   0x00002104   0x00001634   Code   RO          150    .text               field.o
-    0x00003738   0x00003738   0x00000028   Code   RO          183    .text               c_w.l(noretval__2sprintf.o)
-    0x00003760   0x00003760   0x0000004e   Code   RO          187    .text               c_w.l(_printf_pad.o)
-    0x000037ae   0x000037ae   0x00000002   PAD
-    0x000037b0   0x000037b0   0x00000078   Code   RO          189    .text               c_w.l(_printf_dec.o)
-    0x00003828   0x00003828   0x00000138   Code   RO          203    .text               c_w.l(__printf_flags_wp.o)
-    0x00003960   0x00003960   0x00000006   Code   RO          215    .text               c_w.l(heapauxi.o)
-    0x00003966   0x00003966   0x000000b2   Code   RO          220    .text               c_w.l(_printf_intcommon.o)
-    0x00003a18   0x00003a18   0x00000030   Code   RO          222    .text               c_w.l(_printf_char_common.o)
-    0x00003a48   0x00003a48   0x0000000a   Code   RO          224    .text               c_w.l(_sputc.o)
-    0x00003a52   0x00003a52   0x0000004a   Code   RO          246    .text               c_w.l(sys_stackheap_outer.o)
-    0x00003a9c   0x00003a9c   0x00000012   Code   RO          248    .text               c_w.l(exit.o)
-    0x00003aae   0x00003aae   0x00000002   PAD
-    0x00003ab0   0x00003ab0   0x00000008   Code   RO          256    .text               c_w.l(libspace.o)
-    0x00003ab8   0x00003ab8   0x0000000c   Code   RO          319    .text               c_w.l(sys_exit.o)
-    0x00003ac4   0x00003ac4   0x00000000   Code   RO          336    .text               c_w.l(indicate_semi.o)
-    0x00003ac4   0x00003ac4   0x0000000e   Code   RO          201    i._is_digit         c_w.l(__printf_wp.o)
-    0x00003ad2   0x00003ad2   0x00000011   Data   RO          204    .constdata          c_w.l(__printf_flags_wp.o)
-    0x00003ae3   0x00003ae3   0x000005f0   Data   RO           48    .rodata.AsciiLib    asciilib.o
-    0x000040d3   0x000040d3   0x00000014   Data   RO          171    .rodata.str1.1      field.o
-    0x000040e7   0x000040e7   0x000001c0   Data   RO          167    .rodata.tetrominoes  field.o
-    0x000042a7   0x000042a7   0x00000001   PAD
-    0x000042a8   0x000042a8   0x00000030   Data   RO          392    Region$$Table       anon$$obj.o
+    0x00002104   0x00002104   0x0000152c   Code   RO          150    .text               field.o
+    0x00003630   0x00003630   0x00000028   Code   RO          183    .text               c_w.l(noretval__2sprintf.o)
+    0x00003658   0x00003658   0x0000004e   Code   RO          187    .text               c_w.l(_printf_pad.o)
+    0x000036a6   0x000036a6   0x00000002   PAD
+    0x000036a8   0x000036a8   0x00000078   Code   RO          189    .text               c_w.l(_printf_dec.o)
+    0x00003720   0x00003720   0x00000138   Code   RO          203    .text               c_w.l(__printf_flags_wp.o)
+    0x00003858   0x00003858   0x00000006   Code   RO          215    .text               c_w.l(heapauxi.o)
+    0x0000385e   0x0000385e   0x000000b2   Code   RO          220    .text               c_w.l(_printf_intcommon.o)
+    0x00003910   0x00003910   0x00000030   Code   RO          222    .text               c_w.l(_printf_char_common.o)
+    0x00003940   0x00003940   0x0000000a   Code   RO          224    .text               c_w.l(_sputc.o)
+    0x0000394a   0x0000394a   0x0000004a   Code   RO          246    .text               c_w.l(sys_stackheap_outer.o)
+    0x00003994   0x00003994   0x00000012   Code   RO          248    .text               c_w.l(exit.o)
+    0x000039a6   0x000039a6   0x00000002   PAD
+    0x000039a8   0x000039a8   0x00000008   Code   RO          256    .text               c_w.l(libspace.o)
+    0x000039b0   0x000039b0   0x0000000c   Code   RO          319    .text               c_w.l(sys_exit.o)
+    0x000039bc   0x000039bc   0x00000000   Code   RO          336    .text               c_w.l(indicate_semi.o)
+    0x000039bc   0x000039bc   0x0000000e   Code   RO          201    i._is_digit         c_w.l(__printf_wp.o)
+    0x000039ca   0x000039ca   0x00000011   Data   RO          204    .constdata          c_w.l(__printf_flags_wp.o)
+    0x000039db   0x000039db   0x000005f0   Data   RO           48    .rodata.AsciiLib    asciilib.o
+    0x00003fcb   0x00003fcb   0x00000014   Data   RO          171    .rodata.str1.1      field.o
+    0x00003fdf   0x00003fdf   0x000001c0   Data   RO          167    .rodata.tetrominoes  field.o
+    0x0000419f   0x0000419f   0x00000001   PAD
+    0x000041a0   0x000041a0   0x00000030   Data   RO          392    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x000042d8, Size: 0x00000400, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x000041d0, Size: 0x00000400, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x10000000        -       0x00000400   Zero   RW            1    STACK               startup_lpc17xx.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x2007c000, Load base: 0x000042d8, Size: 0x00000400, Max: 0x00008000, ABSOLUTE)
+    Execution Region RW_IRAM2 (Exec base: 0x2007c000, Load base: 0x000041d0, Size: 0x00000400, Max: 0x00008000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x2007c000   0x000042d8   0x00000004   Data   RW           23    .data.SystemFrequency  system_lpc17xx.o
-    0x2007c004   0x000042dc   0x0000000e   Data   RW          152    .data.colors        field.o
-    0x2007c012   0x000042ea   0x00000006   PAD
+    0x2007c000   0x000041d0   0x00000004   Data   RW           23    .data.SystemFrequency  system_lpc17xx.o
+    0x2007c004   0x000041d4   0x0000000e   Data   RW          152    .data.colors        field.o
+    0x2007c012   0x000041e2   0x00000006   PAD
     0x2007c018        -       0x00000060   Zero   RW          257    .bss                c_w.l(libspace.o)
     0x2007c078        -       0x00000004   Zero   RW           85    .bss.J_click        irq_rit.o
     0x2007c07c        -       0x00000004   Zero   RW           82    .bss.J_down         irq_rit.o
@@ -933,7 +933,7 @@ Memory Map of the image
     0x2007c094        -       0x00000004   Zero   RW           86    .bss.J_up_left      irq_rit.o
     0x2007c098        -       0x00000004   Zero   RW           87    .bss.J_up_right     irq_rit.o
     0x2007c09c        -       0x00000001   Zero   RW           24    .bss.ScaleFlag      system_lpc17xx.o
-    0x2007c09d   0x000042ea   0x00000003   PAD
+    0x2007c09d   0x000041e2   0x00000003   PAD
     0x2007c0a0        -       0x00000004   Zero   RW          170    .bss.current_score  field.o
     0x2007c0a4        -       0x00000008   Zero   RW          168    .bss.current_tetromino  field.o
     0x2007c0ac        -       0x00000004   Zero   RW           75    .bss.down_0         irq_rit.o
@@ -943,7 +943,7 @@ Memory Map of the image
     0x2007c248        -       0x00000001   Zero   RW          155    .bss.game_running   field.o
     0x2007c249        -       0x00000001   Zero   RW          154    .bss.game_started   field.o
     0x2007c24a        -       0x00000001   Zero   RW          157    .bss.hard_drop      field.o
-    0x2007c24b   0x000042ea   0x00000001   PAD
+    0x2007c24b   0x000041e2   0x00000001   PAD
     0x2007c24c        -       0x00000004   Zero   RW          162    .bss.high_score     field.o
     0x2007c250        -       0x00000001   Zero   RW          158    .bss.move_left      field.o
     0x2007c251        -       0x00000001   Zero   RW          159    .bss.move_right     field.o
@@ -954,12 +954,12 @@ Memory Map of the image
     0x2007c259        -       0x00000001   Zero   RW          161    .bss.tickN          field.o
     0x2007c25a        -       0x00000190   Zero   RW          165    .bss.toPlace        field.o
     0x2007c3ea        -       0x00000001   Zero   RW          153    .bss.toPlace_count  field.o
-    0x2007c3eb   0x000042ea   0x00000001   PAD
+    0x2007c3eb   0x000041e2   0x00000001   PAD
     0x2007c3ec        -       0x00000004   Zero   RW           78    .bss.toRelease_down_0  irq_rit.o
     0x2007c3f0        -       0x00000004   Zero   RW           79    .bss.toRelease_down_1  irq_rit.o
     0x2007c3f4        -       0x00000004   Zero   RW           80    .bss.toRelease_down_2  irq_rit.o
     0x2007c3f8        -       0x00000001   Zero   RW          163    .bss.total_cleared_rows  field.o
-    0x2007c3f9   0x000042ea   0x00000007   PAD
+    0x2007c3f9   0x000041e2   0x00000007   PAD
     0x2007c400        -       0x00000000   Zero   RW            2    HEAP                startup_lpc17xx.o
 
 
@@ -971,7 +971,7 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
         42          0       1520          0          0        646   asciilib.o
-      5684         16        468         14        831      17147   field.o
+      5420         16        468         14        831      15941   field.o
       5986          0          0          0          0      18516   glcd.o
        204          0          0          0          0       3962   irq_button.o
        734          0          0          0         60       5422   irq_rit.o
@@ -985,7 +985,7 @@ Image component sizes
        336         20          0          4          1       2134   system_lpc17xx.o
 
     ----------------------------------------------------------------------
-     13722         58       2241         20       1932      68953   Object Totals
+     13458         58       2241         20       1932      67747   Object Totals
          0          0         48          0          0          0   (incl. Generated)
          6          0          1          2         16          0   (incl. Padding)
 
@@ -1045,15 +1045,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     14854        106       2258         20       2028      69557   Grand Totals
-     14854        106       2258         20       2028      69557   ELF Image Totals
-     14854        106       2258         20          0          0   ROM Totals
+     14590        106       2258         20       2028      68351   Grand Totals
+     14590        106       2258         20       2028      68351   ELF Image Totals
+     14590        106       2258         20          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                17112 (  16.71kB)
+    Total RO  Size (Code + RO Data)                16848 (  16.45kB)
     Total RW  Size (RW Data + ZI Data)              2048 (   2.00kB)
-    Total ROM Size (Code + RO Data + RW Data)      17132 (  16.73kB)
+    Total ROM Size (Code + RO Data + RW Data)      16868 (  16.47kB)
 
 ==============================================================================
 

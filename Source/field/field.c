@@ -339,6 +339,8 @@ uint8_t generate_idx(){
 
 void field_placeRandomTetromino(){
 	int idx = generate_idx();
+	if (idx == current_tetromino.index)
+		idx++;
 	field_placeTetromino(4, 0, idx, 0, colors[idx], 1);
 }
 
@@ -568,6 +570,7 @@ void start_game(){
 	total_cleared_rows = 0;
 	game_started = 1;
 	tickN = 0;
+	current_tetromino.index = 10;
 	field_placeRandomTetromino();
 }
 
