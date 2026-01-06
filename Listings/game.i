@@ -2628,7 +2628,7 @@ uint8_t generate_idx(){
 void placeRandomTetromino(){
  int idx = generate_idx();
  if (idx == current_tetromino.index)
-  idx++;
+  idx = (idx + 1) % 7;
  placeTetromino(4, 0, idx, 0, colors[idx], 1);
 }
 
