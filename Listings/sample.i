@@ -1894,19 +1894,9 @@ extern void reset_RIT( void );
 
 extern void RIT_IRQHandler (void);
 # 29 "Source/sample.c" 2
-
-
-
-extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
-
-
-
-
-
-
-
+# 40 "Source/sample.c"
 //one second of emulation takes 22 seconds in real life
-//so I divide by 22 to make the timing the same on both the board and in the emulator
+//so I divide by 1 to make the timing the same on both the board and in the emulator
 
 
 
@@ -1918,10 +1908,10 @@ int main(void){
  SystemInit();
  BUTTON_init();
  joystick_init();
- init_RIT(0x4C4B40 //50ms with a 100MHz clock / 22); //
+ init_RIT(0x4C4B40 //50ms with a 100MHz clock / 1); //
  enable_RIT();
  init_timer(0, 0xFFFFFFFF); // for seeding PRNG
- init_timer(1, 0x17D7840 //one second with a 25MHz clock / 22 / 6 // game ticks per second); // for game advancement
+ init_timer(1, 0x17D7840 //one second with a 25MHz clock / 1 / 6 // game ticks per second); // for game advancement
  __NVIC_SetPriority(TIMER1_IRQn, 1);
  enable_timer(0);
    LCD_Initialization();

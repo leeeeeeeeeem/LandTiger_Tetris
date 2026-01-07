@@ -2498,9 +2498,9 @@ static uint8_t tetrominoes[7][4][4][4] = {
           };
 
 static uint16_t colors[7] = {
-    0xADDE,
+    0x8EF9,
     0xF6F5,
-    0xC53E,
+    0xC4FB,
     0x859E,
     0xF590,
     0xA713,
